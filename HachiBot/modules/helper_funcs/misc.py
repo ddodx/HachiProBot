@@ -72,7 +72,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
         pairs.append((modules[-1],))
 
     else:
-        pairs += [[EqInlineKeyboardButton("Go Home", callback_data="prime_back")]]
+        pairs += [[EqInlineKeyboardButton("Go Home", callback_data="hachi_back")]]
 
     return pairs
 
@@ -103,6 +103,14 @@ def build_keyboard(buttons):
             keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
 
     return keyb
+    
+
+def delete(delmsg, timer):
+    sleep(timer)
+    try:
+        delmsg.delete()
+    except:
+        return
 
 
 def revert_buttons(buttons):
