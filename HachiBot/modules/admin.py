@@ -6,6 +6,7 @@ from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
 
 from HachiBot import DRAGONS, dispatcher
+from HachiBot.modules.connection import connected
 from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.modules.helper_funcs.chat_status import (
     bot_admin,
@@ -17,6 +18,7 @@ from HachiBot.modules.helper_funcs.chat_status import (
 )
 
 from HachiBot.modules.helper_funcs.admin_rights import (
+    user_can_pin,
     user_can_changeinfo,
     user_can_promote,
 )
@@ -25,7 +27,7 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user_and_text,
 )
 from HachiBot.modules.log_channel import loggable
-from HachiBot.modules.helper_funcs.alternate import send_message
+from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
 
 
 @bot_admin
