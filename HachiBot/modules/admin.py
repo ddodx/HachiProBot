@@ -168,7 +168,7 @@ def setchat_title(update: Update, context: CallbackContext):
 @can_promote
 @user_admin
 @loggable
-def promote(update: Update, context: CallbackContext) -> str:
+def admin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
@@ -327,7 +327,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
-def fullpromote(update: Update, context: CallbackContext) -> str:
+def coadmin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
@@ -407,7 +407,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#FULLPROMOTED\n"
+        f"#COADMIND\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
         f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
     )
@@ -420,7 +420,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
-def demote(update: Update, context: CallbackContext) -> str:
+def unadmin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
@@ -490,7 +490,7 @@ def demote(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
-def refresh_admin(update, _):
+def reload(update, _):
     try:
         ADMIN_CACHE.pop(update.effective_chat.id)
     except KeyError:
@@ -937,8 +937,8 @@ __help__ = """
 ❂ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
 ❂ /unpin*:* unpins the currently pinned message
 ❂ /invitelink*:* gets invitelink
-❂ /promote*:* promotes the user replied to
-❂ /fullpromote*:* promotes the user replied to with full rights
+❂ /admin*:* promotes the user replied to
+❂ /coadmin*:* promotes the user replied to with full rights
 ❂ /demote*:* demotes the user replied to
 ❂ /title <title here>*:* sets a custom title for an admin that the bot promoted
 ❂ /admincache*:* force refresh the admins list
@@ -986,18 +986,18 @@ PINNED_HANDLER = CommandHandler(
 
 INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite, run_async=True)
 
-PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote, run_async=True)
-FULLPROMOTE_HANDLER = DisableAbleCommandHandler(
-    "fullpromote", fullpromote, run_async=True
+ADMIN_HANDLER = DisableAbleCommandHandler("admin", admin, run_async=True)
+COADMIN_HANDLER = DisableAbleCommandHandler(
+    "coadmin", coadmin, run_async=True
 )
 LOW_PROMOTE_HANDLER = DisableAbleCommandHandler(
     "lowpromote", lowpromote, run_async=True
 )
-DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote, run_async=True)
+UNADMIN_HANDLER = DisableAbleCommandHandler("unadmin", unadmin, run_async=True)
 
 SET_TITLE_HANDLER = CommandHandler("title", set_title, run_async=True)
-ADMIN_REFRESH_HANDLER = CommandHandler(
-    "admincache", refresh_admin, filters=Filters.chat_type.groups, run_async=True
+RELOAD_HANDLER = CommandHandler(
+    "reload", reload, filters=Filters.chat_type.groups, run_async=True
 )
 
 dispatcher.add_handler(SET_DESC_HANDLER)
@@ -1010,23 +1010,23 @@ dispatcher.add_handler(PIN_HANDLER)
 dispatcher.add_handler(UNPIN_HANDLER)
 dispatcher.add_handler(PINNED_HANDLER)
 dispatcher.add_handler(INVITE_HANDLER)
-dispatcher.add_handler(PROMOTE_HANDLER)
-dispatcher.add_handler(FULLPROMOTE_HANDLER)
+dispatcher.add_handler(ADMIN_HANDLER)
+dispatcher.add_handler(COADMIN_HANDLER)
 dispatcher.add_handler(LOW_PROMOTE_HANDLER)
-dispatcher.add_handler(DEMOTE_HANDLER)
+dispatcher.add_handler(UNADMIN_HANDLER)
 dispatcher.add_handler(SET_TITLE_HANDLER)
-dispatcher.add_handler(ADMIN_REFRESH_HANDLER)
+dispatcher.add_handler(RELOAD_HANDLER)
 
 __mod_name__ = "Admins"
 __command_list__ = [
     "setdesc" "setsticker" "setgpic" "delgpic" "setgtitle" "adminlist",
     "admins",
     "invitelink",
-    "promote",
-    "fullpromote",
+    "admin",
+    "coadmin",
     "lowpromote",
-    "demote",
-    "admincache",
+    "unadmin",
+    "reload",
 ]
 __handlers__ = [
     SET_DESC_HANDLER,
@@ -1039,10 +1039,10 @@ __handlers__ = [
     UNPIN_HANDLER,
     PINNED_HANDLER,
     INVITE_HANDLER,
-    PROMOTE_HANDLER,
-    FULLPROMOTE_HANDLER,
+    ADMIN_HANDLER,
+    COADMIN_HANDLER,
     LOW_PROMOTE_HANDLER,
-    DEMOTE_HANDLER,
+    UNADMIN_HANDLER,
     SET_TITLE_HANDLER,
-    ADMIN_REFRESH_HANDLER,
+    RELOAD_HANDLER,
 ]
