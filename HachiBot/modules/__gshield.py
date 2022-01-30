@@ -348,4 +348,4 @@ __help__ = """
   • `/profanity <on/off>`*:* Enable|Disable slag word cleaning
 """
 
-__mod_name__ = "Shield"
+__mod_name__ = "GShield"
