@@ -24,6 +24,8 @@ Anti Raid And Cron Jobs:
 Fakeit
 ❂ /fakegen *:* Fake generating
 ❂ /picgen *:* Pictures generating
+AntiVirus
+❂ /scanit *:* Scan file or document thats have virus or no
  
  File To Link:
 ❂ /transfersh : reply to a telegram file to upload it on transfersh and get direct download link
