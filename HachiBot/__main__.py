@@ -10,6 +10,7 @@ import HachiBot.modules.sql.users_sql as sql
 from sys import argv
 from typing import Optional
 from telegram import __version__ as peler
+from telethon import __version__ as tlhver
 from platform import python_version as memek
 from HachiBot import (
     ALLOW_EXCL,
@@ -81,30 +82,33 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
- ───「[Prime Mega](https://t.me/HachiBotBot)」───
-*Hello {} !*
-────────────────────────
-HachiBot a powerful group management bot built to help you manage your group!
-────────────────────
-Hit the /help or tap on button to se available command on me.
+Allo Tott {}, I'am *Goemon Hachisuka*
+✪ Powerfull Management Bot To Help In Managing Your Group.[✨](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
+✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)
+
+┏━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┓
+× *Server Uptime :* `{}`
+× `{}` *users, across* `{}` *chats.*
+┗━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┛
+
+✪ Hit /help to see my available commands.
 """
 
 buttons = [
         [
+        InlineKeyboardButton(text=" ｢ AboutHachi 」", callback_data="hachi_"),
+        InlineKeyboardButton(text=" ｢ GetHelp 」", callback_data="help_back"),
+    ],
+    [
         InlineKeyboardButton(
-            text="➕️ Add Prime Mega to your group ➕️", url="t.me/HachiBotBot?startgroup=true"
+            text=" ➕ ｢ Kuciose Saya 」➕ ",
+            url="t.me/HachiXBot?startgroup=true",
         ),
     ],
     [
-        InlineKeyboardButton(text="Support", url="https://t.me/PrimeSupportGroup"
-        ),
-        InlineKeyboardButton(
-            text="TryInline", switch_inline_query_current_chat=""
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="Help & Commands❔", callback_data="help_back"
-        ),
+        InlineKeyboardButton(text=" ｢ Support 」", url="http://t.me/demonszxx"),
+        InlineKeyboardButton(text=" [✖️] ", callback_data="close"),
+        InlineKeyboardButton(text=" ｢ Update 」", url="http://t.me/ppppppppppppppppqq"),
     ],
 ]
 
@@ -112,10 +116,10 @@ buttons = [
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-PRIME_IMG = "https://telegra.ph/file/b9fa4e1360d0a872a3cd5.jpg"
+HACHI_IMG = "https://telegra.ph/file/f2a033fd4e10fbee49551.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @Bukan_guudlooking \
+ You can support the project by contacting @ddodxy \
  Supporting isnt always financial! \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
@@ -231,7 +235,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_text(
-            f"<b>Hi I'm Prime Mega!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
+            f"<b>Hi Ketot, Aim Hachi Robot!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
             parse_mode=ParseMode.HTML
        )
 
@@ -317,7 +321,18 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="Go Back", callback_data="help_back")]]
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="Go Back", callback_data="help_back"
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Support", url="https://t.me/demonszxx"
+                            ),
+                        ],
+                    ]
                 ),
             )
 
@@ -358,41 +373,41 @@ def help_button(update, context):
         pass
 
 
-def prime_about_callback(update, context):
+def hachi_about_callback(update, context):
     query = update.callback_query
-    if query.data == "prime_":
+    if query.data == "hachi_":
         query.message.edit_text(
-            text="๏ I'm *Prime Mega*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *HachiXBot*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
             "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
             "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
             "\n• I check for admins' permissions before executing any command and more stuffs"
-            "\n\n_HachiBot's licensed under the GNU General Public License v3.0_"
-            "\n\n Click on button bellow to get basic help for HachiBot.",
+            "\n\n_HachiXBot's licensed under the GNU General Public License v3.0_"
+            "\n\n Click on button bellow to get basic help for HachiXBot.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Admins", callback_data="prime_admin"),
-                    InlineKeyboardButton(text="Notes", callback_data="prime_notes"),
+                    InlineKeyboardButton(text="Admins", callback_data="hachi_admin"),
+                    InlineKeyboardButton(text="Notes", callback_data="hachi_notes"),
                  ],
                  [
-                    InlineKeyboardButton(text="Support", callback_data="prime_support"),
-                    InlineKeyboardButton(text="Credits", callback_data="prime_credit"),
+                    InlineKeyboardButton(text="Support", callback_data="hachi_support"),
+                    InlineKeyboardButton(text="Credits", callback_data="hachi_credit"),
                  ],
                  [
                     InlineKeyboardButton(text="Musicplayer", callback_data="source_"),
                  ],
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="prime_back"),
+                    InlineKeyboardButton(text="Go Back", callback_data="hachi_back"),
                  ]
                 ]
             ),
         )
-    elif query.data == "prime_back":
+    elif query.data == "hachi_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -407,10 +422,10 @@ def prime_about_callback(update, context):
                 disable_web_page_preview=True,
         )
 
-    elif query.data == "prime_admin":
+    elif query.data == "hachi_admin":
         query.message.edit_text(
             text=f"*๏ Let's make your group bit effective now*"
-            "\nCongragulations, Prime Mega now ready to manage your group."
+            "\nCongragulations, HachiXBot now ready to manage your group."
             "\n\n*Admin Tools*"
             "\nBasic Admin tools help you to protect and powerup your group."
             "\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
@@ -420,11 +435,11 @@ def prime_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Go Back", callback_data="prime_")]]
+                [[InlineKeyboardButton(text="Go Back", callback_data="hachi_")]]
             ),
         )
 
-    elif query.data == "prime_notes":
+    elif query.data == "hachi_notes":
         query.message.edit_text(
             text=f"<b>๏ Setting up notes</b>"
             f"\nYou can save message/media/audio or anything as notes"
@@ -432,22 +447,22 @@ def prime_about_callback(update, context):
             f"\n\nYou can also set buttons for notes and filters (refer help menu)",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Go Back", callback_data="prime_")]]
+                [[InlineKeyboardButton(text="Go Back", callback_data="hachi_")]]
             ),
         )
-    elif query.data == "prime_support":
+    elif query.data == "hachi_support":
         query.message.edit_text(
-            text="*๏ HachiBot support chats*"
-            "\nJoin My Support Group/Channel for see or report a problem on HachiBot.",
+            text="*๏ HachiXBot support chats*"
+            "\nJoin My Support Group/Channel for see or report a problem on HachiXBot.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Support", url="t.me/PrimeSupportGroup"),
-                    InlineKeyboardButton(text="Updates", url="https://t.me/PrimeSupportChannel"),
+                    InlineKeyboardButton(text="Support", url="t.me/demonszxx"),
+                    InlineKeyboardButton(text="Updates", url="https://xnxx.com"),
                  ],
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="prime_"),
+                    InlineKeyboardButton(text="Go Back", callback_data="hachi_"),
                  
                  ]
                 ]
@@ -455,19 +470,19 @@ def prime_about_callback(update, context):
         )
 
 
-    elif query.data == "prime_credit":
+    elif query.data == "hachi_credit":
         query.message.edit_text(
-            text=f"<b>๏ Credis for HachiBot</b>\n"
-            f"\nHere Developers Making The HachiBotRobot",
+            text=f"<b>๏ Credis for HachiXBot</b>\n"
+            f"\nHere Developers Making The Hachi Robot",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
+                    InlineKeyboardButton(text="ddox", url="t.me/ddodxy"),
                     InlineKeyboardButton(text="Tonic", url="t.me/Bukan_guudlooking"),
-                    InlineKeyboardButton(text="x~b", url="t.me/Xbarok"),
                  ],
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="prime_"),
+                    InlineKeyboardButton(text="Go Back", callback_data="hachi_"),
                  
                  ]
                 ]
@@ -480,27 +495,21 @@ def Source_about_callback(update, context):
         query.message.edit_text(
             text="๏›› This advance command for Musicplayer."
             "\n\n๏ Command for admins only."
-            "\n • `/reload` - For refreshing the adminlist."
             "\n • `/userbotjoin` - For inviting the assistant to your groups."
             "\n • `/userbotleave` - Use this if you want the assistant leaving your groups."
             "\n • `/pause` - To pause the playback."
-            "\n • `/vpause` - To pause video stream."
             "\n • `/resume` - To resuming the playback You've paused."
-            "\n • `/vresume` - To resuming video stream."
             "\n • `/skip` - To skipping the player."
-            "\n • `/vskip` - To skipping the video stream."
             "\n • `/end` - For end the playback."
-            "\n • `/vend` - For end the video stream."
             "\n • `/musicplayer <on/off>` - Toggle for turn ON or turn OFF the musicplayer."
             "\n\n๏ Command for all members."
-            "\n • `/play` or `/ytp` <query> - Playing music via YouTube."
-            "\n • `/vplay` <query or reply audio> - Playing video from YouTube.",
+            "\n • `/play` <query> - Playing And Can Play Vid To.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="prime_")
+                    InlineKeyboardButton(text="Go Back", callback_data="hachi_")
                  ]
                 ]
             ),
@@ -790,8 +799,10 @@ def main():
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
             dispatcher.bot.sendMessage(
-                f"@{SUPPORT_CHAT}", 
-                "👋 Hi friends, I'm alive.",
+                f"@demonszxx",
+                "ɪ'ᴀᴍ ᴏɴʟɪɴᴇ ɴᴏᴡ ʙᴇʏʙɪ⚡️\n\n"
+                f"✪**Library Version :** `{peler}` \n"
+                f"✪**Telethon Version :** `{tlhver}` ",
                 parse_mode=ParseMode.MARKDOWN
             )
         except Unauthorized:
@@ -815,7 +826,7 @@ def main():
     )
 
     about_callback_handler = CallbackQueryHandler(
-        prime_about_callback, pattern=r"prime_", run_async=True
+        hachi_about_callback, pattern=r"hachi_", run_async=True
     )
 
     source_callback_handler = CallbackQueryHandler(
