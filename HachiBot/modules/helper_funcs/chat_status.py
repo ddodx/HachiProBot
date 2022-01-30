@@ -33,6 +33,22 @@ def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     return user_id in DRAGONS or user_id in DEV_USERS
 
 
+def is_stats_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    return user_id in DEV_USERS
+
+
+def user_can_changeinfo(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_change_info
+
+
+def user_can_promote(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_promote_members
+
+
+def user_can_pin(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_pin_messages
+
+
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (
         chat.type == "private"
@@ -308,6 +324,10 @@ def can_pin(func):
         update.effective_message.reply_text(cant_pin, parse_mode=ParseMode.HTML)
 
     return pin_rights
+
+
+def callbacks_in_filters(data):
+    return filters.create(lambda flt, _, query: flt.data in query.data, data=data)
 
 
 def can_promote(func):
