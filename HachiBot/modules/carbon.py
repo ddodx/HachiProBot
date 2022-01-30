@@ -27,8 +27,8 @@ async def carbon_func(_, message):
 @pbot.on_message(filters.command("repo"))
 async def repo(_, message):
     await message.reply_text(
-        f"""✨ **Hey I'm Prime Mega** 
-**Owner repo : [『TØNIC』](https://t.me/Bukan_guudlooking)**
+        f"""✨ **Hey I'm Hachi Robot** 
+**Owner repo : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)**
 **Python Version :** `{y()}`
 **Library Version :** `{o}`
 **Telethon Version :** `{s}`
@@ -38,8 +38,8 @@ async def repo(_, message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Repo", url="https://github.com/Tonic990/HachiBot"), 
-                    InlineKeyboardButton("Support", url="https://t.me/PrimeSupportGroup")
+                    InlineKeyboardButton("Repo", url="https://nhentai.io"), 
+                    InlineKeyboardButton("Support", url="https://t.me/demonszxx")
                 ]
             ]
         ),

@@ -9,16 +9,16 @@ from HachiBot.events import register
 from HachiBot import telethn as tbot
 
 
-PHOTO = "https://telegra.ph/file/efc27dec817626cc95016.jpg"
+PHOTO = "https://telegra.ph/file/4ba029703f45315735c45.jpg"
 
 @register(pattern=("/alive"))
 async def awake(event):
-  PRIME = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Prime Mega.** \n\n"
-  PRIME += "⚪ **I'm Working Properly** \n\n"
-  PRIME += f"⚪ **My Master : [Lord](https://t.me/Bukan_guudlooking)** \n\n"
-  PRIME += f"⚪ **Library Version :** `{telever}` \n\n"
-  PRIME += f"⚪ **Telethon Version :** `{tlhver}` \n\n"
-  PRIME += f"⚪ **Pyrogram Version :** `{pyrover}` \n\n"
-  PRIME += "**Thanks For Adding Me Here ❤️**"
-  BUTTON = [[Button.url("ʜᴇʟᴘ​", "https://t.me/HachiBotBot?start=help"), Button.url("sᴜᴘᴘᴏʀᴛ​", "https://t.me/PrimeSupportGroup")]]
-  await tbot.send_file(event.chat_id, PHOTO, caption=PRIME,  buttons=BUTTON)
+  HACHI = f"**Hai Ketot Uwow [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Hachi Robot.** \n\n"
+  HACHI += "⚪ **I'm Working Properly** \n\n"
+  HACHI += f"⚪ **Lord Bapa Gua Ni : [Lord](https://t.me/ddodxy)** \n\n"
+  HACHI += f"⚪ **Library Version :** `{telever}` \n\n"
+  HACHI += f"⚪ **Telethon Version :** `{tlhver}` \n\n"
+  HACHI += f"⚪ **Pyrogram Version :** `{pyrover}` \n\n"
+  HACHI += "**Thanks For Adding Me Here **"
+  BUTTON = [[Button.url("ʜᴇʟᴘ​", "https://t.me/HachiXBot?start=help"), Button.url("sᴜᴘᴘᴏʀᴛ​", "https://t.me/demonszxx")]]
+  await tbot.send_file(event.chat_id, PHOTO, caption=HACHI,  buttons=BUTTON)
