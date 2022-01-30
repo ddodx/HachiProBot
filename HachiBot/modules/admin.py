@@ -337,7 +337,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
-def fullpromote(update: Update, context: CallbackContext) -> str:
+def coadmin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
