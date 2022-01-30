@@ -457,14 +457,9 @@ def unadmin(update: Update, context: CallbackContext):
             can_manage_voice_chats=False,
         )
         message.reply_text(
-            f"Sucessfully demoted a admins in <b>{chat.title}</b>\n\nAdmin: <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoter: {mention_html(user.id, user.first_name)}",
+            f"Successfully demoted <b>{user_member.user.first_name or user_id}</b>!",
             parse_mode=ParseMode.HTML,
         )
-        # refresh admin cache
-    try:
-        ADMIN_CACHE.pop(update.effective_chat.id)
-    except KeyError:
-        pass
         return (
             "<b>{}:</b>"
             "\n#DEMOTED"
