@@ -481,7 +481,7 @@ def unadmin(update: Update, context: CallbackContext):
             "Failed to demote. I might not be admin, or the admin status was appointed by another "
             "user, so I can't act upon them!"
         )
-        return ""
+        return
 
 
 @user_admin
