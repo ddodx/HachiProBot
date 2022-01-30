@@ -580,7 +580,7 @@ Locking bots will stop non-admins from adding bots to the chat.
 
 __mod_name__ = "Locks"
 
-LOCKTYPES_HANDLER = DisableAbleCommandHandler("locktypes", locktype, run_async=True)
+LOCKTYPES_HANDLER = DisableAbleCommandHandler("locktypes", locktypes, run_async=True)
 LOCK_HANDLER = CommandHandler("lock", lock, pass_args=True, run_async=True)  # , filters=Filters.group,)
 UNLOCK_HANDLER = CommandHandler(
     "unlock", unlock, pass_args=True, run_async=True

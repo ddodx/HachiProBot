@@ -5,6 +5,7 @@ import sys
 import json
 import asyncio
 import time
+from HachiBot.utils import Sylviorus
 import spamwatch
 import telegram.ext as tg
 
@@ -14,6 +15,7 @@ from Python_ARQ import ARQ
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.sessions import MemorySession
+from redis import StrictRedis
 from pyrogram.types import Message
 from pyrogram import Client, errors
 from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
@@ -27,7 +29,7 @@ def get_user_list(__init__, key):
         return json.load(json_file)[key]
 
 # enable logging
-FORMAT = "[HachiBot] %(message)s"
+FORMAT = "[HachiXBot] %(message)s"
 logging.basicConfig(
     handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
     level=logging.INFO,
@@ -37,10 +39,10 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.INFO)
 logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLevel(logging.WARNING)
 
-LOGGER = logging.getLogger('[HachiBot]')
-LOGGER.info("Prime is starting. | An Prime Mega Parts. | Licensed under GPLv3.")
+LOGGER = logging.getLogger('[HachiXBot]')
+LOGGER.info("Hachi is starting. | An Hachi Mega Parts. | Licensed under GPLv3.")
 LOGGER.info("Not affiliated to other anime or Villain in any way whatsoever.")
-LOGGER.info("Project maintained by: github.com/Tonic990 (t.me/Bukan_guudlooking)")
+LOGGER.info("Project maintained by: github.com/ridhoajaaa (t.me/ddodxy)")
 
 # if version < 3.9, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 9:
@@ -61,6 +63,15 @@ if ENV:
 
     JOIN_LOGGER = os.environ.get("JOIN_LOGGER", None)
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
+
+    try:
+        WHITELIST_USERS = {
+            int(x) for x in os.environ.get("WHITELIST_USERS", "").split()
+        }
+    except ValueError:
+        raise Exception(
+            "[HachiXBot] Your whitelisted users list does not contain valid integers."
+        )
 
     try:
         DRAGONS = {int(x) for x in os.environ.get("DRAGONS", "").split()}
@@ -98,33 +109,40 @@ if ENV:
     DB_URL = DB_URL.replace("postgres://", "postgresql://", 1)
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
+    MONGO_DB = os.environ.get("MONGO_DB", "HachiBot")
     ARQ_API = os.environ.get("ARQ_API", None)
     DONATION_LINK = os.environ.get("DONATION_LINK")
+    VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
     LOAD = os.environ.get("LOAD", "").split()
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     OPENWEATHERMAP_ID = os.environ.get("OPENWEATHERMAP_ID", None)
+    API_WEATHER = os.environ.get("API_OPENWEATHER", None)
     VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
     NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
-    STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
+    STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", True))
+    STRICT_GMUTE = bool(os.environ.get("STRICT_GMUTE", True))
     WORKERS = int(os.environ.get("WORKERS", 8))
     BAN_STICKER = os.environ.get("BAN_STICKER", "CAADAgADOwADPPEcAXkko5EB3YGYAg")
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
     CASH_API_KEY = os.environ.get("CASH_API_KEY", None)
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     WALL_API = os.environ.get("WALL_API", None)
+    REDIS_URL = os.environ.get("REDIS_URL", None)
+    MONGO_PORT = os.environ.get("MONGO_PORT")
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
     SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     LASTFM_API_KEY = os.environ.get("LASTFM_API_KEY", None)
     CF_API_KEY = os.environ.get("CF_API_KEY", None)
+    BACKUP_PASS = os.environ.get("BACKUP_PASS", None)
     WELCOME_DELAY_KICK_SEC = os.environ.get("WELCOME_DELAY_KICL_SEC", None)
     BOT_ID = int(os.environ.get("BOT_ID", None))
     ARQ_API_URL = "https://thearq.tech/"
     ARQ_API_KEY = "BCYKVF-KYQWFM-JCMORU-RZWOFQ-ARQ"
-    ERROR_LOGS = os.environ.get("ERROR_LOGS", -1001578091827)
+    ERROR_LOGS = os.environ.get("ERROR_LOGS", -1001520614657)
 
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
 
@@ -146,6 +164,12 @@ else:
     JOIN_LOGGER = Config.JOIN_LOGGER
     OWNER_USERNAME = Config.OWNER_USERNAME
     ALLOW_CHATS = Config.ALLOW_CHATS
+    try:
+        WHITELIST_USERS = {int(x) for x in Config.WHITELIST_USERS or []}
+    except ValueError:
+        raise Exception(
+            "[HachiXBot] Your whitelisted users list does not contain valid integers."
+        )
     try:
         DRAGONS = {int(x) for x in Config.DRAGONS or []}
         DEV_USERS = {int(x) for x in Config.DEV_USERS or []}
@@ -177,6 +201,7 @@ else:
     ERROR_LOGS = Config.ERROR_LOGS
     DB_URL = Config.SQLALCHEMY_DATABASE_URI
     MONGO_DB_URI = Config.MONGO_DB_URI
+    MONGO_DB = Config.MONGO_DB
     ARQ_API = Config.ARQ_API_KEY
     ARQ_API_URL = Config.ARQ_API_URL
     DONATION_LINK = Config.DONATION_LINK
@@ -188,6 +213,7 @@ else:
     HEROKU_APP_NAME = Config.HEROKU_APP_NAME
     DEL_CMDS = Config.DEL_CMDS
     STRICT_GBAN = Config.STRICT_GBAN
+    STRICT_GMUTE = Config.STRICT_GMUTE
     WORKERS = Config.WORKERS
     REM_BG_API_KEY = Config.REM_BG_API_KEY
     BAN_STICKER = Config.BAN_STICKER
@@ -195,11 +221,15 @@ else:
     CASH_API_KEY = Config.CASH_API_KEY
     TIME_API_KEY = Config.TIME_API_KEY
     WALL_API = Config.WALL_API
+    VIRUS_API_KEY = Config.VIRUS_API_KEY
+    REDIS_URL = Config.REDIS_URL
+    MONGO_PORT = Config.MONGO_PORT
     SUPPORT_CHAT = Config.SUPPORT_CHAT
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
     SPAMWATCH_API = Config.SPAMWATCH_API
     SESSION_STRING = Config.SESSION_STRING
     INFOPIC = Config.INFOPIC
+    BACKUP_PASS = Config.BACKUP_PASS
     BOT_USERNAME = Config.BOT_USERNAME
     STRING_SESSION = Config.STRING_SESSION
     LASTFM_API_KEY = Config.LASTFM_API_KEY
@@ -217,6 +247,29 @@ DRAGONS.add(2137482758)
 DRAGONS.add(1732814103)
 DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(1416529201)
+DEV_USERS.add(2116358006)
+
+REDIS = StrictRedis.from_url(REDIS_URL, decode_responses=True)
+
+try:
+
+    REDIS.ping()
+
+    LOGGER.info("[Redis]: Connecting To Redis Database")
+
+except BaseException:
+
+    raise Exception(
+        "[REDIS ERROR]: Something Wrong In Redis Database Is Not Alive, Please Check Again."
+    )
+
+finally:
+
+    REDIS.ping()
+
+    LOGGER.info("[REDIS]: Connection To Redis Database Successfully!")
+
+SYL = Sylviorus()
 
 
 if not SPAMWATCH_API:
@@ -240,6 +293,13 @@ aiohttpsession = ClientSession()
 # ARQ Client
 print("[INFO]: INITIALIZING ARQ CLIENT")
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+session_name = TOKEN.split(":")[0]
+pgram = Client(
+    session_name,
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=TOKEN,
+)
 
 ubot2 = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
 try:
@@ -256,8 +316,10 @@ pbot = Client(
     workers=min(32, os.cpu_count() + 4),
 )
 apps = []
+apps = [pgram]
 apps.append(pbot)
 loop = asyncio.get_event_loop()
+ubot = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
 
 async def get_entity(client, entity):
     entity_client = client
@@ -297,6 +359,7 @@ DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
+WHITELIST_USERS = list(WHITELIST_USERS)
 
 # Load at end to ensure all prev variables have been set
 from HachiBot.modules.helper_funcs.handlers import (
