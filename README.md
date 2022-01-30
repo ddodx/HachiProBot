@@ -38,7 +38,7 @@ The easiest way to deploy this Bot is via Heroku.
 
 ## CREDITS
 
-This whole repo was forked and edited from [Prime Mega](https://github.com/Tonic990/PrimeMega), And multiple modules from [NatsuNagisa](https://github.com/ridhoajaaa/Natsunagi-Nagisa).
+This whole repo was forked and edited from [Prime Mega](https://github.com/Tonic990/HachiBot), And multiple modules from [NatsuNagisa](https://github.com/ridhoajaaa/Natsunagi-Nagisa).
 Appropriate copyright and Code ownership goes to the respective creators/developers/owners.
 Some code has been created by my own and my team.
 I thank everyone who is behind this huge project. 
