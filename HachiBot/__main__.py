@@ -80,6 +80,11 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
+PM_START_IMG = "https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg"
+GROUP_START_IMG = (
+    "CAACAgUAAx0CXGNFKwABB2vuYeJV4mvj5q4dVoiiSoeWKUlMBQcAAlEAA8sM3DrNp9j83PxDhSME"
+)
+
 
 PM_START_TEXT = """
 Allo Tott {}, I'am *Goemon Hachisuka*
@@ -234,10 +239,23 @@ def start(update: Update, context: CallbackContext):
                 disable_web_page_preview=True,
             )
     else:
-        update.effective_message.reply_text(
-            f"<b>Hi Ketot, Aim Hachi Robot!</b>\n<b>Started working since:</b> <code>{uptime}</code>",
-            parse_mode=ParseMode.HTML
-       )
+        message.reply_animation(
+            GROUP_START_IMG,
+            caption="<code> Demons Online \nAktif sejak</code>: <code>{}</code>".format(
+                uptime
+            ),
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Support", url=f"https://telegram.dog/demonszxx"
+                        ),
+                        InlineKeyboardButton(text="Updates", url="https://nhentai.to/"),
+                    ],
+                ]
+            ),
+        )
 
 
 def error_handler(update, context):
