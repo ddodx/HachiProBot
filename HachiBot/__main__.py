@@ -251,7 +251,7 @@ def start(update: Update, context: CallbackContext):
                 disable_web_page_preview=True,
             )
     else:
-        message.reply_animation(
+        update.effective_message.reply_animation(
             GROUP_START_IMG,
             caption="<code> HachiRobot Online \nAktif sejak</code>: <code>{}</code>".format(
                 uptime
