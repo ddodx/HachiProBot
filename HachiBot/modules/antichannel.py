@@ -210,7 +210,7 @@ __help__ = """
 
 CLEANLINKED_HANDLER = CommandHandler(
     ["acm", "antichannel", "antich"],
-    antichannelmode,
+    antich,
     filters=Filters.chat_type.groups,
     run_async=True,
 )
