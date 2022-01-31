@@ -6,15 +6,15 @@
 
 
 ![Python Version](https://img.shields.io/badge/python-3.10-green?style=for-the-badge&logo=appveyor)
-![Issues](https://img.shields.io/github/issues/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)
-![Forks](https://img.shields.io/github/forks/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)
-![Stars](https://img.shields.io/github/stars/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)
-![LICENSE](https://img.shields.io/github/license/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)
-![Contributors](https://img.shields.io/github/contributors/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)
-![Repository Size](https://img.shields.io/github/repo-size/ridhoajaaa/HachiXBot?style=for-the-badge&logo=appveyor)</br>
+![Issues](https://img.shields.io/github/issues/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)
+![Forks](https://img.shields.io/github/forks/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)
+![Stars](https://img.shields.io/github/stars/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)
+![LICENSE](https://img.shields.io/github/license/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)
+![Contributors](https://img.shields.io/github/contributors/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)
+![Repository Size](https://img.shields.io/github/repo-size/ridhoajaaa/HachiProBot?style=for-the-badge&logo=appveyor)</br>
 
 
-[![Join Support!](https://img.shields.io/badge/Support%20Chat-Demonszx-red)](https://t.me/demonszxx)
+[![Join Support!](https://img.shields.io/badge/Support%20Chat-demonszx-red)](https://t.me/demonszxx)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/cfb691a93a064d9ea753ef2b5fccf797)](https://www.codacy.com/manual/ridhoajaaa/HachiXBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ridhoajaaa/HachiXBot&amp;utm_campaign=Badge_Grade)
 
 
@@ -32,7 +32,7 @@ The easiest way to deploy this Bot is via Heroku.
 
 ## Bot stuff
 
-* Bot link : [Hachi Goemon](https://t.me/HachiXBot)
+* Bot link : [Goemon Hachisuka](https://t.me/HachiXBot)
 * Bot Support chat : [Support](https://t.me/demonszxx)
 * Bot News/Updates : [News](https://t.me/HachiXLogs)
 
