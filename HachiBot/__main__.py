@@ -12,6 +12,17 @@ from typing import Optional
 from telegram import __version__ as peler
 from telethon import __version__ as tlhver
 from platform import python_version as memek
+from telegram import (
+    Chat,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    ReplyKeyboardMarkup,
+    KeyboardButton,
+    Message,
+    ParseMode,
+    Update,
+    User,
+    Bot,
 from HachiBot import (
     ALLOW_EXCL,
     CERT_PATH,
@@ -226,16 +237,17 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            message.reply_text(
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_text(
                 PM_START_TEXT.format(
-                    escape_markdown(context.bot.first_name),
+                    escape_markdown(first_name),
                     escape_markdown(uptime),
                     sql.num_users(),
-                    sql.num_chats(),
-                ),
+                    sql.num_chats()),                        
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
+                disable_web_page_preview=True,
             )
     else:
         message.reply_animation(
@@ -255,7 +267,6 @@ def start(update: Update, context: CallbackContext):
                 ]
             ),
         )
-
 
 
 def error_handler(update, context):
