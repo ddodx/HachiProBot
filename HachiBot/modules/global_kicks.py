@@ -96,13 +96,13 @@ def __user_info__(user_id):
     times = sql.get_times(user_id)
     
     if int(user_id) in DRAGONS or int(user_id) in DEMONS:
-        text="Globally kicked: <b>No</b> (Immortal)"
+        text="<b>Globally kicked:</b> No (Immortal)"
     else:
-        text = "Globally kicked: {}"
+        text = "<b>Globally kicked:</b> {}"
         if times!=0:
-            text = text.format("<b>Yes</b> (Times: {})".format(times))
+            text = text.format("Yes (Times: {})".format(times))
         else:
-            text = text.format("<b>No</b>")
+            text = text.format("No")
     return text
 
 

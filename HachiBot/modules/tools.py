@@ -14,23 +14,23 @@ __help__ = """
 ❂ /decrypt*:* Decrypts Previously Ecrypted Text
 ❂ /zip*:* reply to a telegram file to compress it in .zip format
 ❂ /unzip*:* reply to a telegram file to decompress it from the .zip format
-Link To File:
+*Link To File*
 ❂ /up : reply to a direct download link to upload it to telegram as files
-Crypto Info:
+*Crypto Info*
 ❂ /crypto <type of crypto>*:* to get info for currency crypto
-Anti Raid And Cron Jobs:
+*Anti Raid And Cron Jobs*
 ❂ /raid <enable/disable>*:* gatau bang
 ❂ /backup db*:* backup db
-Fakeit
+*Fakeit*
 ❂ /fakegen *:* Fake generating
 ❂ /picgen *:* Pictures generating
-AntiVirus
+*AntiVirus*
 ❂ /scanit *:* Scan file or document thats have virus or no
  
- File To Link:
+*File To Link*
 ❂ /transfersh : reply to a telegram file to upload it on transfersh and get direct download link
 ❂ /tmpninja : reply to a telegram file to upload it on tmpninja and get direct download link
- Tagger
+*Tagger*
 ❂ /all [message] : for mention everyone
 ❂ /cancel : for stopped mention bot
 """
