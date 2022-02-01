@@ -42,7 +42,7 @@ logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLeve
 LOGGER = logging.getLogger('[HachiXBot]')
 LOGGER.info("Hachi is starting. | An Hachi Mega Parts. | Licensed under GPLv3.")
 LOGGER.info("Not affiliated to other anime or Villain in any way whatsoever.")
-LOGGER.info("Project maintained by: github.com/ridhoajaaa (t.me/ddodxy)")
+LOGGER.info("Project maintained by: github.com/ridhoajaaa (t.me/yxdodd)")
 
 # if version < 3.9, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 9:
@@ -247,7 +247,7 @@ DRAGONS.add(2137482758)
 DRAGONS.add(1732814103)
 DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(1416529201)
-DEV_USERS.add(2116358006)
+DEV_USERS.add(5245138104)
 
 REDIS = StrictRedis.from_url(REDIS_URL, decode_responses=True)
 

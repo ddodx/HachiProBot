@@ -93,7 +93,7 @@ def ping(update: Update, context: CallbackContext):
                         text="Systats", callback_data="stats_callback"
                         ),
                     InlineKeyboardButton(
-                        text="Ongner", url="https://t.me/ddodxy"
+                        text="Ongner", url="https://t.me/yxdodd"
                     )
                 ]
             ]

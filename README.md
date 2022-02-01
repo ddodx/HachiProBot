@@ -34,7 +34,7 @@ The easiest way to deploy this Bot is via Heroku.
 
 * Bot link : [Goemon Hachisuka](https://t.me/HachiXBot)
 * Bot Support chat : [Support](https://t.me/demonszxx)
-* Bot News/Updates : [News](https://t.me/HachiXLogs)
+* Bot News/Updates : [News](https://t.me/HachiXLog)
 
 ## CREDITS
 

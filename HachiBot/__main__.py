@@ -99,14 +99,14 @@ GROUP_START_IMG = (
 
 
 PM_START_TEXT = """
-Allo Tott {}, I'am *Goemon Hachisuka*
-✪ Powerfull Management Bot To Help In Managing Your Group.[✨](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
-✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)
+Allo Tott {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
+✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
+✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼 𝗘𝗹 𝗤𝗵𝗼𝗻𝘁𝗼𝗹𝗲.](https://t.me/yxdodd)
 
-┏━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┓
-× *Server Uptime :* `{}`
-× `{}` *users, across* `{}` *chats.*
-┗━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┛
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+• *Uptime:* `{}`
+• `{}` *Users, across* `{}` *chats.*
+➖➖➖➖➖➖➖➖➖➖➖➖➖
 
 ✪ Hit /help to see my available commands.
 """
@@ -131,12 +131,12 @@ buttons = [
 
 
 HELP_STRINGS = """
-Click on the button bellow to get description about specifics command."""
+✪ *Click on the button bellow to get description about specifics command. *[✪](https://telegra.ph/file/f2a033fd4e10fbee49551.jpg)"""
 
 HACHI_IMG = "https://telegra.ph/file/f2a033fd4e10fbee49551.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @ddodxy \
+ You can support the project by contacting @yxdodd \
  Supporting isnt always financial! \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
@@ -508,7 +508,7 @@ def hachi_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="ddox", url="t.me/ddodxy"),
+                    InlineKeyboardButton(text="ddox", url="t.me/yxdodd"),
                     InlineKeyboardButton(text="Tonic", url="t.me/Bukan_guudlooking"),
                  ],
                  [

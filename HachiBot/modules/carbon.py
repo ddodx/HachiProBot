@@ -28,7 +28,7 @@ async def carbon_func(_, message):
 async def repo(_, message):
     await message.reply_text(
         f"""✨ **Hey I'm Hachi Robot** 
-**Owner repo : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)**
+**Owner repo : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/yxdodd)**
 **Python Version :** `{y()}`
 **Library Version :** `{o}`
 **Telethon Version :** `{s}`

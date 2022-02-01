@@ -314,26 +314,26 @@ def info(update: Update, context: CallbackContext):
         text += "\n\n<b>The level for my master is</b> : Lord As Lord"
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\n<b>The level for this user is</b> : Saint"
+        text += "\n\n<b>The level for this user is</b> : Lord"
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\n<b>The level for this user is</b> : Shadow Slayer"
+        text += "\n\n<b>The level for this user is</b> : God"
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\n<b>The level for this user is</b> : Guardian"
+        text += "\n\n<b>The level for this user is</b> : Saint"
         disaster_level_present = True
     elif user.id in TIGERS:
         text += "\n\n<b>The level for this user is</b> : Commander"
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\n<b>The level for this user is</b> : Villain"
+        text += "\n\n<b>The level for this user is</b> : Tiger"
         disaster_level_present = True
     elif user.id == 1482952149:
         text += "\n\nCo-Owner Of A Bot. Queen Of @Badboyanim. Bot Name Inspired From Tantei Wa Mou, Shindeiru."
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/HachiXLogs/114">Levelling</a>]'.format(
+        text += ' [<a href="https://t.me/HachiXLog/4">Levelling</a>]'.format(
             bot.username,
         )
 
@@ -370,10 +370,10 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "Health", url="https://t.me/HachiXLogs/116"
+                                "Health", url="https://t.me/HachiXLog/3"
                             ),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/HachiXLogs/114"
+                                "Disaster", url="https://t.me/HachiXLog/4"
                             ),
                         ],
                         [
@@ -392,10 +392,10 @@ def info(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "Health", url="https://t.me/HachiXLogs/116"
+                                "Health", url="https://t.me/HachiXLog/3"
                             ),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/HachiXLogs/114"
+                                "Disaster", url="https://t.me/HachiXLog/4"
                             ),
                         ],
                         [
@@ -509,7 +509,7 @@ def stats(update, context):
             + "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
             + "\n\n[⍙ GitHub](https://github.com/ridhoajaaa/HachiXBot) | [⍚ Bokep](https://xnxx.com)\n\n"
-            + "╘══「 by [ddodxy](github.com/ridhoajaaa) 」\n",
+            + "╘══「 by [yxdodd](github.com/ridhoajaaa) 」\n",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),
             disable_web_page_preview=True,
@@ -697,8 +697,8 @@ When marked as AFK, any mentions will be replied to with a message to say you're
 
 *What is that health thingy?*
 Come and see ;
-[HP System explained](https://t.me/HachiXLogs/116)
-[Disaster Levelling](https://t.me/HachiXLogs/114)
+[HP System explained](https://t.me/HachiXLog/3)
+[Disaster Levelling](https://t.me/HachiXLog/4)
 """
 
 __mod_name__ = "Info & AFK"

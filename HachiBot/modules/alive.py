@@ -15,7 +15,7 @@ PHOTO = "https://telegra.ph/file/4ba029703f45315735c45.jpg"
 async def awake(event):
   HACHI = f"**Hai Ketot Uwow [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Hachi Robot.** \n\n"
   HACHI += "⚪ **I'm Working Properly** \n\n"
-  HACHI += f"⚪ **Lord Bapa Gua Ni : [Lord](https://t.me/ddodxy)** \n\n"
+  HACHI += f"⚪ **Lord Bapa Gua Ni : [Lord](https://t.me/yxdodd)** \n\n"
   HACHI += f"⚪ **Library Version :** `{telever}` \n\n"
   HACHI += f"⚪ **Telethon Version :** `{tlhver}` \n\n"
   HACHI += f"⚪ **Pyrogram Version :** `{pyrover}` \n\n"
