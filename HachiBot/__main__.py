@@ -92,14 +92,14 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-PM_START_IMG = "https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg"
+Hachi_IMG = "https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg"
 GROUP_START_IMG = (
     "CAACAgUAAx0CXGNFKwABB2vuYeJV4mvj5q4dVoiiSoeWKUlMBQcAAlEAA8sM3DrNp9j83PxDhSME"
 )
 
 
 PM_START_TEXT = """
-Allo Tott {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
+Halo Mek {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
 ✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
 ✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼 𝗘𝗹 𝗤𝗵𝗼𝗻𝘁𝗼𝗹𝗲.](https://t.me/yxdodd)
 
@@ -112,22 +112,27 @@ Allo Tott {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
 """
 
 buttons = [
-        [
-        InlineKeyboardButton(text=" ｢ AboutHachi 」", callback_data="hachi_"),
-        InlineKeyboardButton(text=" ｢ GetHelp 」", callback_data="help_back"),
-    ],
     [
-        InlineKeyboardButton(
-            text=" ➕ ｢ Kuciose Saya 」➕ ",
-            url="t.me/HachiXBot?startgroup=true",
-        ),
-    ],
-    [
-        InlineKeyboardButton(text=" ｢ Support 」", url="http://t.me/demonszxx"),
-        InlineKeyboardButton(text=" [✖️] ", callback_data="close"),
-        InlineKeyboardButton(text=" ｢ Update 」", url="http://t.me/ppppppppppppppppqq"),
-    ],
-]
+                        InlineKeyboardButton(
+                            text="Add Hachi To Your Group",
+                            url="t.me/HachiXBot?startgroup=true"),
+                    ],
+                   [
+                       InlineKeyboardButton(text="[► Help ◄]", callback_data="help_back"),
+                      InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
+                       InlineKeyboardButton(text="[► About ◄]", callback_data="hachi_"),
+                     
+                     ],
+                    [                  
+                       InlineKeyboardButton(
+                             text="🚑 Support",
+                             url="http://t.me/demonszxx"),
+                       InlineKeyboardButton(
+                             text="Updates 📢",
+                             url="https://t.me/hachixlog")
+    
+                     ], 
+    ]
 
 
 HELP_STRINGS = """
@@ -407,7 +412,7 @@ def hachi_about_callback(update, context):
     query = update.callback_query
     if query.data == "hachi_":
         query.message.edit_text(
-            text="๏ I'm *HachiXBot*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *HachiXBot*, a powerful group management bot built to help you manage your group easily.\n"
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
@@ -429,7 +434,7 @@ def hachi_about_callback(update, context):
                     InlineKeyboardButton(text="Credits", callback_data="hachi_credit"),
                  ],
                  [
-                    InlineKeyboardButton(text="Musicplayer", callback_data="source_"),
+                    InlineKeyboardButton(text="MusicPlayer", callback_data="source_"),
                  ],
                  [
                     InlineKeyboardButton(text="Go Back", callback_data="hachi_back"),

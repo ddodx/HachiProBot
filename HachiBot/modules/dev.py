@@ -23,6 +23,23 @@ from telethon import events
 
 
 @dev_plus
+def allow_groups(update: Update, context: CallbackContext):
+    args = context.args
+    if not args:
+        state = "Lockdown is " + "on" if not Natsunagi.ALLOW_CHATS else "off"
+        update.effective_message.reply_text(f"Current state: {state}")
+        return
+    if args[0].lower() in ["off", "no"]:
+        Natsunagi.ALLOW_CHATS = True
+    elif args[0].lower() in ["yes", "on"]:
+        Natsunagi.ALLOW_CHATS = False
+    else:
+        update.effective_message.reply_text("Format: /lockdown Yes/No or Off/On")
+        return
+    update.effective_message.reply_text("Done! Lockdown value toggled.")
+
+
+@dev_plus
 def leave(update: Update, context: CallbackContext):
     bot = context.bot
     args = context.args
