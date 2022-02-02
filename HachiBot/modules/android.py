@@ -81,6 +81,118 @@ def device(update, context):
     )
 
 
+# Picked from UserIndoBot; Thanks to them!
+@ddocmd(command="los", can_disable=True)
+@typing_action
+def los(update, context) -> str:
+    message = update.effective_message
+    args = context.args
+    try:
+        device = args[0]
+    except Exception:
+        device = ""
+
+    if device == "":
+        reply_text = "*Please Type Your Device Codename*\nExample : `/los lavender`"
+        message.reply_text(
+            reply_text,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+        return
+
+    fetch = get(f"https://download.lineageos.org/api/v1/{device}/nightly/*")
+    if fetch.status_code == 200 and len(fetch.json()["response"]) != 0:
+        usr = fetch.json()
+        data = len(usr["response"]) - 1  # the latest rom are below
+        response = usr["response"][data]
+        filename = response["filename"]
+        url = response["url"]
+        buildsize_a = response["size"]
+        buildsize_b = sizee(int(buildsize_a))
+        version = response["version"]
+
+        reply_text = f"*Download :* [{filename}]({url})\n"
+        reply_text += f"*Build Size :* `{buildsize_b}`\n"
+        reply_text += f"*Version :* `{version}`\n"
+
+        keyboard = [
+            [InlineKeyboardButton(text="Click Here To Downloads", url=f"{url}")]
+        ]
+        message.reply_text(
+            reply_text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+        return
+    message.reply_text(
+        "`Couldn't find any results matching your query.`",
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True,
+    )
+
+
+# Picked from AstrakoBot; Thanks to them!
+@ddocmd(command="orangefox", can_disable=True)
+@typing_action
+def orangefox(update, _):
+    message = update.effective_message
+    devices = message.text[len("/orangefox ") :]
+    btn = ""
+
+    if devices:
+        link = get(
+            f"https://api.orangefox.download/v3/releases/?codename={devices}&sort=date_desc&limit=1"
+        )
+
+        if link.status_code == 404:
+            msg = f"OrangeFox recovery is not avaliable for {devices}"
+        else:
+            page = loads(link.content)
+            file_id = page["data"][0]["_id"]
+            link = get(
+                f"https://api.orangefox.download/v3/devices/get?codename={devices}"
+            )
+            page = loads(link.content)
+            oem = page["oem_name"]
+            model = page["model_name"]
+            full_name = page["full_name"]
+            maintainer = page["maintainer"]["username"]
+            link = get(f"https://api.orangefox.download/v3/releases/get?_id={file_id}")
+            page = loads(link.content)
+            dl_file = page["filename"]
+            build_type = page["type"]
+            version = page["version"]
+            changelog = page["changelog"][0]
+            size = str(round(float(page["size"]) / 1024 / 1024, 1)) + "MB"
+            dl_link = page["mirrors"]["US"]
+            date = datetime.fromtimestamp(page["date"])
+            md5 = page["md5"]
+            msg = f"*Latest OrangeFox Recovery for the {full_name}*\n\n"
+            msg += f"× Manufacturer: `{oem}`\n"
+            msg += f"× Model: `{model}`\n"
+            msg += f"× Codename: `{devices}`\n"
+            msg += f"× Build type: `{build_type}`\n"
+            msg += f"× Maintainer: `{maintainer}`\n"
+            msg += f"× Version: `{version}`\n"
+            msg += f"× Changelog: `{changelog}`\n"
+            msg += f"× Size: `{size}`\n"
+            msg += f"× Date: `{date}`\n"
+            msg += f"× File: `{dl_file}`\n"
+            msg += f"× MD5: `{md5}`\n"
+            btn = [[InlineKeyboardButton(text="Download", url=dl_link)]]
+    else:
+        msg = "Enter the device codename to fetch, like:\n`/orangefox mido`"
+
+    update.message.reply_text(
+        text=msg,
+        reply_markup=InlineKeyboardMarkup(btn),
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True,
+    )
+
+
 @ddocmd(command="gsi", can_disable=True)
 @typing_action
 def gsi(update, context):
@@ -142,6 +254,26 @@ def checkfw(update: Update, context: CallbackContext):
     )
 
     cleartime = get_clearcmd(chat.id, "checkfw")
+
+    if cleartime:
+        context.dispatcher.run_async(delete, delmsg, cleartime.time)
+
+
+@ddocmd(command="phh", can_disable=True)
+def phh(update: Update, context: CallbackContext):
+    args = context.args
+    message = update.effective_message
+    chat = update.effective_chat
+    index = int(args[0]) if len(args) > 0 and args[0].isdigit() else 0
+    text = getphh(index)
+
+    delmsg = message.reply_text(
+        text,
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True,
+    )
+
+    cleartime = get_clearcmd(chat.id, "phh")
 
     if cleartime:
         context.dispatcher.run_async(delete, delmsg, cleartime.time)
@@ -209,14 +341,11 @@ __help__ = """
 Get the latest Magsik releases or TWRP for your device!
 *Android related commands:*
 × /magisk - Gets the latest magisk release for Stable/Beta/Canary.
-× /phhmagisk - Gets Latest los build.
 × /device <codename> - Gets android device basic info from its codename.
 × /twrp <codename> -  Gets latest twrp for the android device using the codename.
 × /orangefox <codename> -  Gets latest orangefox recovery for the android device using the codename.
 × /los <codename> - Gets Latest los build.
-× /evo <codename> - Gets Latest evolution build.
 × /gsi <codename> - Gets Latest gsi build.
-× /pixys <codename> - Gets Latest pixyos build.
 × /miui <devicecodename>- Fetches latest firmware info for a given device codename
 × /realmeui <devicecodename>- Fetches latest firmware info for a given device codename
 × /phh : Get lastest phh builds from github
