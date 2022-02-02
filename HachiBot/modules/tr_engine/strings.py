@@ -24,9 +24,6 @@ LANGUAGES = ['en-US', 'pt']
 
 strings = {}
 
-for i in LANGUAGES:
-    strings[i] = yaml.full_load(open("locales/" + i + ".yml", "r"))
-
 
 def tld(chat_id, t, show_none=True):
     LANGUAGE = prev_locale(chat_id)
