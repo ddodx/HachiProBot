@@ -15,6 +15,7 @@ pykeyboard
 pynewtonmath
 pytimeparse
 aiofiles
+rapidjson
 ffmpeg-python
 spongemock
 zalgo-text
