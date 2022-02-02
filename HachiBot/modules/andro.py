@@ -409,6 +409,45 @@ async def twrp(c: Client, update: Update):
             reply_markup=InlineKeyboardMarkup(keyboard))
 
 
+@pbot.on_message(filters.command(["los", "lineage"]))
+async def los(c: Client, update: Update):
+
+    chat_id = update.chat.id,
+    try:
+        device = update.command[1]
+    except Exception:
+        device = ''
+
+    if device == '':
+        reply_text = tld(chat_id, "cmd_example").format("los")
+        await update.reply_text(reply_text, disable_web_page_preview=True)
+        return
+
+    fetch = get(f'https://download.lineageos.org/api/v1/{device}/nightly/*')
+    if fetch.status_code == 200 and len(fetch.json()['response']) != 0:
+        usr = json.loads(fetch.content)
+        response = usr['response'][0]
+        filename = response['filename']
+        url = response['url']
+        buildsize_a = response['size']
+        buildsize_b = sizee(int(buildsize_a))
+        version = response['version']
+
+        reply_text = tld(chat_id, "download").format(filename, url)
+        reply_text += tld(chat_id, "build_size").format(buildsize_b)
+        reply_text += tld(chat_id, "version").format(version)
+
+        btn = tld(chat_id, "btn_dl")
+        keyboard = [[InlineKeyboardButton(
+            text=btn, url=url)]]
+        await update.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), disable_web_page_preview=True)
+        return
+
+    else:
+        reply_text = tld(chat_id, "err_not_found")
+    await update.reply_text(reply_text, disable_web_page_preview=True)
+
+
 @pbot.on_message(filters.command(["evo", "evox"]))
 async def evo(c: Client, update: Update):
 
@@ -589,6 +628,26 @@ async def pixys(c: Client, update: Update):
     await update.reply_text(reply_text,
                             parse_mode="markdown",
                             disable_web_page_preview=True)
+
+
+@pbot.on_message(filters.command("phh"))
+async def phh(c: Client, update: Update):
+
+    chat_id = update.chat.id
+
+    fetch = get(
+        "https://api.github.com/repos/phhusson/treble_experimentations/releases/latest"
+    )
+    usr = json.loads(fetch.content)
+    reply_text = tld(chat_id, "phh_releases")
+    for i in range(len(usr)):
+        try:
+            name = usr['assets'][i]['name']
+            url = usr['assets'][i]['browser_download_url']
+            reply_text += f"[{name}]({url})\n"
+        except IndexError:
+            continue
+    await update.reply_text(reply_text)
 
 
 @pbot.on_message(filters.command("phhmagisk"))
