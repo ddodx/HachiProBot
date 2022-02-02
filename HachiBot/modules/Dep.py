@@ -76,4 +76,4 @@ Commands listed here only work for users with special access are mainly used for
 `⚠️ Read from top`
 Visit *@demonszxx* for more information.
 """
-__mod_name__ = "Dev 🦁"
+__mod_name__ = "Devs"
