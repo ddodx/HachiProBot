@@ -212,7 +212,7 @@ def gsi(update, context):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
-@ddocmd(command="bootleg", "btlg", can_disable=True)
+@ddocmd(command="bootleg", can_disable=True)
 @typing_action
 def bootleg(update, context) -> str:
     message = update.effective_message
