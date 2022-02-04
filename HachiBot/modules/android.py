@@ -134,7 +134,7 @@ def los(update, context) -> str:
 
 
 # Picked from AstrakoBot; Thanks to them!
-@ddocmd(command="orangefox", can_disable=True)
+@ddocmd(command="orangefox", "ofx", can_disable=True)
 @typing_action
 def orangefox(update, _):
     message = update.effective_message
@@ -210,6 +210,86 @@ def gsi(update, context):
         except IndexError:
             continue
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
+
+
+@ddocmd(command="bootleg", "btlg", can_disable=True)
+@typing_action
+def bootleg(update, context) -> str:
+    message = update.effective_message
+    args = context.args
+    try:
+        codename = args[0]
+    except Exception:
+        codename = ""
+
+    if codename == "":
+        message.reply_text(
+            "*Please Type Your Device Codename*\nExample : `/bootleg lavender`",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+        return
+
+    fetch = get("https://bootleggersrom-devices.github.io/api/devices.json")
+    if fetch.status_code == 200:
+        data = fetch.json()
+
+        if codename.lower() == "x00t":
+            device = "X00T"
+        elif codename.lower() == "rmx1971":
+            device = "RMX1971"
+        else:
+            device = codename.lower()
+
+        try:
+            fullname = data[device]["fullname"]
+            filename = data[device]["filename"]
+            buildate = data[device]["buildate"]
+            buildsize = data[device]["buildsize"]
+            buildsize = sizee(int(buildsize))
+            downloadlink = data[device]["download"]
+            if data[device]["mirrorlink"] != "":
+                mirrorlink = data[device]["mirrorlink"]
+            else:
+                mirrorlink = None
+        except KeyError:
+            message.reply_text(
+                "`Couldn't find any results matching your query.`",
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+            )
+            return
+
+        reply_text = f"*BootlegersROM for {fullname}*\n"
+        reply_text += f"*Download :* [{filename}]({downloadlink})\n"
+        reply_text += f"*Size :* `{buildsize}`\n"
+        reply_text += f"*Build Date :* `{buildate}`\n"
+        if mirrorlink is not None:
+            reply_text += f"[Mirror link]({mirrorlink})"
+
+        keyboard = [
+            [
+                InlineKeyboardButton(
+                    text="Click Here To Downloads", url=f"{downloadlink}"
+                )
+            ]
+        ]
+
+        message.reply_text(
+            reply_text,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+        return
+
+    if fetch.status_code == 404:
+        message.reply_text(
+            "`Couldn't reach api`",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+        return
 
 
 @ddocmd(command="checkfw", can_disable=True)
@@ -349,9 +429,9 @@ Get the latest Magsik releases or TWRP for your device!
 × /miui <devicecodename>- Fetches latest firmware info for a given device codename
 × /realmeui <devicecodename>- Fetches latest firmware info for a given device codename
 × /phh : Get lastest phh builds from github
-× /miui <devicecodename>- Get samsung spesifikasi
+× /samspec <devicecodename>- Get samsung spesifikasi
 × /whatis <devicecodename>- to get information from codename
-× /variant <devicecodename>- same yang atas
+× /variants <devicecodename>- same yang atas
 × /samget <devicecodename>- get samsung spesifikasi
 × /checkfw <model> <csc> - Samsung only - Shows the latest firmware info for the given device, taken from samsung servers
 × /getfw <model> <csc> - Samsung only - gets firmware download links from samfrew, sammobile and sfirmwares for the given device

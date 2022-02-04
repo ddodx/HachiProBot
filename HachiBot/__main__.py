@@ -103,12 +103,12 @@ Halo Mek {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
 ✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
 ✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼 𝗘𝗹 𝗤𝗵𝗼𝗻𝘁𝗼𝗹𝗲.](https://t.me/yxdodd)
 
-➖➖➖➖➖➖➖➖➖➖➖➖➖
-• *Uptime:* `{}`
-• `{}` *Users, across* `{}` *chats.*
-➖➖➖➖➖➖➖➖➖➖➖➖➖
+┏━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┓
+× *Server Uptime :* `{}`
+× `{}` *users, across* `{}` *chats.*
+┗━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┛
 
-✪ Hit /help to see my available commands.
+✪ Hit /help to learn more how to use me.
 """
 
 buttons = [

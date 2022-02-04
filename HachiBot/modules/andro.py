@@ -228,7 +228,7 @@ async def samspecs(c: Client, update: Update):
         text=message)
 
 
-@pbot.on_message(filters.command(["whatis", "device", "codename"]))
+@pbot.on_message(filters.command(["whatis", "codename"]))
 async def models(c: Client, update: Update):
     if len(update.command) != 2:
         message = "Please write your codename into it, i.e <code>/whatis herolte</code>"
@@ -478,71 +478,6 @@ async def evo(c: Client, update: Update):
         return
 
 
-@pbot.on_message(filters.command(["bootleggers", "btlg"]))
-async def bootleggers(c: Client, update: Update):
-
-    chat_id = update.chat.id,
-    try:
-        codename = update.command[1]
-    except Exception:
-        codename = ''
-
-    if codename == '':
-        reply_text = tld(chat_id, "cmd_example").format("bootleggers")
-        await update.reply_text(reply_text, disable_web_page_preview=True)
-        return
-
-    fetch = get('https://bootleggersrom-devices.github.io/api/devices.json')
-    if fetch.status_code == 200:
-        nestedjson = json.loads(fetch.content)
-
-        if codename.lower() == 'x00t':
-            devicetoget = 'X00T'
-        else:
-            devicetoget = codename.lower()
-
-        reply_text = ""
-        devices = {}
-
-        for device, values in nestedjson.items():
-            devices.update({device: values})
-
-        if devicetoget in devices:
-            for oh, baby in devices[devicetoget].items():
-                dontneedlist = ['id', 'filename', 'download', 'xdathread']
-                peaksmod = {
-                    'fullname': 'Device name',
-                    'buildate': 'Build date',
-                    'buildsize': 'Build size',
-                    'downloadfolder': 'SourceForge folder',
-                    'mirrorlink': 'Mirror link',
-                    'xdathread': 'XDA thread'
-                }
-                if baby and oh not in dontneedlist:
-                    if oh in peaksmod:
-                        oh = peaksmod.get(oh, oh.title())
-
-                    if oh == 'SourceForge folder':
-                        reply_text += f"\n**{oh}:** [Here]({baby})\n"
-                    elif oh == 'Mirror link':
-                        if not baby == "Error404":
-                            reply_text += f"\n**{oh}:** [Here]({baby})\n"
-                    else:
-                        reply_text += f"\n**{oh}:** `{baby}`"
-
-            reply_text += tld(chat_id, "xda_thread").format(
-                devices[devicetoget]['xdathread'])
-            reply_text += tld(chat_id, "download").format(
-                devices[devicetoget]['filename'],
-                devices[devicetoget]['download'])
-        else:
-            reply_text = tld(chat_id, "err_not_found")
-
-    elif fetch.status_code == 404:
-        reply_text = tld(chat_id, "err_api")
-    await update.reply_text(reply_text, disable_web_page_preview=True)
-
-
 @pbot.on_message(filters.command("pixys"))
 async def pixys(c: Client, update: Update):
 
@@ -658,5 +593,3 @@ async def magisk(c: Client, update: Update):
 
     await update.reply_text(releases, disable_web_page_preview=True)
 
-
-__help__ = True
