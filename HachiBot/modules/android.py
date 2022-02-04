@@ -134,7 +134,7 @@ def los(update, context) -> str:
 
 
 # Picked from AstrakoBot; Thanks to them!
-@ddocmd(command="orangefox", "ofx", can_disable=True)
+@ddocmd(command="orangefox", can_disable=True)
 @typing_action
 def orangefox(update, _):
     message = update.effective_message
