@@ -376,10 +376,10 @@ file_helpo = file_help.replace("_", " ")
 __help__ = """
 Available commands:
 *Markdown*:
-❂ `/markdownhelp`: quick summary of how markdown works in telegram - can only be called in private chats
+× `/markdownhelp`: quick summary of how markdown works in telegram - can only be called in private chats
 
 *Currency converter*:
-❂ `/cash`: currency converter
+× `/cash`: currency converter
 Example:
 × `/cash 1 USD INR`
      OR
@@ -387,43 +387,43 @@ Example:
 » Output: `1.0 USD = 75.505 INR`
 
 *Translator*:
-❂ `/tr` or `/tl` (language code) as reply to a long message
-❂ `/langs` : lists all the language codes
+× `/tr` or `/tl` (language code) as reply to a long message
+× `/langs` : lists all the language codes
 Example:
  × `/tr en`: translates something to english
  × `/tr hi-en`: translates hindi to english.
 
 *Quotly*:
-❂ `/q` : To quote a message.
-❂ `/q <Number>` : To quote more than 1 messages.
-❂ `/q r` : to quote a message with it's reply
+× `/q` : To quote a message.
+× `/q <Number>` : To quote more than 1 messages.
+× `/q r` : to quote a message with it's reply
 
 Compress And Decompress: 
-❂ `/zip`*:* reply to a telegram file to compress it in .zip format
-❂ `/unzip`*:* reply to a telegram file to decompress it from the .zip format
+× `/zip`*:* reply to a telegram file to compress it in .zip format
+× `/unzip`*:* reply to a telegram file to decompress it from the .zip format
 
 *Other Commands*:
 *Paste*:
-❂ `/paste`*:* Saves replied content to ezup and replies with a url
+× `/paste`*:* Saves replied content to ezup and replies with a url
 
 *React*:
-❂ `/react`*:* Reacts with a random reaction
+× `/react`*:* Reacts with a random reaction
 
 *Urban Dictonary*:
-❂ `/ud <word>`*:* Type the word or expression you want to search use
+× `/ud <word>`*:* Type the word or expression you want to search use
 
 *Wikipedia*:
-❂ `/wiki <query>`*:* wikipedia your query
+× `/wiki <query>`*:* wikipedia your query
 
 *Wallpapers*:
-❂ `/wall <query>`*:* get a wallpaper from alphacoders
+× `/wall <query>`*:* get a wallpaper from alphacoders
 
 *Text To Speech*:
-❂ `/tts <text>`*:* Converts a text message to a voice message.
+× `/tts <text>`*:* Converts a text message to a voice message.
 
 *Telegraph*:
-❂ `tgm`*:* Upload media to telegraph
-❂ `tgt`*:* Upload text to telegraph
+× `tgm`*:* Upload media to telegraph
+× `tgt`*:* Upload text to telegraph
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler(

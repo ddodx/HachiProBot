@@ -6,6 +6,7 @@ from telegram.ext import CallbackContext, CallbackQueryHandler
 import HachiBot.modules.sql.approve_sql as sql
 from HachiBot.modules.helper_funcs.chat_status import user_admin
 from HachiBot.modules.log_channel import loggable
+from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.utils.helpers import mention_html
 from telegram.error import BadRequest
@@ -13,7 +14,7 @@ from telegram.error import BadRequest
 
 @loggable
 @user_admin
-def approve(update, context):
+def free(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -57,7 +58,7 @@ def approve(update, context):
 
 @loggable
 @user_admin
-def disapprove(update, context):
+def unfree(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -93,8 +94,8 @@ def disapprove(update, context):
     return log_message
 
 
-@user_admin
-def approved(update, context):
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
+def listfree(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -109,7 +110,7 @@ def approved(update, context):
     message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-@user_admin
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
 def approval(update, context):
     message = update.effective_message
     chat = update.effective_chat
@@ -197,29 +198,30 @@ Sometimes, you might trust a user not to send unwanted content.
 Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
 That's what approvals are for - approve of trustworthy users to allow them to send
 *Admin commands:*
-❂ /approval*:* Check a user's approval status in this chat.
-❂ /approve*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
-❂ /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
-❂ /approved*:* List all approved users.
-❂ /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
+
+× /approval*:* Check a user's approval status in this chat.
+× /free*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
+× /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
+× /listfree*:* List all approved users.
+× /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
 """
 
-APPROVE = DisableAbleCommandHandler("approve", approve, run_async=True)
-DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
-APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
+FREE = DisableAbleCommandHandler("free", free, run_async=True)
+UNFREE = DisableAbleCommandHandler("unfree", unfree, run_async=True)
+LISTFREE = DisableAbleCommandHandler("listfree", listfree, run_async=True)
 APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
 UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, run_async=True)
 UNAPPROVEALL_BTN = CallbackQueryHandler(
     unapproveall_btn, pattern=r"unapproveall_.*", run_async=True
 )
 
-dispatcher.add_handler(APPROVE)
-dispatcher.add_handler(DISAPPROVE)
-dispatcher.add_handler(APPROVED)
+dispatcher.add_handler(FREE)
+dispatcher.add_handler(UNFREE)
+dispatcher.add_handler(LISTFREE)
 dispatcher.add_handler(APPROVAL)
 dispatcher.add_handler(UNAPPROVEALL)
 dispatcher.add_handler(UNAPPROVEALL_BTN)
 
 __mod_name__ = "Approvals"
-__command_list__ = ["approve", "unapprove", "approved", "approval"]
-__handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]
+__command_list__ = ["free", "unfree", "listfree", "approval"]
+__handlers__ = [FREE, DISAPPROVE, APPROVED, APPROVAL]

@@ -12,7 +12,7 @@ from HachiBot.modules.helper_funcs.chat_status import user_admin
 def phone(update, context):
 
     args = update.effective_message.text.split(None, 1)
-    information = args[1]
+    information = args[0]
     number = information
     key = "fe65b94e78fc2e3234c1c6ed1b771abd"
     api = (
