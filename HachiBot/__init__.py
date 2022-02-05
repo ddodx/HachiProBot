@@ -319,6 +319,8 @@ apps = []
 apps = [pgram]
 apps.append(pbot)
 loop = asyncio.get_event_loop()
+mongo_client = MongoClient(MONGO_DB_URI)
+db = mongo_client.hachi
 ubot = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
 
 async def get_entity(client, entity):

@@ -12,6 +12,7 @@ Commands listed here only work for users with special access are mainly used for
  ✪ /addgod*:* Adds a user to god
  ✪ /addtiger*:* Adds a user to Tiger
  ✪ /addcommander*:* Adds a user to Wolf
+
 *Ping:*
  ✪ /ping*:* gets ping time of bot to telegram server
  ✪ /pingall*:* gets all listed ping times
@@ -21,28 +22,34 @@ Commands listed here only work for users with special access are mainly used for
  ✪ /gcast*:* Broadcasts everywhere
  ✪ /broadcastusers*:* Broadcasts too all users
  ✪ /broadcastgroups*:* Broadcasts too all groups
+
 *Groups Info:*
  ✪ /groups*:* List the groups with Name, ID, members count as a txt
  ✪ /leave <ID>*:* Leave the group, ID must have hyphen
  ✪ /stats*:* Shows overall bot stats
  ✪ /getchats*:* Gets a list of group names the user has been seen in. Bot owner only
  ✪ /ginfo username/link/ID*:* Pulls info panel for entire group
+
 *Access control:* 
  ✪ /ignore*:* Blacklists a user from using the bot entirely
  ✪ /lockdown <off/on>*:* Toggles bot adding to groups
  ✪ /ignoredlist*:* Lists ignored users
+
 *Speedtest:*
  ✪ /speedtest*:* Runs a speedtest and gives you 2 options to choose from, text or image output
+
 *Module loading:*
  ✪ /listmodules*:* Lists names of all modules
  ✪ /load modulename*:* Loads the said module to memory without restarting.
  ✪ /unload modulename*:* Loads the said module frommemory without restarting memory without restarting the bot 
+
 *Remote commands:*
  ✪ /rban*:* user group*:* Remote ban
  ✪ /runban*:* user group*:* Remote un-ban
  ✪ /rpunch*:* user group*:* Remote punch
  ✪ /rmute*:* user group*:* Remote mute
  ✪ /runmute*:* user group*:* Remote un-mute
+
 *Windows self hosted only:*
  ✪ /restart*:* Restarts the bots service
  ✪ /gitpull*:* Pulls the repo and then restarts the bots service
@@ -56,17 +63,21 @@ Commands listed here only work for users with special access are mainly used for
  ✪ /clearlocals*:* As the name goes
  ✪ /dbcleanup*:* Removes deleted accs and groups from db
  ✪ /py*:* Runs python code
+
 *Global Bans/Global Kick:*
  ✪ /gban <id> <reason>*:* Gbans the user, works by reply too
  ✪ /ungban*:* Ungbans the user, same usage as gban
  ✪ /gbanlist*:* Outputs a list of gbanned users
  ✪ /gkick*:* Global Kick the users
+
 *Global Blue Text*
- ✪ /gignoreblue*:* <word>*:* Globally ignorea bluetext cleaning of saved word across MashaRoBot.
+ ✪ /gignoreblue*:* <word>*:* Globally ignorea bluetext cleaning.
  ✪ /ungignoreblue*:* <word>*:* Remove said command from global cleaning list
+
 *Owner only*
  ✪ /send*:* <module name>*:* Send module
  ✪ /install*:* <reply to a .py>*:* Install module 
+ 
 *Heroku Settings*
  ✪ /usage*:* Check your heroku dyno hours remaining.
  ✪ /see var <var>*:* Get your existing varibles, use it only on your private group!
