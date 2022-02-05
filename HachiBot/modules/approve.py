@@ -224,4 +224,4 @@ dispatcher.add_handler(UNAPPROVEALL_BTN)
 
 __mod_name__ = "Approvals"
 __command_list__ = ["free", "unfree", "listfree", "approval"]
-__handlers__ = [FREE, DISAPPROVE, APPROVED, APPROVAL]
+__handlers__ = [FREE, UNFREE, LISTFREEÍ, APPROVAL]
