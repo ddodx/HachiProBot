@@ -146,9 +146,9 @@ def check_afk(update, _, user_id: int, fst_name: int, userc_id: int):
         if int(userc_id) == int(user_id):
             return
         if reason == "none":
-            res = f"<code>{fst_name}</code> is AFK!\n\nTerakhir dilihat : <code>{since_afk}</code>"
+            res = f"<code>{fst_name}</code> Lagi AFK tot!\n\nTerakhir dilihat : <code>{since_afk}</code>"
         else:
-            res = f"<code>{fst_name}</code> is AFK!\n\nAlasan: <code>{reason}</code>\nTerakhir dilihat : <code>{since_afk}</code>"
+            res = f"<code>{fst_name}</code> Lagi AFK tot!\n\nAlasan: <code>{reason}</code>\nTerakhir dilihat : <code>{since_afk}</code>"
 
         update.effective_message.reply_text(res, parse_mode=ParseMode.HTML)
 
