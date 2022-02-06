@@ -9,6 +9,8 @@ from HachiBot.utils import Sylviorus
 import spamwatch
 import telegram.ext as tg
 
+from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+from pymongo import MongoClient
 from inspect import getfullargspec
 from aiohttp import ClientSession
 from Python_ARQ import ARQ
