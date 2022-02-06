@@ -9,7 +9,7 @@ from pyrogram import filters
 
 from HachiBot import BOT_ID, arq
 from HachiBot import pbot as ewex
-from HachiBot.bot_plugins.chatbot import add_chat, get_session, remove_chat
+from HachiBot.ex_plugins.chatbot import add_chat, get_session, remove_chat
 from HachiBot.utils.pluginhelper import admins_only, edit_or_reply
 
 url = "https://acobot-brainshop-ai-v1.p.rapidapi.com/get"
