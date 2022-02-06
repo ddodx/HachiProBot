@@ -1,4 +1,4 @@
-from aries.events import register
+from HachiBot.events import register
 import requests as r
 from bs4 import BeautifulSoup as bs
 
