@@ -126,7 +126,7 @@ SPILL_STRING = (
 "Spill kado ulang tahun paling the best",
 "siapa anak dakjal di grup ini?",
 "Spill wallpaper hp",
-"Spill yang orang yang sering phpin kamu
+"Spill yang orang yang sering phpin kamu",
 "Spill uname ig lu",
 "Spill foto muka lo pas lagi nangis",
 "Spill nama boneka kalian",
