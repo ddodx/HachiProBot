@@ -133,15 +133,6 @@ def weather(update, context):
         if err.message in ("Message to delete not found", "Message can't be deleted"):
             return
 
-
-__help__ = r"""
-Weather module:
-× /weather <city>: Gets weather information of particular place!
-\* To prevent spams weather command and the output will be deleted after 30 seconds
-"""
-
-__mod_name__ = "Weather"
-
 WEATHER_HANDLER = DisableAbleCommandHandler("weather", weather, pass_args=True)
 
 dispatcher.add_handler(WEATHER_HANDLER)

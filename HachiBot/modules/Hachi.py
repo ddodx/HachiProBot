@@ -12,6 +12,7 @@ from telegram import (
 from telegram.ext import CallbackContext
 
 import HachiBot.modules.hachi_strings as hachi_strings
+import HachiBot.modules.spillstring as spill_strings
 from HachiBot import dispatcher
 from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.events import register
@@ -195,12 +196,21 @@ def diaryadodo(update: Update, context: CallbackContext):
     reply_text(random.choice(AD_STRINGS), parse_mode=ParseMode.MARKDOWN)
 
 
+def spill(update: Update, context: CallbackContext):
+    msg = update.effective_message
+    reply_text = (
+        msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
+    )
+    reply_text(random.choice(spill_strings.SPILL_STRING), parse_mode=ParseMode.MARKDOWN)
+
+
 __help__ = """
  × `/odo`*:* gives random demons media.
  × `/ipe`*:* gives random poto nya ipe
- × `/asupan`*:* gives random asupan medi.
+ × `/asupan`*:* gives random asupan media.
  × `/chika`*:* gives random chika media.
  × `/wibu`*:* gives random wibu media.
+ × `/spill`*:* game spills.
  × `/lawak`*:* gives random lawak media.
  × `/apakah`*:* For ask question about someone with AI.
  × `/diarydodo`*:* Check Aja.
@@ -222,11 +232,13 @@ IPE_HANDLER = DisableAbleCommandHandler("ipe", ipe, run_async=True)
 dispatcher.add_handler(IPE_HANDLER)
 LAWAK_HANDLER = DisableAbleCommandHandler("lawak", lawak, run_async=True)
 dispatcher.add_handler(LAWAK_HANDLER)
+SPILL_HANDLER = DisableAbleCommandHandler("spill", spill, run_async=True)
+dispatcher.add_handler(SPILL_HANDLER)
 DIARYDODO_HANDLER = DisableAbleCommandHandler("diarydodo", diaryadodo, run_async=True)
 dispatcher.add_handler(DIARYDODO_HANDLER)
 
 __mod_name__ = "Hachi Extras"
 
 
-__command_list__ = ["odo", "ipe", "diarydodo", "lawak"]
-__handlers__ = [ODO_HANDLER, IPE_HANDLER, DIARYDODO_HANDLER, LAWAK_HANDLER]
+__command_list__ = ["odo", "spill", "ipe", "diarydodo", "lawak"]
+__handlers__ = [ODO_HANDLER, SPILL_HANDLER, IPE_HANDLER, DIARYDODO_HANDLER, LAWAK_HANDLER]
