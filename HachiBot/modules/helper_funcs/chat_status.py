@@ -2,7 +2,7 @@ from time import perf_counter
 from functools import wraps
 from cachetools import TTLCache
 from threading import RLock
-from HachiBot import (
+from PrimeMega import (
     DEL_CMDS,
     DEV_USERS,
     DRAGONS,
@@ -13,16 +13,12 @@ from HachiBot import (
     dispatcher,
 )
 
-from telegram import Chat, ChatMember, ParseMode, Update, User, TelegramError, Message
+from telegram import Chat, ChatMember, ParseMode, Update
 from telegram.ext import CallbackContext
 
-THREAD_LOCK = RLock()
 # stores admemes in memory for 10 min.
-ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10)
-
-
-def is_anon(user: User, chat: Chat):
-    return chat.get_member(user.id).is_anonymous
+ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10, timer=perf_counter)
+THREAD_LOCK = RLock()
 
 
 def is_whitelist_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
@@ -35,22 +31,6 @@ def is_support_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool
 
 def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     return user_id in DRAGONS or user_id in DEV_USERS
-
-
-def is_stats_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    return user_id in DEV_USERS
-
-
-def user_can_changeinfo(chat: Chat, user: User, bot_id: int) -> bool:
-    return chat.get_member(user.id).can_change_info
-
-
-def user_can_promote(chat: Chat, user: User, bot_id: int) -> bool:
-    return chat.get_member(user.id).can_promote_members
-
-
-def user_can_pin(chat: Chat, user: User, bot_id: int) -> bool:
-    return chat.get_member(user.id).can_pin_messages
 
 
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
@@ -330,10 +310,6 @@ def can_pin(func):
     return pin_rights
 
 
-def callbacks_in_filters(data):
-    return filters.create(lambda flt, _, query: flt.data in query.data, data=data)
-
-
 def can_promote(func):
     @wraps(func)
     def promote_rights(update: Update, context: CallbackContext, *args, **kwargs):
@@ -427,6 +403,6 @@ def connection_status(func):
 
 
 # Workaround for circular import with connection.py
-from HachiBot.modules import connection
+from PrimeMega.modules import connection
 
 connected = connection.connected
