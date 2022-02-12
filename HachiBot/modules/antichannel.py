@@ -201,13 +201,6 @@ def eliminate_linked_channel_msg(update: Update, _: CallbackContext):
 
 __mod_name__ = "AntiChannel"
 
-__help__ = """
-*Anti Channel Mode*:
-× `/antich` or `/antichannel` <on/off>*:* Bans and deletes anyone who tries to talk as channel and forces them to talk using real account
-× `/antilinkedchannel` <on/off>*:* Makes HachiBot Nagisa automatically delete linked channel posts from groups
-× `/antichannelpin` <on/off>*:* Makes HachiBot Nagisa automatically unpin linked channel posts from chatroom
-"""
-
 CLEANLINKED_HANDLER = CommandHandler(
     ["acm", "antichannel", "antich"],
     antich,

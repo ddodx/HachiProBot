@@ -871,6 +871,11 @@ __help__ = """
 × /setdesc*:* Set group description
 × /setsticker*:* Set group sticker
 
+*Anti Channel Mode*:
+× `/antich` or `/antichannel` <on/off>*:* Bans and deletes anyone who tries to talk as channel and forces them to talk using real account
+× `/antilinkedchannel` <on/off>*:* Makes HachiBot Nagisa automatically delete linked channel posts from groups
+× `/antichannelpin` <on/off>*:* Makes HachiBot Nagisa automatically unpin linked channel posts from chatroom
+
 *Rules*:
 × /rules*:* get the rules for this chat.
 × /setrules <your rules here>*:* set the rules for this chat.

@@ -33,4 +33,10 @@ __help__ = """
 *Tagger*
 × /all [message] : for mention everyone
 × /cancel : for stopped mention bot
+
+*Logomaker*
+× /logo <text/name> - Create a logo with random view.
+× /wlogo <text/name> - Create a logo with wide view only.
+Image Editor :
+×  /edit <reply photo> - to edit image.
 """

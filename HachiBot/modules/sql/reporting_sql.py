@@ -1,9 +1,10 @@
 import threading
 from typing import Union
 
-from HachiBot.modules.sql import BASE, SESSION
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.sql.sqltypes import BigInteger
-from sqlalchemy import Boolean, Column, Integer, String
+
+from HachiBot.modules.sql import SESSION, BASE
 
 
 class ReportingUserSettings(BASE):

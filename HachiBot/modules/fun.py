@@ -313,6 +313,7 @@ def weebify(update: Update, context: CallbackContext):
 
 
 __help__ = """
+*Funny:*
 × /runs*:* reply a random string from an array of replies
 × /slap*:* slap a user, or get slapped if not a reply
 × /shrug*:* get shrug XD
@@ -328,16 +329,15 @@ __help__ = """
 × /pat*:* pats a user, or get patted
 × /8ball*:* predicts using 8ball method
 
-- Animation
+*Animation:*
 × /love 
 × /hack 
 × /bombs 
 
-- Shippering
+*Shippering:*
 × /couples - get couples of today
 
-- Here is the help for the Styletext module:
-
+*Here is the help for the Styletext module:*
 × /weebify <text>: weebify your text!
 × /bubble <text>: bubble your text!
 × /fbubble <text>: bubble-filled your text!
@@ -346,6 +346,17 @@ __help__ = """
 × /blue <text>: bluify your text!
 × /latin <text>: latinify your text!
 × /lined <text>: lined your text!
+
+*Play Game With Emojis:*
+× /dice or /dice 1 to 6 any value
+× /ball or /ball 1 to 5 any value
+× /dart or /dart 1 to 6 any value
+Usage: hahaha just a magic.
+warning: you would be in trouble if you input any other value than mentioned.
+
+*Truth And Dare:*
+× /Truth : for random truth.
+× /dare : for random dare.
 """
 
 SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize, run_async=True)

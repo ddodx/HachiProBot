@@ -1,11 +1,10 @@
 import threading
 
-from sqlalchemy import String, Column, Integer, UnicodeText
-from sqlalchemy.sql.sqltypes import BigInteger
+from sqlalchemy import String, Column, Integer, UnicodeText, BigInteger
 
 from HachiBot.modules.sql import SESSION, BASE
 
-DEF_COUNT = 1
+DEF_COUNT = 0
 DEF_LIMIT = 0
 DEF_OBJ = (None, DEF_COUNT, DEF_LIMIT)
 
@@ -99,9 +98,7 @@ def set_flood_strength(chat_id, flood_type, value):
         curr_setting = SESSION.query(FloodSettings).get(str(chat_id))
         if not curr_setting:
             curr_setting = FloodSettings(
-                chat_id,
-                flood_type=int(flood_type),
-                value=value,
+                chat_id, flood_type=int(flood_type), value=value
             )
 
         curr_setting.flood_type = int(flood_type)
@@ -116,7 +113,8 @@ def get_flood_setting(chat_id):
         setting = SESSION.query(FloodSettings).get(str(chat_id))
         if setting:
             return setting.flood_type, setting.value
-        return 1, "0"
+        else:
+            return 1, "0"
 
     finally:
         SESSION.close()
