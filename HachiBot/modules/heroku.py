@@ -166,7 +166,7 @@ async def dyno_usage(dyno):
         "**Remaining Quota:**\n"
         f"Total Left: `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]\n\n"
-        f"**Dyno Heroku {day} Days Left**"
+        f"**{day} Days Left**"
     )
 
 
