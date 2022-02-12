@@ -1,6 +1,6 @@
 import html
 
-from HachiBot import LOGGER, SUDO_USERS, WHITELIST_USERS
+from HachiBot import LOGGER, WHITELIST_USERS
 from HachiBot.modules.helper_funcs.chat_status import user_not_admin
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.sql import reporting_sql as sql
@@ -17,7 +17,7 @@ from HachiBot.modules.helper_funcs.decorators import ddocmd, ddomsg, ddocallback
 from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 REPORT_GROUP = 12
-REPORT_IMMUNE_USERS = SUDO_USERS + WHITELIST_USERS
+REPORT_IMMUNE_USERS = + WHITELIST_USERS
 
 
 @ddocmd(command='reports')
