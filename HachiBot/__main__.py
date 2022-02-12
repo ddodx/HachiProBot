@@ -102,10 +102,10 @@ PM_START_TEXT = """
 Halo Mek {} [👋](https://telegra.ph/file/522f6468e22be29fa081b.jpg)
 ✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
 
-➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+➖➖➖➖➖➖➖➖➖➖➖➖➖
 × *Server Uptime :* `{}`
 × `{}` *users, across* `{}` *chats.*
-➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+➖➖➖➖➖➖➖➖➖➖➖➖➖
 
 ✪ Hit /help to learn more how to use me.
 """
@@ -122,7 +122,7 @@ buttons = [
                      
                      ],
                     [
-                        InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
+                        InlineKeyboardButton(text=" ✖️ Close ✖️ ", callback_data="close"),
 
                      ], 
     ]
