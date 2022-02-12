@@ -123,7 +123,7 @@ buttons = [
                      ],
                     [                  
                        InlineKeyboardButton(
-                             InlineKeyboardButton(text=" ✖️ ", callback_data="close")
+                             InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
                      ], 
     ]
 
