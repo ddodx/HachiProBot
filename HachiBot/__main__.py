@@ -121,9 +121,9 @@ buttons = [
                        InlineKeyboardButton(text="About Hachi", callback_data="hachi_"),
                      
                      ],
-                    [                  
-                       InlineKeyboardButton(
-                             InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
+                    [
+                        InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
+
                      ], 
     ]
 
