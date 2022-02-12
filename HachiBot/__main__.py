@@ -99,14 +99,13 @@ GROUP_START_IMG = (
 
 
 PM_START_TEXT = """
-Halo Mek {} [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
+Halo Mek {} [👋](https://telegra.ph/file/522f6468e22be29fa081b.jpg)
 ✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
-✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼 𝗘𝗹 𝗤𝗵𝗼𝗻𝘁𝗼𝗹𝗲.](https://t.me/yxdodd)
 
-┏━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┓
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 × *Server Uptime :* `{}`
 × `{}` *users, across* `{}` *chats.*
-┗━━━━━━━━•❃°•°❀°•°❃•━━━━━━━━┛
+➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 
 ✪ Hit /help to learn more how to use me.
 """
@@ -118,25 +117,19 @@ buttons = [
                             url="t.me/HachiXBot?startgroup=true"),
                     ],
                    [
-                       InlineKeyboardButton(text="[► Help ◄]", callback_data="help_back"),
-                      InlineKeyboardButton(text=" ✖️ ", callback_data="close"),
-                       InlineKeyboardButton(text="[► About ◄]", callback_data="hachi_"),
+                       InlineKeyboardButton(text="Get Help", callback_data="help_back"),
+                       InlineKeyboardButton(text="About Hachi", callback_data="hachi_"),
                      
                      ],
                     [                  
                        InlineKeyboardButton(
-                             text="🚑 Support",
-                             url="http://t.me/demonszxx"),
-                       InlineKeyboardButton(
-                             text="Updates 📢",
-                             url="https://t.me/hachixlog")
-    
+                             InlineKeyboardButton(text=" ✖️ ", callback_data="close")
                      ], 
     ]
 
 
 HELP_STRINGS = """
-✪ *Click on the button bellow to get description about specifics command. *[✪](https://telegra.ph/file/f2a033fd4e10fbee49551.jpg)"""
+✪ *Click on the button bellow to get description about specifics command. *✪"""
 
 HACHI_IMG = "https://telegra.ph/file/f2a033fd4e10fbee49551.jpg"
 

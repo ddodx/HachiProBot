@@ -216,7 +216,7 @@ def report(update: Update, context: CallbackContext) -> str:
 
         try:
             update.effective_message.reply_sticker(
-                "CAACAgUAAx0CRSKHWwABAXGoYB2UJauytkH4RJWSStz9DTlxQg0AAlcHAAKAUF41_sNx9Y1z2DQeBA")
+                "CAACAgUAAx0CWkjQNgACAU9iB5j5hEdkmGS6P7qohFX1jkp1kQACZQQAAuUNWFUCrZQya4oKPSME")
         except:
             pass
         message.reply_to_message.reply_text(
