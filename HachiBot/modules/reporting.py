@@ -17,7 +17,7 @@ from HachiBot.modules.helper_funcs.decorators import ddocmd, ddomsg, ddocallback
 from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 REPORT_GROUP = 12
-REPORT_IMMUNE_USERS = + WHITELIST_USERS
+REPORT_IMMUNE_USERS = WHITELIST_USERS
 
 
 @ddocmd(command='reports')
