@@ -289,11 +289,4 @@ def buttons(update: Update, context: CallbackContext):
             query.answer("🛑 Failed to delete message!")
 
 
-from HachiBot.modules.language import gs
-
-
-def get_help(chat):
-    return gs(chat, "reports_help")
-
-
 __mod_name__ = "Reporting"
