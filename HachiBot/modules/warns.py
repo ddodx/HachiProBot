@@ -3,7 +3,8 @@ import re
 from typing import Optional
 
 import telegram
-from HachiBot import SARDEGNA_USERS, WHITELIST_USERS, dispatcher
+from HachiBot import WHITELIST_USERS, dispatcher
+from HachiBot import DRAGONS as SARDEGNA_USERS
 from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.modules.helper_funcs.chat_status import (
     bot_admin,
@@ -496,14 +497,6 @@ def __chat_settings__(chat_id, user_id):
         f"This chat has `{num_warn_filters}` warn filters. "
         f"It takes `{limit}` warns before the user gets *{'kicked' if soft_warn else 'banned'}*."
     )
-
-
-from HachiBot.modules.language import gs
-
-
-def get_help(chat):
-    return gs(chat, "warns_help")
-
 
 __mod_name__ = "Warnings"
 
