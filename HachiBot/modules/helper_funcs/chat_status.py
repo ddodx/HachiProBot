@@ -13,16 +13,12 @@ from HachiBot import (
     dispatcher,
 )
 
-from telegram import Chat, ChatMember, ParseMode, Update, TelegramError, User
+from telegram import Chat, ChatMember, ParseMode, Update, User
 from telegram.ext import CallbackContext
 
 # stores admemes in memory for 10 min.
 ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10, timer=perf_counter)
 THREAD_LOCK = RLock()
-
-
-def is_anon(user: User, chat: Chat):
-    return chat.get_member(user.id).is_anonymous
 
 
 def is_whitelist_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
@@ -37,34 +33,31 @@ def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     return user_id in DRAGONS or user_id in DEV_USERS
 
 
-def is_user_admin(update: Update, user_id: int, member: ChatMember = None) -> bool:
-    chat = update.effective_chat
-    msg = update.effective_message
+def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (
-            chat.type == "private"
-            or user_id in SUDO_USERS
-            or user_id in DEV_USERS
-            or chat.all_members_are_administrators
-            or (msg.reply_to_message and msg.reply_to_message.sender_chat is not None and
-                msg.reply_to_message.sender_chat.type != "channel")
-    ):
+        chat.type == "private"
+        or user_id in DRAGONS
+        or user_id in DEV_USERS
+        or chat.all_members_are_administrators
+        or user_id in [777000, 1087968824]
+    ):  # Count telegram and Group Anonymous as admin
         return True
-
     if not member:
-        # try to fetch from cache first.
-        try:
-            return user_id in ADMIN_CACHE[chat.id]
-        except KeyError:
-            # KeyError happened means cache is deleted,
-            # so query bot api again and return user status
-            # while saving it in cache for future usage...
-            chat_admins = dispatcher.bot.getChatAdministrators(chat.id)
-            admin_list = [x.user.id for x in chat_admins]
-            ADMIN_CACHE[chat.id] = admin_list
+        with THREAD_LOCK:
+            # try to fetch from cache first.
+            try:
+                return user_id in ADMIN_CACHE[chat.id]
+            except KeyError:
+                # keyerror happend means cache is deleted,
+                # so query bot api again and return user status
+                # while saving it in cache for future useage...
+                chat_admins = dispatcher.bot.getChatAdministrators(chat.id)
+                admin_list = [x.user.id for x in chat_admins]
+                ADMIN_CACHE[chat.id] = admin_list
 
-            if user_id in admin_list:
-                return True
-            return False
+                return user_id in admin_list
+    else:
+        return member.status in ("administrator", "creator")
 
 
 def is_bot_admin(chat: Chat, bot_id: int, bot_member: ChatMember = None) -> bool:
