@@ -286,6 +286,10 @@ def bot_can_delete(func):
         update.effective_message.reply_text(cant_delete, parse_mode=ParseMode.HTML)
 
     return delete_rights
+    
+
+def callbacks_in_filters(data):
+    return filters.create(lambda flt, _, query: flt.data in query.data, data=data)
 
 
 def can_pin(func):
