@@ -1,9 +1,8 @@
 import threading
 
-from sqlalchemy.sql.sqltypes import BigInteger
-
 from HachiBot.modules.sql import BASE, SESSION
-from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, distinct, func
+from sqlalchemy import Boolean, Column, String, UnicodeText, distinct, func, Integer
+from sqlalchemy.sql.sqltypes import BigInteger
 from sqlalchemy.dialects import postgresql
 
 
@@ -23,7 +22,10 @@ class Warns(BASE):
 
     def __repr__(self):
         return "<{} warns for {} in {} for reasons {}>".format(
-            self.num_warns, self.user_id, self.chat_id, self.reasons
+            self.num_warns,
+            self.user_id,
+            self.chat_id,
+            self.reasons,
         )
 
 
@@ -45,7 +47,7 @@ class WarnFilters(BASE):
         return bool(
             isinstance(other, WarnFilters)
             and self.chat_id == other.chat_id
-            and self.keyword == other.keyword
+            and self.keyword == other.keyword,
         )
 
 
@@ -84,7 +86,7 @@ def warn_user(user_id, chat_id, reason=None):
         warned_user.num_warns += 1
         if reason:
             warned_user.reasons = warned_user.reasons + [
-                reason
+                reason,
             ]  # TODO:: double check this wizardry
 
         reasons = warned_user.reasons
@@ -213,8 +215,7 @@ def get_warn_setting(chat_id):
         setting = SESSION.query(WarnSettings).get(str(chat_id))
         if setting:
             return setting.warn_limit, setting.soft_warn
-        else:
-            return 3, False
+        return 3, False
 
     finally:
         SESSION.close()
@@ -297,8 +298,10 @@ def migrate_chat(old_chat_id, new_chat_id):
         for filt in chat_filters:
             filt.chat_id = str(new_chat_id)
         SESSION.commit()
-        WARN_FILTERS[str(new_chat_id)] = WARN_FILTERS[str(old_chat_id)]
-        del WARN_FILTERS[str(old_chat_id)]
+        old_warn_filt = WARN_FILTERS.get(str(old_chat_id))
+        if old_warn_filt is not None:
+            WARN_FILTERS[str(new_chat_id)] = old_warn_filt
+            del WARN_FILTERS[str(old_chat_id)]
 
     with WARN_SETTINGS_LOCK:
         chat_settings = (
