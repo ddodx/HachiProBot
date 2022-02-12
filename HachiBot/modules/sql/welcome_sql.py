@@ -2,10 +2,15 @@ import random
 import threading
 from typing import Union
 
-from HachiBot.modules.helper_funcs.msg_types import Types
-from HachiBot.modules.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText
 from sqlalchemy.sql.sqltypes import BigInteger
+from sqlalchemy.sql.expression import false
+
+from HachiBot.modules.helper_funcs.msg_types import Types
+from HachiBot.modules.sql import BASE, SESSION
+
+DEFAULT_WELCOME = "Halo {first}, Moga betah di sini"
+DEFAULT_GOODBYE = "babayy ngentot!"
 
 DEFAULT_WELCOME_MESSAGES = [
     "{first} is here!",  # Discord welcome messages copied
@@ -239,7 +244,7 @@ class Welcome(BASE):
     custom_leave = Column(UnicodeText, default=random.choice(DEFAULT_GOODBYE_MESSAGES))
     leave_type = Column(Integer, default=Types.TEXT.value)
 
-    clean_welcome = Column(BigInteger)
+    clean_welcome = Column(Integer)
 
     def __init__(self, chat_id, should_welcome=True, should_goodbye=True):
         self.chat_id = chat_id
@@ -317,19 +322,36 @@ class CleanServiceSetting(BASE):
         return "<Chat used clean service ({})>".format(self.chat_id)
 
 
+class DefenseMode(BASE):
+    __tablename__ = "defense_mode"
+    chat_id = Column(String(14), primary_key=True)
+    status = Column(Boolean, default=False)
+    time = Column(Integer, default=21600)
+    acttime = Column(Integer, default=3600)
+    permanent = Column(Boolean, default=False)
+
+    def __init__(self, chat_id, status, time, acttime, permanent):
+        self.chat_id = str(chat_id)
+        self.status = status
+        self.time = time
+        self.acttime = acttime
+        self.permanent = permanent
+
+
 Welcome.__table__.create(checkfirst=True)
 WelcomeButtons.__table__.create(checkfirst=True)
 GoodbyeButtons.__table__.create(checkfirst=True)
 WelcomeMute.__table__.create(checkfirst=True)
 WelcomeMuteUsers.__table__.create(checkfirst=True)
 CleanServiceSetting.__table__.create(checkfirst=True)
+DefenseMode.__table__.create(checkfirst=True)
 
 INSERTION_LOCK = threading.RLock()
 WELC_BTN_LOCK = threading.RLock()
 LEAVE_BTN_LOCK = threading.RLock()
 WM_LOCK = threading.RLock()
 CS_LOCK = threading.RLock()
-
+DEFENSE_LOCK = threading.RLock()
 
 def welcome_mutes(chat_id):
     try:
@@ -398,7 +420,7 @@ def get_welc_pref(chat_id):
             welc.welcome_type,
         )
     # Welcome by default.
-    return True, random.choice(DEFAULT_WELCOME_MESSAGES), None, Types.TEXT
+    return True, DEFAULT_WELCOME, None, Types.TEXT
 
 
 def get_gdbye_pref(chat_id):
@@ -407,7 +429,7 @@ def get_gdbye_pref(chat_id):
     if welc:
         return welc.should_goodbye, welc.custom_leave, welc.leave_type
     # Welcome by default.
-    return True, random.choice(DEFAULT_GOODBYE_MESSAGES), Types.TEXT
+    return True, DEFAULT_GOODBYE, Types.TEXT
 
 
 def set_clean_welcome(chat_id, clean_welcome):
@@ -477,7 +499,7 @@ def set_custom_welcome(
             welcome_settings.welcome_type = welcome_type.value
 
         else:
-            welcome_settings.custom_welcome = random.choice(DEFAULT_WELCOME_MESSAGES)
+            welcome_settings.custom_welcome = DEFAULT_WELCOME
             welcome_settings.welcome_type = Types.TEXT.value
 
         SESSION.add(welcome_settings)
@@ -500,7 +522,7 @@ def set_custom_welcome(
 
 def get_custom_welcome(chat_id):
     welcome_settings = SESSION.query(Welcome).get(str(chat_id))
-    ret = random.choice(DEFAULT_WELCOME_MESSAGES)
+    ret = DEFAULT_WELCOME
     if welcome_settings and welcome_settings.custom_welcome:
         ret = welcome_settings.custom_welcome
 
@@ -522,7 +544,7 @@ def set_custom_gdbye(chat_id, custom_goodbye, goodbye_type, buttons=None):
             welcome_settings.leave_type = goodbye_type.value
 
         else:
-            welcome_settings.custom_leave = random.choice(DEFAULT_GOODBYE_MESSAGES)
+            welcome_settings.custom_leave = DEFAULT_GOODBYE
             welcome_settings.leave_type = Types.TEXT.value
 
         SESSION.add(welcome_settings)
@@ -545,7 +567,7 @@ def set_custom_gdbye(chat_id, custom_goodbye, goodbye_type, buttons=None):
 
 def get_custom_gdbye(chat_id):
     welcome_settings = SESSION.query(Welcome).get(str(chat_id))
-    ret = random.choice(DEFAULT_GOODBYE_MESSAGES)
+    ret = DEFAULT_GOODBYE
     if welcome_settings and welcome_settings.custom_leave:
         ret = welcome_settings.custom_leave
 
@@ -623,3 +645,37 @@ def migrate_chat(old_chat_id, new_chat_id):
                 btn.chat_id = str(new_chat_id)
 
         SESSION.commit()
+
+
+def getDefenseStatus(chat_id):
+    try:
+        stat = SESSION.query(DefenseMode).get(str(chat_id))
+        if stat:
+            return stat.status, stat.time, stat.acttime
+        return False, 21600, 3600 #default
+    finally:
+        SESSION.close()
+
+
+def setDefenseStatus(chat_id, status, time=21600, acttime=3600):
+    with DEFENSE_LOCK:
+        prevObj = SESSION.query(DefenseMode).get(str(chat_id))
+        perma = False
+        if prevObj:
+            perma = prevObj.permanent
+            SESSION.delete(prevObj)
+        newObj = DefenseMode(str(chat_id), status, time, acttime, perma or False)
+        SESSION.add(newObj)
+        SESSION.commit()
+
+
+def toggleDefenseStatus(chat_id):
+    newObj = True
+    with DEFENSE_LOCK:
+        prevObj = SESSION.query(DefenseMode).get(str(chat_id))
+        if prevObj:
+            newObj = not prevObj.status
+        stat = DefenseMode(str(chat_id), newObj, prevObj.time or 21600, prevObj.acttime or 3600, prevObj.permanent or False)
+        SESSION.add(stat)
+        SESSION.commit()
+        return newObj
