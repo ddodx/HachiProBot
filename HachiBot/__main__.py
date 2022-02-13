@@ -99,11 +99,12 @@ GROUP_START_IMG = (
 
 
 PM_START_TEXT = """
-Halo Mek {}👋[ ](https://telegra.ph/file/5528839041e2451a4c39b.jpg)
-× Im Powerfull Management Bot And I Will Help In Managing Your Group.
+Halo Mek {}👋[ ](https://telegra.ph/file/522f6468e22be29fa081b.jpg)
+× I'm Powerfull Management Bot And I Will Help In Managing Your Group.
+× Maintained By : [ddodxy](https://t.me/yxdodd)
 
-× *Uptime:* `{}`
-× `{}` *Users, across* `{}` *chats.*
+• *Uptime:* `{}`
+• `{}` *Users, across* `{}` *chats.*
 
 × Hit /help to learn more how to use me.
 """
