@@ -227,8 +227,8 @@ def admin(update: Update, context: CallbackContext) -> str:
         )
 
         title = "babu"
-        if " " in message.text:
-        title = message.text.split(" ", 1)[1]
+        if "" in message.text:
+        title = message.text.split("", 1)[1]
         if len(title) > 16:
             message.reply_text(
                 "The title length is longer than 16 characters.\nTruncating it to 16 characters."
