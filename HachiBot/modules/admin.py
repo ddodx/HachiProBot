@@ -329,7 +329,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 @user_admin
 @loggable
 @typing_action
-def fullpromote(update: Update, context: CallbackContext):
+def coadmin(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
     chat = update.effective_chat
