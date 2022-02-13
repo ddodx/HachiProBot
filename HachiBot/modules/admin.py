@@ -226,9 +226,9 @@ def admin(update: Update, context: CallbackContext) -> str:
             can_manage_voice_chats=bot_member.can_manage_voice_chats,
         )
 
-        title = "babu"
-        if "" in message.text:
-        title = message.text.split("", 1)[1]
+        title = "admin"
+    if " " in message.text:
+        title = message.text.split(" ", 1)[1]
         if len(title) > 16:
             message.reply_text(
                 "The title length is longer than 16 characters.\nTruncating it to 16 characters."
