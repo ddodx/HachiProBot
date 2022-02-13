@@ -226,7 +226,7 @@ def admin(update: Update, context: CallbackContext) -> str:
             can_manage_voice_chats=bot_member.can_manage_voice_chats,
         )
 
-        title = "admin"
+    title = "admin"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
         if len(title) > 16:
