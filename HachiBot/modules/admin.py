@@ -225,6 +225,23 @@ def admin(update: Update, context: CallbackContext) -> str:
             can_pin_messages=bot_member.can_pin_messages,
             can_manage_voice_chats=bot_member.can_manage_voice_chats,
         )
+
+        title = "babu"
+        if " " in message.text:
+        title = message.text.split(" ", 1)[1]
+        if len(title) > 16:
+            message.reply_text(
+                "The title length is longer than 16 characters.\nTruncating it to 16 characters."
+            )
+
+        try:
+            bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
+
+        except BadRequest:
+            message.reply_text(
+                "I can't set custom title for admins that I didn't promote!"
+            )
+
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
             message.reply_text("I can't promote someone who isn't in the group.")
@@ -234,7 +251,7 @@ def admin(update: Update, context: CallbackContext) -> str:
 
     bot.sendMessage(
         chat.id,
-        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}\nTitle: {title[:16]}",
         parse_mode=ParseMode.HTML,
     )
     # refresh admin cache

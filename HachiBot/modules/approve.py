@@ -46,8 +46,8 @@ def free(update: Update, context: CallbackContext):
         return ""
     sql.approve(message.chat_id, user_id)
     message.reply_text(
-        f"[{member.user['first_name']}](tg://user?id={member.user['id']}) has been approved in {chat_title}! They "
-        f"will now be ignored by automated admin actions like locks, blocklists, and antiflood.",
+        f"[{member.user['first_name']}](tg://user?id={member.user['id']}) .  telah disetujui di {chat_title}! Mereka "
+        f"Mereka sekarang akan diabaikan oleh tindakan admin otomatis seperti kunci, daftar blokir, dan antibanjir.",
         parse_mode=ParseMode.MARKDOWN,
     )
     log_message = (
