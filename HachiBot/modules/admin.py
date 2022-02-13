@@ -213,20 +213,19 @@ def admin(update: Update, context: CallbackContext) -> str:
 
     try:
         bot.promoteChatMember(
-            chat.id,
-            user_id,
-            can_change_info=bot_member.can_change_info,
-            can_post_messages=bot_member.can_post_messages,
-            can_edit_messages=bot_member.can_edit_messages,
-            can_delete_messages=bot_member.can_delete_messages,
-            can_invite_users=bot_member.can_invite_users,
-            # can_promote_members=bot_member.can_promote_members,
-            can_restrict_members=bot_member.can_restrict_members,
-            can_pin_messages=bot_member.can_pin_messages,
-            can_manage_voice_chats=bot_member.can_manage_voice_chats,
-        )
-        title = "admin"
-        if " " in message.text:
+        chat_id,
+        user_id,
+        can_change_info=bot_member.can_change_info,
+        can_post_messages=bot_member.can_post_messages,
+        can_edit_messages=bot_member.can_edit_messages,
+        can_delete_messages=bot_member.can_delete_messages,
+        can_invite_users=bot_member.can_invite_users,
+        can_restrict_members=bot_member.can_restrict_members,
+        can_pin_messages=bot_member.can_pin_messages,
+    )
+
+    title = "admin"
+    if " " in message.text:
         title = message.text.split(" ", 1)[1]
         if len(title) > 16:
             message.reply_text(
@@ -240,13 +239,6 @@ def admin(update: Update, context: CallbackContext) -> str:
             message.reply_text(
                 "I can't set custom title for admins that I didn't promote!"
             )
-
-    except BadRequest as err:
-        if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
-        else:
-            message.reply_text("An error occured while promoting.")
-        return
 
     bot.sendMessage(
         chat.id,
