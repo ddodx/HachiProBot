@@ -92,38 +92,33 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-Hachi_IMG = "https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg"
+HACHI_IMG = "https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg"
 GROUP_START_IMG = (
     "CAACAgUAAx0CXGNFKwABB2vuYeJV4mvj5q4dVoiiSoeWKUlMBQcAAlEAA8sM3DrNp9j83PxDhSME"
 )
 
 
 PM_START_TEXT = """
-Halo Mek {} [👋](https://telegra.ph/file/522f6468e22be29fa081b.jpg)
+Halo Mek {}👋 [ ](https://telegra.ph/file/522f6468e22be29fa081b.jpg)
 ✪ I'm *炎 Goemon Hachisuka* Powerfull Management Bot.✨
 
-➖➖➖➖➖➖➖➖➖➖➖➖➖
-× *Server Uptime :* `{}`
-× `{}` *users, across* `{}` *chats.*
-➖➖➖➖➖➖➖➖➖➖➖➖➖
+◑ *Uptime:* `{}`
+◑ `{}` *Users, across* `{}` *chats.*
 
 ✪ Hit /help to learn more how to use me.
 """
 
 buttons = [
     [
-                        InlineKeyboardButton(
-                            text="Add Hachi To Your Group",
-                            url="t.me/HachiXBot?startgroup=true"),
-                    ],
-                   [
+
                        InlineKeyboardButton(text="Get Help", callback_data="help_back"),
                        InlineKeyboardButton(text="About Hachi", callback_data="hachi_"),
                      
                      ],
                     [
-                        InlineKeyboardButton(text=" ✖️  ✖️ ", callback_data="close"),
-
+                        InlineKeyboardButton(
+                            text="Add Hachi To Your Group",
+                            url="t.me/HachiXBot?startgroup=true"),
                      ], 
     ]
 
@@ -246,7 +241,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
-                disable_web_page_preview=True,
+                disable_web_page_preview=False,
             )
     else:
         update.effective_message.reply_animation(
