@@ -170,49 +170,35 @@ def setchat_title(update: Update, context: CallbackContext):
 @can_promote
 @user_admin
 @loggable
-def admin(update: Update, context: CallbackContext) -> str:
-    bot = context.bot
-    args = context.args
-
+def admin(update: Update, context: CallbackContext):
+    bot, args = context.bot, context.args
+    chat_id = update.effective_chat.id
     message = update.effective_message
     chat = update.effective_chat
     user = update.effective_user
 
-    promoter = chat.get_member(user.id)
-
-    if (
-        not (promoter.can_promote_members or promoter.status == "creator")
-        and user.id not in DRAGONS
-    ):
-        message.reply_text("You don't have the necessary rights to do that!")
-        return
+    if user_can_promote(chat, user, bot.id) is False:
+        message.reply_text("You don't have enough rights to promote someone!")
+        return ""
 
     user_id = extract_user(message, args)
-
     if not user_id:
-        message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect..",
-        )
-        return
+        message.reply_text("mention one.... 🤷🏻‍♂.")
+        return ""
 
-    try:
-        user_member = chat.get_member(user_id)
-    except:
-        return
-
-    if user_member.status in ("administrator", "creator"):
-        message.reply_text("How am I meant to promote someone that's already an admin?")
-        return
+    user_member = chat.get_member(user_id)
+    if user_member.status in ["administrator", "creator"]:
+        message.reply_text("This person is already an admin...!")
+        return ""
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
-        return
+        message.reply_text("I hope, if i could promote myself!")
+        return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
     bot_member = chat.get_member(bot.id)
 
-    try:
-        bot.promoteChatMember(
+    bot.promoteChatMember(
         chat_id,
         user_id,
         can_change_info=bot_member.can_change_info,
@@ -240,8 +226,7 @@ def admin(update: Update, context: CallbackContext) -> str:
                 "I can't set custom title for admins that I didn't promote!"
             )
 
-    bot.sendMessage(
-        chat.id,
+    message.reply_text(
         f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}\nTitle: {title[:16]}",
         parse_mode=ParseMode.HTML,
     )
@@ -260,8 +245,6 @@ def admin(update: Update, context: CallbackContext) -> str:
             mention_html(user_member.user.id, user_member.user.first_name),
         )
     )
-
-
 
 
 @connection_status
