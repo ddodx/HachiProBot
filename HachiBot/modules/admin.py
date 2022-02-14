@@ -1,4 +1,5 @@
 import html
+from typing import Optional
 
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
@@ -10,22 +11,25 @@ from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.modules.helper_funcs.chat_status import (
     bot_admin,
     can_pin,
+    user_admin,
     can_promote,
     connection_status,
-    user_admin,
     ADMIN_CACHE,
 )
 
 from HachiBot.modules.helper_funcs.admin_rights import (
     user_can_changeinfo,
+    user_can_pin,
     user_can_promote,
 )
 from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
+from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
-from HachiBot.modules.helper_funcs.alternate import send_message
+from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
+from HachiBot.modules.helper_funcs.anonymous import AdminPerms
 
 
 @bot_admin
@@ -168,7 +172,7 @@ def setchat_title(update: Update, context: CallbackContext):
 @user_admin
 @loggable
 @typing_action
-def promote(update: Update, context: CallbackContext):
+def admin(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     chat_id = update.effective_chat.id
     message = update.effective_message
@@ -208,7 +212,7 @@ def promote(update: Update, context: CallbackContext):
         can_pin_messages=bot_member.can_pin_messages,
     )
 
-    title = "admin"
+    title = "babu"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
         if len(title) > 16:
@@ -224,8 +228,9 @@ def promote(update: Update, context: CallbackContext):
                 "I can't set custom title for admins that I didn't promote!"
             )
 
-    message.reply_text(
-        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+    bot.sendMessage(
+        chat.id,
+        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoter: {mention_html(user.id, user.first_name)}</b>\n\n<b>With Title: {title[:16]}<\b>",
         parse_mode=ParseMode.HTML,
     )
     # refresh admin cache
