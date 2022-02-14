@@ -224,6 +224,13 @@ def admin(update: Update, context: CallbackContext) -> str:
         can_pin_messages=bot_member.can_pin_messages,
     )
 
+    except BadRequest as err:
+        if err.message == "User_not_mutual_contact":
+            message.reply_text("I can't promote someone who isn't in the group.")
+        else:
+            message.reply_text("An error occured while promoting.")
+        return
+
     title = "babu"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
@@ -239,13 +246,6 @@ def admin(update: Update, context: CallbackContext) -> str:
             message.reply_text(
                 "I can't set custom title for admins that I didn't promote!"
             )
-        try:
-    except BadRequest as err:
-        if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
-        else:
-            message.reply_text("An error occured while promoting.")
-        return
 
     bot.sendMessage(
         chat.id,
