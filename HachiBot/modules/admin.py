@@ -210,15 +210,16 @@ def admin(update: Update, context: CallbackContext) -> str:
     bot_member = chat.get_member(bot.id)
 
     bot.promoteChatMember(
-        chat_id,
-        user_id,
-        can_change_info=bot_member.can_change_info,
-        can_post_messages=bot_member.can_post_messages,
-        can_edit_messages=bot_member.can_edit_messages,
-        can_delete_messages=bot_member.can_delete_messages,
-        can_invite_users=bot_member.can_invite_users,
-        can_restrict_members=bot_member.can_restrict_members,
-        can_pin_messages=bot_member.can_pin_messages,
+            chat.id,
+            user_id,
+            can_change_info=bot_member.can_change_info,
+            can_post_messages=bot_member.can_post_messages,
+            can_edit_messages=bot_member.can_edit_messages,
+            can_delete_messages=bot_member.can_delete_messages,
+            can_invite_users=bot_member.can_invite_users,
+            # can_promote_members=bot_member.can_promote_members,
+            can_restrict_members=bot_member.can_restrict_members,
+            can_pin_messages=bot_member.can_pin_messages,
     )
     
     title = "admin"
