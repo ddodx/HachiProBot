@@ -250,20 +250,13 @@ def user_not_admin(func):
 
 def bot_admin(func):
     @wraps(func)
-    def is_admin(update: Update, context: CallbackContext, *args, **kwargs):
-        bot = context.bot
-        chat = update.effective_chat
-        update_chat_title = chat.title
-        message_chat_title = update.effective_message.chat.title
-
-        if update_chat_title == message_chat_title:
-            not_admin = "I'm not admin!"
-        else:
-            not_admin = f"I'm not admin in <b>{update_chat_title}</b>!"
-
-        if is_bot_admin(chat, bot.id):
+    def is_admin(update, context, *args, **kwargs):
+        if is_bot_admin(update.effective_chat, context.bot.id):
             return func(update, context, *args, **kwargs)
-        update.effective_message.reply_text(not_admin, parse_mode=ParseMode.HTML)
+        try:
+            update.effective_message.reply_text("I'm not admin!")
+        except BadRequest:
+            return
 
     return is_admin
 
@@ -316,23 +309,13 @@ def can_pin(func):
 
 def can_promote(func):
     @wraps(func)
-    def promote_rights(update: Update, context: CallbackContext, *args, **kwargs):
-        bot = context.bot
-        chat = update.effective_chat
-        update_chat_title = chat.title
-        message_chat_title = update.effective_message.chat.title
-
-        if update_chat_title == message_chat_title:
-            cant_promote = "I can't promote/demote people here!\nMake sure I'm admin and can appoint new admins."
-        else:
-            cant_promote = (
-                f"I can't promote/demote people in <b>{update_chat_title}</b>!\n"
-                f"Make sure I'm admin there and can appoint new admins."
-            )
-
-        if chat.get_member(bot.id).can_promote_members:
+    def promote_rights(update, context, *args, **kwargs):
+        if update.effective_chat.get_member(context.bot.id).can_promote_members:
             return func(update, context, *args, **kwargs)
-        update.effective_message.reply_text(cant_promote, parse_mode=ParseMode.HTML)
+        update.effective_message.reply_text(
+            "I can't promote/demote people here! "
+            "Make sure I'm admin and can appoint new admins."
+        )
 
     return promote_rights
 
