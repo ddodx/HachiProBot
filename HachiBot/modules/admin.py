@@ -210,6 +210,11 @@ def admin(update: Update, context: CallbackContext):
         can_pin_messages=bot_member.can_pin_messages,
     )
 
+    message.reply_text(
+        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n<b>Title: {title[:16]}</b>",
+        parse_mode=ParseMode.HTML,
+    )
+
     title = "babu"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
@@ -225,11 +230,7 @@ def admin(update: Update, context: CallbackContext):
             message.reply_text(
                 "I can't set custom title for admins that I didn't promote!"
             )
-
-    message.reply_text(
-        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n<b>Title: {title[:16]}</b>",
-        parse_mode=ParseMode.HTML,
-    )
+            
     # refresh admin cache
     try:
         ADMIN_CACHE.pop(update.effective_chat.id)
