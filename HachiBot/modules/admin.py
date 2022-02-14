@@ -1,6 +1,5 @@
 import html
 
-from typing import Optional
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
@@ -27,7 +26,6 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
-from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
 from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
@@ -215,17 +213,15 @@ def admin(update: Update, context: CallbackContext) -> str:
     bot_member = chat.get_member(bot.id)
 
     bot.promoteChatMember(
-            chat.id,
-            user_id,
-            can_change_info=bot_member.can_change_info,
-            can_post_messages=bot_member.can_post_messages,
-            can_edit_messages=bot_member.can_edit_messages,
-            can_delete_messages=bot_member.can_delete_messages,
-            can_invite_users=bot_member.can_invite_users,
-            # can_promote_members=bot_member.can_promote_members,
-            can_restrict_members=bot_member.can_restrict_members,
-            can_pin_messages=bot_member.can_pin_messages,
-            can_manage_voice_chats=bot_member.can_manage_voice_chats,
+        chat_id,
+        user_id,
+        can_change_info=bot_member.can_change_info,
+        can_post_messages=bot_member.can_post_messages,
+        can_edit_messages=bot_member.can_edit_messages,
+        can_delete_messages=bot_member.can_delete_messages,
+        can_invite_users=bot_member.can_invite_users,
+        can_restrict_members=bot_member.can_restrict_members,
+        can_pin_messages=bot_member.can_pin_messages,
     )
 
     title = "babu"
@@ -244,8 +240,16 @@ def admin(update: Update, context: CallbackContext) -> str:
                 "I can't set custom title for admins that I didn't promote!"
             )
 
-    message.reply_text(
-        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n<b>Title: {title[:16]}</b>",
+    except BadRequest as err:
+        if err.message == "User_not_mutual_contact":
+            message.reply_text("I can't promote someone who isn't in the group.")
+        else:
+            message.reply_text("An error occured while promoting.")
+        return
+
+    bot.sendMessage(
+        chat.id,
+        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n\n With Title: <b>{title[:16]}(</b>!",
         parse_mode=ParseMode.HTML,
     )
     # refresh admin cache
@@ -253,16 +257,14 @@ def admin(update: Update, context: CallbackContext) -> str:
         ADMIN_CACHE.pop(update.effective_chat.id)
     except KeyError:
         pass
-    return (
-        "<b>{}:</b>"
-        "\n#PROMOTED"
-        "\n<b>Admin:</b> {}"
-        "\n<b>User:</b> {}".format(
-            html.escape(chat.title),
-            mention_html(user.id, user.first_name),
-            mention_html(user_member.user.id, user_member.user.first_name),
-        )
+    log_message = (
+        f"<b>{html.escape(chat.title)}:</b>\n"
+        f"#PROMOTED\n"
+        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+        f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
     )
+
+    return log_message
 
 
 @connection_status
@@ -429,56 +431,57 @@ def coadmin(update: Update, context: CallbackContext) -> str:
         ADMIN_CACHE.pop(update.effective_chat.id)
     except KeyError:
         pass
-    return (
-        "<b>{}:</b>"
-        "\n#PROMOTED"
-        "\n<b>Admin:</b> {}"
-        "\n<b>User:</b> {}".format(
-            html.escape(chat.title),
-            mention_html(user.id, user.first_name),
-            mention_html(user_member.user.id, user_member.user.first_name),
-        )
+    log_message = (
+        f"<b>{html.escape(chat.title)}:</b>\n"
+        f"#COADMIND\n"
+        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+        f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
     )
 
+    return log_message
+
+
+@connection_status
 @bot_admin
 @can_promote
 @user_admin
 @loggable
-@typing_action
-def unadmin(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
+def unadmin(update: Update, context: CallbackContext) -> str:
+    bot = context.bot
+    args = context.args
+
     chat = update.effective_chat
     message = update.effective_message
     user = update.effective_user
 
-    if user_can_promote(chat, user, bot.id) is False:
-        message.reply_text("You don't have enough rights to demote someone!")
-        return ""
-
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("mention one.... 🤷🏻‍♂.")
-        return ""
-
-    user_member = chat.get_member(user_id)
-    if user_member.status == "creator":
-        message.reply_text("I'm not gonna demote Creator this group.... 🙄")
-        return ""
-
-    if user_member.status != "administrator":
         message.reply_text(
-            "How I'm supposed to demote someone who is not even an admin!"
+            "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
-        return ""
+        return
+
+    try:
+        user_member = chat.get_member(user_id)
+    except:
+        return
+
+    if user_member.status == "creator":
+        message.reply_text("This person CREATED the chat, how would I demote them?")
+        return
+
+    if not user_member.status == "administrator":
+        message.reply_text("Can't demote what wasn't promoted!")
+        return
 
     if user_id == bot.id:
-        message.reply_text("Yeahhh... Not gonna demote myself!")
-        return ""
+        message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        return
 
     try:
         bot.promoteChatMember(
-            int(chat.id),
-            int(user_id),
+            chat.id,
+            user_id,
             can_change_info=False,
             can_post_messages=False,
             can_edit_messages=False,
@@ -486,29 +489,30 @@ def unadmin(update: Update, context: CallbackContext):
             can_invite_users=False,
             can_restrict_members=False,
             can_pin_messages=False,
+            can_promote_members=False,
             can_manage_voice_chats=False,
         )
-        message.reply_text(
-            f"Successfully demoted <b>{user_member.user.first_name or user_id}</b>!",
+
+        bot.sendMessage(
+            chat.id,
+            f"Sucessfully demoted a admins in <b>{chat.title}</b>\n\nAdmin: <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoter: {mention_html(user.id, user.first_name)}",
             parse_mode=ParseMode.HTML,
         )
-        return (
-            "<b>{}:</b>"
-            "\n#DEMOTED"
-            "\n<b>Admin:</b> {}"
-            "\n<b>User:</b> {}".format(
-                html.escape(chat.title),
-                mention_html(user.id, user.first_name),
-                mention_html(user_member.user.id, user_member.user.first_name),
-            )
+
+        log_message = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#DEMOTED\n"
+            f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
         )
 
+        return log_message
     except BadRequest:
         message.reply_text(
-            "Failed to demote. I might not be admin, or the admin status was appointed by another "
-            "user, so I can't act upon them!"
+            "Could not demote. I might not be admin, or the admin status was appointed by another"
+            " user, so I can't act upon them!",
         )
-        return ""
+        return
 
 
 @user_admin
@@ -779,24 +783,116 @@ def invite(update: Update, context: CallbackContext):
         )
 
 
-@typing_action
-def adminlist(update: Update, _: CallbackContext):
-    administrators = update.effective_chat.get_administrators()
-    text = "Admins in <b>{}</b>:".format(update.effective_chat.title or "this chat")
+@connection_status
+def adminlist(update, context):
+    chat = update.effective_chat  # type: Optional[Chat] -> unused variable
+    user = update.effective_user  # type: Optional[User]
+    args = context.args  # -> unused variable
+    bot = context.bot
+
+    if update.effective_message.chat.type == "private":
+        send_message(update.effective_message, "This command only works in Groups.")
+        return
+
+    chat = update.effective_chat
+    chat_id = update.effective_chat.id
+    chat_name = update.effective_message.chat.title  # -> unused variable
+
+    try:
+        msg = update.effective_message.reply_text(
+            "Fetching group admins...",
+            parse_mode=ParseMode.HTML,
+        )
+    except BadRequest:
+        msg = update.effective_message.reply_text(
+            "Fetching group admins...",
+            quote=False,
+            parse_mode=ParseMode.HTML,
+        )
+
+    administrators = bot.getChatAdministrators(chat_id)
+    text = "Admins in <b>{}</b>:".format(html.escape(update.effective_chat.title))
+
     for admin in administrators:
         user = admin.user
         status = admin.status
-        name = f"{(mention_html(user.id, user.first_name))}"
+        custom_title = admin.custom_title
+
+        if user.first_name == "":
+            name = "☠ Deleted Account"
+        else:
+            name = "{}".format(
+                mention_html(
+                    user.id,
+                    html.escape(user.first_name + " " + (user.last_name or "")),
+                ),
+            )
+
+        if user.is_bot:
+            administrators.remove(admin)
+            continue
+
+        # if user.username:
+        #    name = escape_markdown("@" + user.username)
         if status == "creator":
-            text += "\n 🦁 Creator:"
-            text += "\n • {} \n\n 🦊 Admin:".format(name)
+            text += "\n 🌏 Creator:"
+            text += "\n<code> • </code>{}\n".format(name)
+
+            if custom_title:
+                text += f"<code> ┗━ {html.escape(custom_title)}</code>\n"
+
+    text += "\n🌟 Admins:"
+
+    custom_admin_list = {}
+    normal_admin_list = []
+
     for admin in administrators:
         user = admin.user
         status = admin.status
-        name = f"{(mention_html(user.id, user.first_name))}"
+        custom_title = admin.custom_title
+
+        if user.first_name == "":
+            name = "☠ Deleted Account"
+        else:
+            name = "{}".format(
+                mention_html(
+                    user.id,
+                    html.escape(user.first_name + " " + (user.last_name or "")),
+                ),
+            )
+        # if user.username:
+        #    name = escape_markdown("@" + user.username)
         if status == "administrator":
-            text += "\n • {}".format(name)
-    update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
+            if custom_title:
+                try:
+                    custom_admin_list[custom_title].append(name)
+                except KeyError:
+                    custom_admin_list.update({custom_title: [name]})
+            else:
+                normal_admin_list.append(name)
+
+    for admin in normal_admin_list:
+        text += "\n<code> • </code>{}".format(admin)
+
+    for admin_group in custom_admin_list.copy():
+        if len(custom_admin_list[admin_group]) == 1:
+            text += "\n<code> • </code>{} | <code>{}</code>".format(
+                custom_admin_list[admin_group][0],
+                html.escape(admin_group),
+            )
+            custom_admin_list.pop(admin_group)
+
+    text += "\n"
+    for admin_group, value in custom_admin_list.items():
+        text += "\n🚨 <code>{}</code>".format(admin_group)
+        for admin in value:
+            text += "\n<code> • </code>{}".format(admin)
+        text += "\n"
+
+    try:
+        msg.edit_text(text, parse_mode=ParseMode.HTML)
+    except BadRequest:  # if original message is deleted
+        return
 
 
 @bot_admin
@@ -885,7 +981,7 @@ __help__ = """
 × /antilinkedchannel <on/off>*:* Makes HachiBot Nagisa automatically delete linked channel posts from groups
 × /antichannelpin <on/off>*:* Makes HachiBot Nagisa automatically unpin linked channel posts from chatroom
 
-*Rules*:
+*Rules:*
 × /rules*:* get the rules for this chat.
 × /setrules <your rules here>*:* set the rules for this chat.
 × /clearrules*:* clear the rules for this chat.
