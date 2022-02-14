@@ -1,6 +1,6 @@
 import html
-from typing import Optional
 
+from typing import Optional
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
