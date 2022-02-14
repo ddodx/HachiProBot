@@ -144,7 +144,8 @@ if ENV:
     BOT_ID = int(os.environ.get("BOT_ID", None))
     ARQ_API_URL = "https://thearq.tech/"
     ARQ_API_KEY = "BCYKVF-KYQWFM-JCMORU-RZWOFQ-ARQ"
-    ERROR_LOGS = os.environ.get("ERROR_LOGS", -1001520614657)
+    ERROR_LOG = os.environ.get("ERROR_LOG", None)
+    ERROR_LOGS = os.environ.get("ERROR_LOGS", -1001590897564)
 
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
 
@@ -200,6 +201,7 @@ else:
     CERT_PATH = Config.CERT_PATH
     API_ID = Config.API_ID
     API_HASH = Config.API_HASH
+    ERROR_LOG = Config.ERROR_LOG
     ERROR_LOGS = Config.ERROR_LOGS
     DB_URL = Config.SQLALCHEMY_DATABASE_URI
     MONGO_DB_URI = Config.MONGO_DB_URI
