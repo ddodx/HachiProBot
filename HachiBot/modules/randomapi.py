@@ -48,7 +48,7 @@ async def boobs(client, message):
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     pic_loc = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "bobs.jpg")
-    a = await message.reply_text("**Mencari Gambar Feri Lagi Bugil**")
+    a = await message.reply_text("**Mencari Gambar Ipeh Lagi Bugil**")
     await a.edit("`Mengirim...`")
     nsfw = requests.get("http://api.oboobs.ru/noise/1").json()[0]["preview"]
     urllib.request.urlretrieve("http://media.oboobs.ru/{}".format(nsfw), pic_loc)
@@ -59,7 +59,7 @@ async def boobs(client, message):
     await a.delete()
 
 
-@pbot.on_message(filters.command("memes"))
+@pbot.on_message(filters.command("meme"))
 async def memes(client, message):
     async with aiohttp.ClientSession() as ses:
         async with ses.get(

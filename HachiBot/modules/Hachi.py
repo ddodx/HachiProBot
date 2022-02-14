@@ -48,7 +48,7 @@ async def _(event):
             ),
         )
     else:
-        await event.reply("`Something went wrong. Please try again Later.`")
+        await event.reply("Something went wrong. Please try again Later.")
 
 
 AD_STRINGS = (
@@ -205,24 +205,24 @@ def spill(update: Update, context: CallbackContext):
 
 
 __help__ = """
- × `/odo`*:* gives random demons media.
- × `/ipe`*:* gives random poto nya ipe
- × `/asupan`*:* gives random asupan media.
- × `/chika`*:* gives random chika media.
- × `/wibu`*:* gives random wibu media.
- × `/spill`*:* game spills.
- × `/lawak`*:* gives random lawak media.
- × `/apakah`*:* For ask question about someone with AI.
- × `/diarydodo`*:* Check Aja.
- × `/apod`*:* Get Astronomy Picture of Day by NASA.
- × `/devian` <search query> ; <no of pics> *:* Devian-Art Image Search.
- × `/joke`*:* To get random joke.
- × `/inslut`*:* Insult someone.
- × `/bugil`*:*nbuat yang sangean kek mas almin.
- × `/url <long url>`*:* To get a shorten link of long link.
- × `/carbon` <text> [or reply] *:* Beautify your code using carbon.now.sh
- × `/phone <number>`*:* To get info about that number
- × `/webss` <url> *:* Take A Screenshot Of A Webpage.
+ × /odo*:* gives random demons media.
+ × /ipe*:* gives random poto nya ipe
+ × /asupan*:* gives random asupan media.
+ × /chika*:* gives random chika media.
+ × /wibu*:* gives random wibu media.
+ × /spill*:* game spills.
+ × /lawak*:* gives random lawak media.
+ × /apakah*:* For ask question about someone with AI.
+ × /diarydodo*:* Check Aja.
+ × /apod*:* Get Astronomy Picture of Day by NASA.
+ × /devian <search query> ; <no of pics> *:* Devian-Art Image Search.
+ × /joke*:* To get random joke.
+ × /inslut*:* Insult someone.
+ × /bugil*:*nbuat yang sangean kek mas almin.
+ × /url <long url>*:* To get a shorten link of long link.
+ × /carbon <text> [or reply] *:* Beautify your code using carbon.now.sh
+ × /phone <number>*:* To get info about that number
+ × /webss <url> *:* Take A Screenshot Of A Webpage.
 """
 
 

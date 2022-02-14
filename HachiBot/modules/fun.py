@@ -336,6 +336,12 @@ __help__ = """
 
 *Shippering:*
 × /couples - get couples of today
+× /tweet - make twitter posts.
+× /stic - Get random stickers from emoji.
+× /frog - make text stickers.
+× /gglax - Create google search sticker with text.
+× /quot - write quote on animated sticker.
+× /uta - Inline song search and downloader.
 
 *Here is the help for the Styletext module:*
 × /weebify <text>: weebify your text!

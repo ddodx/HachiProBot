@@ -376,9 +376,6 @@ def info(update: Update, context: CallbackContext):
                                 "Disaster", url="https://t.me/HachiXLog/4"
                             ),
                         ],
-                        [
-                            InlineKeyboardButton(" [❌] ", callback_data="close"),
-                        ],
                     ]
                 ),
                 parse_mode=ParseMode.HTML,
@@ -397,9 +394,6 @@ def info(update: Update, context: CallbackContext):
                             InlineKeyboardButton(
                                 "Disaster", url="https://t.me/HachiXLog/4"
                             ),
-                        ],
-                        [
-                            InlineKeyboardButton(" [❌] ", callback_data="close"),
                         ],
                     ]
                 ),
@@ -509,7 +503,7 @@ def stats(update, context):
             + "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
             + "\n\n[⍙ GitHub](https://github.com/ridhoajaaa/HachiXBot) | [⍚ Bokep](https://xnxx.com)\n\n"
-            + "╘══「 by [yxdodd](github.com/ridhoajaaa) 」\n",
+            + "╘══「 by [ddod](github.com/ridhoajaaa) 」\n",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),
             disable_web_page_preview=True,
