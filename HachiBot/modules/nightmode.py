@@ -19,6 +19,7 @@ from datetime import timedelta
 import dateparser
 from telethon import *
 from telethon.tl.types import ChatBannedRights
+from telethon.tl.functions.channels import GetParticipantRequest
 
 from HachiBot import telethn as tbot
 from HachiBot.events import register
