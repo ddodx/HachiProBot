@@ -6,7 +6,6 @@ from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
 
 from HachiBot import DRAGONS, dispatcher
-from HachiBot.modules.connection import connected
 from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.modules.helper_funcs.chat_status import (
     bot_admin,
@@ -18,7 +17,6 @@ from HachiBot.modules.helper_funcs.chat_status import (
 )
 
 from HachiBot.modules.helper_funcs.admin_rights import (
-    user_can_pin,
     user_can_changeinfo,
     user_can_promote,
 )
@@ -27,8 +25,7 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user_and_text,
 )
 from HachiBot.modules.log_channel import loggable
-from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
-from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
+from HachiBot.modules.helper_funcs.alternate import send_message
 
 
 @bot_admin
@@ -232,32 +229,12 @@ def admin(update: Update, context: CallbackContext) -> str:
             message.reply_text("An error occured while promoting.")
         return
 
-    title = "babu"
-    if " " in message.text:
-        title = message.text.split(" ", 1)[1]
-        if len(title) > 16:
-            message.reply_text(
-                "The title length is longer than 16 characters.\nTruncating it to 16 characters."
-            )
-
-        try:
-            bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
-
-        except BadRequest:
-            message.reply_text(
-                "I can't set custom title for admins that I didn't promote!"
-            )
-
     bot.sendMessage(
         chat.id,
-        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n\n With Title: <b>{title[:16]}(</b>!",
+        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
         parse_mode=ParseMode.HTML,
     )
-    # refresh admin cache
-    try:
-        ADMIN_CACHE.pop(update.effective_chat.id)
-    except KeyError:
-        pass
+
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#PROMOTED\n"
@@ -427,11 +404,7 @@ def coadmin(update: Update, context: CallbackContext) -> str:
         f"Fullpromoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoter: {mention_html(user.id, user.first_name)}</b>",
         parse_mode=ParseMode.HTML,
     )
-    # refresh admin cache
-    try:
-        ADMIN_CACHE.pop(update.effective_chat.id)
-    except KeyError:
-        pass
+
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#COADMIND\n"
@@ -957,35 +930,30 @@ def button(update: Update, context: CallbackContext) -> str:
 
 __help__ = """
 *User Commands*:
-× /admins*:* list of admins in the chat
-× /pinned*:* to get the current pinned message.
+❂ /admins*:* list of admins in the chat
+❂ /pinned*:* to get the current pinned message.
 
 *The Following Commands are Admins only:* 
-× /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
-× /unpin*:* unpins the currently pinned message
-× /invitelink*:* gets invitelink
-× /admin*:* promotes the user replied to
-× /coadmin*:* promotes the user replied to with full rights
-× /unadmin*:* demotes the user replied to
-× /title <title here>*:* sets a custom title for an admin that the bot promoted
-× /reload*:* force refresh the admins list
-× /del*:* deletes the message you replied to
-× /purge*:* deletes all messages between this and the replied to message.
-× /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
-× /setgtitle <text>*:* set group title
-× /setgpic*:* reply to an image to set as group photo
-× /setdesc*:* Set group description
-× /setsticker*:* Set group sticker
+❂ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
+❂ /unpin*:* unpins the currently pinned message
+❂ /invitelink*:* gets invitelink
+❂ /admin*:* promotes the user replied to
+❂ /coadmin*:* promotes the user replied to with full rights
+❂ /demote*:* demotes the user replied to
+❂ /title <title here>*:* sets a custom title for an admin that the bot promoted
+❂ /admincache*:* force refresh the admins list
+❂ /del*:* deletes the message you replied to
+❂ /purge*:* deletes all messages between this and the replied to message.
+❂ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
+❂ /setgtitle <text>*:* set group title
+❂ /setgpic*:* reply to an image to set as group photo
+❂ /setdesc*:* Set group description
+❂ /setsticker*:* Set group sticker
 
-*Anti Channel Mode*:
-× /antich or /antichannel <on/off>*:* Bans and deletes anyone who tries to talk as channel and forces them to talk using real account
-× /antilinkedchannel <on/off>*:* Makes HachiBot Nagisa automatically delete linked channel posts from groups
-× /antichannelpin <on/off>*:* Makes HachiBot Nagisa automatically unpin linked channel posts from chatroom
-
-*Rules:*
-× /rules*:* get the rules for this chat.
-× /setrules <your rules here>*:* set the rules for this chat.
-× /clearrules*:* clear the rules for this chat.
+*Rules*:
+❂ /rules*:* get the rules for this chat.
+❂ /setrules <your rules here>*:* set the rules for this chat.
+❂ /clearrules*:* clear the rules for this chat.
 """
 
 SET_DESC_HANDLER = CommandHandler(
