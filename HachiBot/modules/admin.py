@@ -28,7 +28,7 @@ from HachiBot.modules.helper_funcs.extraction import (
 )
 from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
-from HachiBot.modules.helper_funcs.alternate import send_message
+from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
 from HachiBot.modules.helper_funcs.anonymous import AdminPerms
 
 
