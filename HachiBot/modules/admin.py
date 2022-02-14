@@ -26,10 +26,8 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
-from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
-from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
 @bot_admin
@@ -167,13 +165,12 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
-@ddocmd(command="admin", can_disable=False)
 @connection_status
 @bot_admin
 @can_promote
-@user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
+@user_admin
 @loggable
-def admin(update: Update, context: CallbackContext) -> Optional[str]:
+def promote(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
@@ -181,20 +178,20 @@ def admin(update: Update, context: CallbackContext) -> Optional[str]:
     chat = update.effective_chat
     user = update.effective_user
 
-    # promoter = chat.get_member(user.id)
-    """
+    promoter = chat.get_member(user.id)
+
     if (
-            not (promoter.can_promote_members or promoter.status == "creator")
-            and not user.id in SUDO_USERS
+        not (promoter.can_promote_members or promoter.status == "creator")
+        and user.id not in DRAGONS
     ):
         message.reply_text("You don't have the necessary rights to do that!")
         return
-    """
+
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "You don't seem to be referring to a user or the ID specified is incorrect..",
         )
         return
 
@@ -214,19 +211,16 @@ def admin(update: Update, context: CallbackContext) -> Optional[str]:
     # set same perms as bot - bot can't assign higher perms than itself!
     bot_member = chat.get_member(bot.id)
 
-    try:
-        bot.promoteChatMember(
-            chat.id,
-            user_id,
-            can_change_info=bot_member.can_change_info,
-            can_post_messages=bot_member.can_post_messages,
-            can_edit_messages=bot_member.can_edit_messages,
-            can_delete_messages=bot_member.can_delete_messages,
-            can_invite_users=bot_member.can_invite_users,
-            # can_promote_members=bot_member.can_promote_members,
-            can_restrict_members=bot_member.can_restrict_members,
-            can_pin_messages=bot_member.can_pin_messages,
-            can_manage_voice_chats=bot_member.can_manage_voice_chats,
+    bot.promoteChatMember(
+        chat_id,
+        user_id,
+        can_change_info=bot_member.can_change_info,
+        can_post_messages=bot_member.can_post_messages,
+        can_edit_messages=bot_member.can_edit_messages,
+        can_delete_messages=bot_member.can_delete_messages,
+        can_invite_users=bot_member.can_invite_users,
+        can_restrict_members=bot_member.can_restrict_members,
+        can_pin_messages=bot_member.can_pin_messages,
     )
 
     title = "babu"
