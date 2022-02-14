@@ -26,7 +26,7 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
-from tg_bot.modules.helper_funcs.decorators import ddocmd
+from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message, typing_action
 from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
@@ -244,16 +244,8 @@ def admin(update: Update, context: CallbackContext) -> Optional[str]:
             message.reply_text(
                 "I can't set custom title for admins that I didn't promote!"
             )
-        
-    except BadRequest as err:
-        if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
-        else:
-            message.reply_text("An error occured while promoting.")
-        return
 
-    bot.sendMessage(
-        chat.id,
+    message.reply_text(
         f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n<b>Title: {title[:16]}</b>",
         parse_mode=ParseMode.HTML,
     )
