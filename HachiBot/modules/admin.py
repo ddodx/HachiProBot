@@ -163,6 +163,7 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
+@run_async
 @connection_status
 @bot_admin
 @can_promote
@@ -198,7 +199,7 @@ def admin(update: Update, context: CallbackContext) -> str:
     except:
         return
 
-    if user_member.status in ("administrator", "creator"):
+    if user_member.status == "administrator" or user_member.status == "creator":
         message.reply_text("How am I meant to promote someone that's already an admin?")
         return
 
@@ -228,6 +229,22 @@ def admin(update: Update, context: CallbackContext) -> str:
         else:
             message.reply_text("An error occured while promoting.")
         return
+    
+    title = "babu"
+    if " " in message.text:
+        title = message.text.split(" ", 1)[1]
+        if len(title) > 16:
+            message.reply_text(
+                "The title length is longer than 16 characters.\nTruncating it to 16 characters."
+            )
+
+        try:
+            bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
+
+        except BadRequest:
+            message.reply_text(
+                "I can't set custom title for admins that I didn't promote!"
+            )
 
     bot.sendMessage(
         chat.id,
