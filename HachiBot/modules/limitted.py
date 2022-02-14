@@ -15,7 +15,7 @@ from HachiBot.events import register
 from HachiBot import ubot
 
 
-@register(pattern="limit(?: |$)(.*)")
+@register(pattern="^/limited ?(.*)")
 async def _(event):
     await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation("@SpamBot") as conv:
