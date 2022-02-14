@@ -239,7 +239,7 @@ def admin(update: Update, context: CallbackContext) -> str:
             message.reply_text(
                 "I can't set custom title for admins that I didn't promote!"
             )
-
+        try:
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
             message.reply_text("I can't promote someone who isn't in the group.")
