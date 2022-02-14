@@ -12,7 +12,6 @@ from HachiBot.modules.helper_funcs.chat_status import (
     can_pin,
     can_promote,
     connection_status,
-    user_admin,
     ADMIN_CACHE,
 )
 
@@ -24,8 +23,10 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
+from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message
+from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
 @bot_admin
@@ -163,13 +164,13 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
-@run_async
+@ddocmd(command="admin", can_disable=False)
 @connection_status
 @bot_admin
 @can_promote
-@user_admin
+@user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
 @loggable
-def admin(update: Update, context: CallbackContext) -> str:
+def admin(update: Update, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     args = context.args
 
@@ -177,20 +178,20 @@ def admin(update: Update, context: CallbackContext) -> str:
     chat = update.effective_chat
     user = update.effective_user
 
-    promoter = chat.get_member(user.id)
-
+    # promoter = chat.get_member(user.id)
+    """
     if (
-        not (promoter.can_promote_members or promoter.status == "creator")
-        and user.id not in DRAGONS
+            not (promoter.can_promote_members or promoter.status == "creator")
+            and not user.id in DRAGONS
     ):
         message.reply_text("You don't have the necessary rights to do that!")
         return
-
+    """
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect..",
+            "You don't seem to be referring to a user or the ID specified is incorrect.."
         )
         return
 
@@ -199,7 +200,7 @@ def admin(update: Update, context: CallbackContext) -> str:
     except:
         return
 
-    if user_member.status == "administrator" or user_member.status == "creator":
+    if user_member.status in ("administrator", "creator"):
         message.reply_text("How am I meant to promote someone that's already an admin?")
         return
 
@@ -248,7 +249,7 @@ def admin(update: Update, context: CallbackContext) -> str:
 
     bot.sendMessage(
         chat.id,
-        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Promoter: {mention_html(user.id, user.first_name)}</b>\n\n<b>With Title: {title[:16]}<\b>",
         parse_mode=ParseMode.HTML,
     )
 
