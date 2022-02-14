@@ -11,6 +11,7 @@ from HachiBot.modules.disable import DisableAbleCommandHandler
 from HachiBot.modules.helper_funcs.chat_status import (
     bot_admin,
     can_pin,
+    user_admin,
     can_promote,
     connection_status,
     ADMIN_CACHE,
@@ -18,6 +19,7 @@ from HachiBot.modules.helper_funcs.chat_status import (
 
 from HachiBot.modules.helper_funcs.admin_rights import (
     user_can_changeinfo,
+    user_can_pin,
     user_can_promote,
 )
 from HachiBot.modules.helper_funcs.extraction import (
@@ -27,7 +29,7 @@ from HachiBot.modules.helper_funcs.extraction import (
 from HachiBot.modules.helper_funcs.decorators import ddocmd
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message
-from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
+from HachiBot.modules.helper_funcs.anonymous import AdminPerms
 
 
 @bot_admin
@@ -165,66 +167,50 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
-@ddocmd(command="admin", can_disable=False)
-@connection_status
-@bot_admin
 @can_promote
-@user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
+@user_admin
 @loggable
+@typing_action
 def admin(update: Update, context: CallbackContext) -> Optional[str]:
-    bot = context.bot
-    args = context.args
-
+    bot, args = context.bot, context.args
+    chat_id = update.effective_chat.id
     message = update.effective_message
     chat = update.effective_chat
     user = update.effective_user
 
-    # promoter = chat.get_member(user.id)
-    """
-    if (
-            not (promoter.can_promote_members or promoter.status == "creator")
-            and not user.id in DRAGONS
-    ):
-        message.reply_text("You don't have the necessary rights to do that!")
-        return
-    """
+    if user_can_promote(chat, user, bot.id) is False:
+        message.reply_text("You don't have enough rights to promote someone!")
+        return ""
+
     user_id = extract_user(message, args)
-
     if not user_id:
-        message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
-        )
-        return
+        message.reply_text("mention one.... 🤷🏻‍♂.")
+        return ""
 
-    try:
-        user_member = chat.get_member(user_id)
-    except:
-        return
-
-    if user_member.status in ("administrator", "creator"):
-        message.reply_text("How am I meant to promote someone that's already an admin?")
-        return
+    user_member = chat.get_member(user_id)
+    if user_member.status in ["administrator", "creator"]:
+        message.reply_text("This person is already an admin...!")
+        return ""
 
     if user_id == bot.id:
-        message.reply_text("I can't promote myself! Get an admin to do it for me.")
-        return
+        message.reply_text("I hope, if i could promote myself!")
+        return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
     bot_member = chat.get_member(bot.id)
 
     try:
         bot.promoteChatMember(
-            chat.id,
+            chat_id,
             user_id,
             can_change_info=bot_member.can_change_info,
             can_post_messages=bot_member.can_post_messages,
             can_edit_messages=bot_member.can_edit_messages,
             can_delete_messages=bot_member.can_delete_messages,
             can_invite_users=bot_member.can_invite_users,
-            # can_promote_members=bot_member.can_promote_members,
             can_restrict_members=bot_member.can_restrict_members,
             can_pin_messages=bot_member.can_pin_messages,
-        )
+    )
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
             message.reply_text("I can't promote someone who isn't in the group.")
