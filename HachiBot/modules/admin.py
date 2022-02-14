@@ -167,11 +167,13 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
+
+@bot_admin
 @can_promote
 @user_admin
 @loggable
 @typing_action
-def admin(update: Update, context: CallbackContext) -> Optional[str]:
+def admin(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     chat_id = update.effective_chat.id
     message = update.effective_message
@@ -199,25 +201,18 @@ def admin(update: Update, context: CallbackContext) -> Optional[str]:
     # set same perms as bot - bot can't assign higher perms than itself!
     bot_member = chat.get_member(bot.id)
 
-    try:
-        bot.promoteChatMember(
-            chat_id,
-            user_id,
-            can_change_info=bot_member.can_change_info,
-            can_post_messages=bot_member.can_post_messages,
-            can_edit_messages=bot_member.can_edit_messages,
-            can_delete_messages=bot_member.can_delete_messages,
-            can_invite_users=bot_member.can_invite_users,
-            can_restrict_members=bot_member.can_restrict_members,
-            can_pin_messages=bot_member.can_pin_messages,
+    bot.promoteChatMember(
+        chat_id,
+        user_id,
+        can_change_info=bot_member.can_change_info,
+        can_post_messages=bot_member.can_post_messages,
+        can_edit_messages=bot_member.can_edit_messages,
+        can_delete_messages=bot_member.can_delete_messages,
+        can_invite_users=bot_member.can_invite_users,
+        can_restrict_members=bot_member.can_restrict_members,
+        can_pin_messages=bot_member.can_pin_messages,
     )
-    except BadRequest as err:
-        if err.message == "User_not_mutual_contact":
-            message.reply_text("I can't promote someone who isn't in the group.")
-        else:
-            message.reply_text("An error occured while promoting.")
-        return
-    
+
     title = "babu"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
