@@ -222,7 +222,7 @@ def admin(update: Update, context: CallbackContext) -> str:
             can_pin_messages=bot_member.can_pin_messages,
     )
     
-    title = "admin"
+    title = "babu"
     if " " in message.text:
         title = message.text.split(" ", 1)[1]
         if len(title) > 16:
@@ -240,7 +240,7 @@ def admin(update: Update, context: CallbackContext) -> str:
 
     bot.sendMessage(
         chat.id,
-        f"Promoting a user in <b>{chat.title}</b>\n\nUser: {mention_html(user_member.user.id, user_member.user.first_name)}\nAdmin: {mention_html(user.id, user.first_name)}",
+        f"Promoting a user in <b>{chat.title}</b>\n\n<b>User: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Admin: {mention_html(user.id, user.first_name)}</b>\n\n<b>With Title: {title[:16]}</b>",
         parse_mode=ParseMode.HTML,
     )
 
@@ -478,7 +478,7 @@ def unadmin(update: Update, context: CallbackContext) -> str:
 
         bot.sendMessage(
             chat.id,
-            f"Sucessfully demoted a admins in <b>{chat.title}</b>\n\nAdmin: <b>{mention_html(user_member.user.id, user_member.user.first_name)}</b>\nDemoter: {mention_html(user.id, user.first_name)}",
+            f"Sucessfully demoted a admins in <b>{chat.title}</b>\n\n<b>Admin: {mention_html(user_member.user.id, user_member.user.first_name)}</b>\n<b>Demoter: {mention_html(user.id, user.first_name)}</b>",
             parse_mode=ParseMode.HTML,
         )
 
