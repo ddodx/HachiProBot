@@ -15,7 +15,7 @@ from telethon.tl.functions.messages import ExportChatInviteRequest
 from telethon.tl.types import ChannelParticipantsKicked
 
 from HachiBot import OWNER_ID as owner
-from HachiBot.utils.pluginhelper import edit_or_reply
+from HachiBot.utils.tools import edit_or_reply
 from HachiBot.events import register
 
 

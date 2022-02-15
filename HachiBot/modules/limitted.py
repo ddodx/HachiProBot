@@ -10,7 +10,7 @@
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from HachiBot.utils.pluginhelper import edit_or_reply
+from HachiBot.utils.tools import edit_or_reply
 from HachiBot.events import register
 from HachiBot import ubot
 
