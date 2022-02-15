@@ -38,6 +38,7 @@ bleach
 wikipedia
 pythonping
 markdown2
+markdown
 hurry-filesize
 telethon
 telethon-session-sqlalchemy
