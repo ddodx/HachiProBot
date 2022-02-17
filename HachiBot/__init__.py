@@ -302,7 +302,6 @@ aiohttpsession = ClientSession()
 print("[INFO]: INITIALIZING ARQ CLIENT")
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 pornhub = arq.pornhub
-phdl = arq.phdl
 session_name = TOKEN.split(":")[0]
 pgram = Client(
     session_name,
@@ -330,7 +329,6 @@ pbot = Client(
 apps = []
 apps = [pgram]
 apps.append(pbot)
-phdl = arq.phdl
 loop = asyncio.get_event_loop()
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.hachi
