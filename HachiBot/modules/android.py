@@ -222,7 +222,7 @@ def bootleg(update, context) -> str:
     except Exception:
         codename = ""
 
-    if codename == "":
+    if not codename == "":
         message.reply_text(
             "*Please Type Your Device Codename*\nExample : `/bootleg lavender`",
             parse_mode=ParseMode.MARKDOWN,
