@@ -97,6 +97,10 @@ if ENV:
         raise Exception("Your tiger users list does not contain valid integers.")
 
     INFOPIC = bool(os.environ.get("INFOPIC", True))
+    REPO_BOT = os.environ.get("REPO_BOT", "https://pornhub.com")
+    OWNER = os.environ.get("OWNER", "ddodxy")
+    BOT_NAME = os.environ.get("BOT_NAME", "炎 Goemon Hachisuka")
+    UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "HachiXLog")
     BOT_USERNAME = os.environ.get("BOT_USERNAME", None)
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
@@ -297,6 +301,8 @@ aiohttpsession = ClientSession()
 # ARQ Client
 print("[INFO]: INITIALIZING ARQ CLIENT")
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+pornhub = arq.pornhub
+phdl = arq.phdl
 session_name = TOKEN.split(":")[0]
 pgram = Client(
     session_name,

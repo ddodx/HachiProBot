@@ -33,6 +33,7 @@ google-trans-new
 jikanpy
 speedtest-cli
 coffeehouse
+pornhub_api
 regex
 bleach
 wikipedia
