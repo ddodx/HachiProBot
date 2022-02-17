@@ -101,11 +101,3 @@ async def proxy_callback_func(_, cq: CallbackQuery):
         reply_markup=keyb,
         disable_web_page_preview=True,
     )
-
-
-__mod_name__ = "Proxy"
-
-__help__ = """
-*Proxy Command*
-× /proxy - Get socks5 proxy which you can use with telegram or other things
-"""

@@ -38,6 +38,6 @@ The easiest way to deploy this Bot is via Heroku.
 
 ## CREDITS
 
-This whole repo was forked and edited from [Prime Mega](https://github.com/Tonic990/HachiBot), Thanks To [NatsuNagisa](https://github.com/ridhoajaaa/Natsunagi-Nagisa), [EmikoRobot](https://github.com/kennedy-ex/EmikoRobot), [SiestaRobot](https://github.com/shiinobu/SiestaRobot) And [SaintAries](https://github.com/Aryza23/SaintAries) For Some of Their Modules.
+This whole repo was forked and edited from [Prime Mega](https://github.com/Tonic990/HachiBot), Thanks To [NatsuNagisa](https://github.com/aryazakaria01/Natsunagi-Nagisa), [EmikoRobot](https://github.com/kennedy-ex/EmikoRobot), [SiestaRobot](https://github.com/shiinobu/SiestaRobot) And [SaintAries](https://github.com/Aryza23/SaintAries) For Some of Their Modules.
 Appropriate copyright and Code ownership goes to the respective creators/developers/owners.
 I thank everyone who is behind this huge project. 
