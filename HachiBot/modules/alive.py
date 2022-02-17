@@ -11,7 +11,7 @@ from HachiBot import telethn as tbot
 
 PHOTO = "https://telegra.ph/file/4ba029703f45315735c45.jpg"
 
-@register(pattern=("^/alive(?: |$)(.*)")
+@register(pattern=("^/alive(?: |$)(.*)"))
 async def awake(event):
   HACHI = f"**Hai Ketot Uwow [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Hachi Robot.** \n\n"
   HACHI += "✪ **I'm Working Properly** \n\n"
