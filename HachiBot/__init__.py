@@ -330,6 +330,7 @@ pbot = Client(
 apps = []
 apps = [pgram]
 apps.append(pbot)
+phdl = arq.phdl
 loop = asyncio.get_event_loop()
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.hachi

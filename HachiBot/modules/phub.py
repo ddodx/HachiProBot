@@ -6,7 +6,7 @@ from Python_ARQ import ARQ
 from asyncio import get_running_loop
 from wget import download
 from HachiBot import OWNER, BOT_NAME, REPO_BOT, ARQ_API_KEY, UPDATES_CHANNEL, TOKEN
-from HachiBot import phdl, pornhub, arq
+from HachiBot import phdl
 
 async def download_url(url: str):
     loop = get_running_loop()
