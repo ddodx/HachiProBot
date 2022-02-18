@@ -14,7 +14,6 @@ from HachiBot.modules.helper_funcs.chat_status import user_admin, is_user_admin
 from HachiBot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from HachiBot.modules.helper_funcs.filters import CustomFilters
 from HachiBot.modules.sql.users_sql import get_all_chats
-from HachiBot.events import register
 
 GMUTE_ENFORCE_GROUP = 6
 
@@ -24,7 +23,6 @@ OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + DEMONS + TIGERS
 ERROR_DUMP = None
 
 
-@register(pattern="^/gmute ?(.*)")
 def gmute(update, context):
     message = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat
@@ -138,7 +136,6 @@ def gmute(update, context):
     message.reply_text("They won't be talking again anytime soon.")
 
 
-@register(pattern="^/ungmute ?(.*)")
 def ungmute(update, context):
     message = update.effective_message  # type: Optional[Message]
     bot = context.bot

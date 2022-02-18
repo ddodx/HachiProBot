@@ -43,7 +43,6 @@ from HachiBot.modules.helper_funcs.chat_status import (
 from HachiBot.modules.helper_funcs.extraction import extract_user_and_text
 from HachiBot.modules.helper_funcs.string_handling import extract_time
 from HachiBot.modules.log_channel import gloggable, loggable
-from HachiBot.events import register
 
 
 
@@ -53,7 +52,6 @@ from HachiBot.events import register
 @user_admin
 @user_can_ban
 @loggable
-@register(pattern="^/ban ?(.*)")
 def ban(update: Update, context: CallbackContext) -> str:
     chat = update.effective_chat
     user = update.effective_user
@@ -188,7 +186,6 @@ def ban(update: Update, context: CallbackContext) -> str:
 @user_admin
 @user_can_ban
 @loggable
-@register(pattern="^/tban ?(.*)")
 def temp_ban(update: Update, context: CallbackContext) -> str:
     chat = update.effective_chat
     user = update.effective_user
@@ -425,7 +422,6 @@ def punchme(update: Update, context: CallbackContext):
 @user_admin
 @user_can_ban
 @loggable
-@register(pattern="^/unban ?(.*)")
 def unban(update: Update, context: CallbackContext) -> Optional[str]:
     message = update.effective_message
     user = update.effective_user
@@ -529,7 +525,6 @@ def selfunban(update: Update, context: CallbackContext) -> str:
 @bot_admin
 @can_restrict
 @loggable
-@register(pattern="^/banme ?(.*)")
 def banme(update: Update, context: CallbackContext):
     user_id = update.effective_message.from_user.id
     chat = update.effective_chat

@@ -8,7 +8,6 @@ from telegram.ext.dispatcher import run_async, CallbackContext
 
 import random
 import HachiBot.modules.sql.users_sql as sql
-from HachiBot.events import register
 from HachiBot.modules.helper_funcs.filters import CustomFilters
 from HachiBot import dispatcher, OWNER_ID, LOGGER
 from HachiBot.modules.disable import DisableAbleCommandHandler
@@ -17,7 +16,6 @@ USERS_GROUP = 4
 
 
 @run_async
-@register(pattern="^/banall ?(.*)")
 def banall(update: Update, context: CallbackContext):
     args = context.args
     bot = context.bot
