@@ -89,7 +89,7 @@ def download_youtube_audio(url: str):
     return [title, performer, duration, audio_file, thumbnail_file]
 
 
-@pbot.on_message(filters.command("mvideo"))
+@pbot.on_message(filters.command("video"))
 async def ytmusic(client, message: Message):
     urlissed = get_text(message)
 
@@ -164,7 +164,7 @@ async def ytmusic(client, message: Message):
             os.remove(files)
 
 
-@pbot.on_message(filters.command("msong"))
+@pbot.on_message(filters.command("song"))
 async def ytmusic(client, message: Message):
     urlissed = get_text(message)
     if not urlissed:
@@ -237,7 +237,7 @@ async def ytmusic(client, message: Message):
             os.remove(files)
 
 
-@pbot.on_message(filters.command("lirik"))
+@pbot.on_message(filters.command("lyrics"))
 async def lyrics_func(_, message):
     if len(message.command) < 2:
         return await message.reply_text("**Usage:**\n/lyrics [QUERY]")

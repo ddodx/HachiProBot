@@ -214,7 +214,7 @@ async def samspecs(c: Client, update: Update):
                                )[0].strip().replace('td', 'b')
             data = re.findall(r'<td>.*?</td>', str(info)
                               )[-1].strip().replace('td', 'code')
-            message += "• {}: <code>{}</code>\n".format(title, data)
+            message += "× {}: <code>{}</code>\n".format(title, data)
 
     else:
         message = "Device specs not found in bot database, make sure this is a Samsung device!"
@@ -327,25 +327,25 @@ async def check(c: Client, update: Update):
         pda1, csc1, phone1 = page1.find("latest").text.strip().split('/')
         message = f'<b>MODEL:</b> <code>{model.upper()}</code>\n<b>CSC:</b> <code>{csc.upper()}</code>\n\n'
         message += '<b>Latest Avaliable Firmware:</b>\n'
-        message += f'• PDA: <code>{pda1}</code>\n• CSC: <code>{csc1}</code>\n'
+        message += f'× PDA: <code>{pda1}</code>\n× CSC: <code>{csc1}</code>\n'
         if phone1:
-            message += f'• Phone: <code>{phone1}</code>\n'
+            message += f'× Phone: <code>{phone1}</code>\n'
         if os1:
-            message += f'• Android: <code>{os1}</code>\n'
+            message += f'× Android: <code>{os1}</code>\n'
         message += '\n'
     else:
         message = f'<b>No public release found for {model.upper()} and {csc.upper()}.</b>\n\n'
     message += '<b>Latest Test Firmware:</b>\n'
     if len(page2.find("latest").text.strip().split('/')) == 3:
         pda2, csc2, phone2 = page2.find("latest").text.strip().split('/')
-        message += f'• PDA: <code>{pda2}</code>\n• CSC: <code>{csc2}</code>\n'
+        message += f'× PDA: <code>{pda2}</code>\n× CSC: <code>{csc2}</code>\n'
         if phone2:
-            message += f'• Phone: <code>{phone2}</code>\n'
+            message += f'× Phone: <code>{phone2}</code>\n'
         if os2:
-            message += f'• Android: <code>{os2}</code>\n'
+            message += f'× Android: <code>{os2}</code>\n'
     else:
         md5 = page2.find("latest").text.strip()
-        message += f'• Hash: <code>{md5}</code>\n• Android: <code>{os2}</code>\n\n'
+        message += f'× Hash: <code>{md5}</code>\n× Android: <code>{os2}</code>\n\n'
     cmd.split()
     if cmd in ("samcheck"):
         await c.send_message(

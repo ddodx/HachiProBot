@@ -741,7 +741,7 @@ async def tmdb_func(answers, query):
                 photo_url=result.backdrop if result.backdrop else result.poster,
                 caption=caption,
                 title=result.title,
-                description=f"{genre} • {result.releaseDate} • {result.rating} • {description}",
+                description=f"{genre} × {result.releaseDate} × {result.rating} × {description}",
                 reply_markup=buttons,
             )
         )

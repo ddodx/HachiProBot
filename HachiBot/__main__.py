@@ -395,12 +395,12 @@ def hachi_about_callback(update, context):
     if query.data == "hachi_":
         query.message.edit_text(
             text="๏ Saya *HachiXBot*, bot manajemen grup yang kuat yang dibuat untuk membantu Anda mengelola grup dengan mudah.\n"
-            "\n• Saya dapat membatasi pengguna."
-            "\n• Saya dapat menyapa pengguna dengan pesan selamat datang yang dapat disesuaikan dan bahkan menetapkan aturan grup."
-            "\n• Saya memiliki sistem anti-banjir yang canggih."
-            "\n• Saya dapat memperingatkan pengguna hingga mereka mencapai peringatan maksimal, dengan setiap tindakan yang telah ditentukan sebelumnya seperti larangan, bisu, tendangan, dll."
-            "\n• Saya memiliki sistem pencatatan, daftar hitam, dan bahkan balasan yang telah ditentukan sebelumnya untuk kata kunci tertentu."
-            "\n• Saya memeriksa izin admin sebelum menjalankan perintah apa pun dan hal lainnya"
+            "\n× Saya dapat membatasi pengguna."
+            "\n× Saya dapat menyapa pengguna dengan pesan selamat datang yang dapat disesuaikan dan bahkan menetapkan aturan grup."
+            "\n× Saya memiliki sistem anti-banjir yang canggih."
+            "\n× Saya dapat memperingatkan pengguna hingga mereka mencapai peringatan maksimal, dengan setiap tindakan yang telah ditentukan sebelumnya seperti larangan, bisu, tendangan, dll."
+            "\n× Saya memiliki sistem pencatatan, daftar hitam, dan bahkan balasan yang telah ditentukan sebelumnya untuk kata kunci tertentu."
+            "\n× Saya memeriksa izin admin sebelum menjalankan perintah apa pun dan hal lainnya"
             "\n\n_Lisensi HachiXBot di bawah GNU General Public License v3.0_"
             "\n\n Klik tombol di bawah untuk mendapatkan bantuan dasar untuk HachiXBot.",
             parse_mode=ParseMode.MARKDOWN,
@@ -509,15 +509,15 @@ def Source_about_callback(update, context):
         query.message.edit_text(
             text="๏›› This advance command for Musicplayer."
             "\n\n๏ Command for admins only."
-            "\n • `/userbotjoin` - For inviting the assistant to your groups."
-            "\n • `/userbotleave` - Use this if you want the assistant leaving your groups."
-            "\n • `/pause` - To pause the playback."
-            "\n • `/resume` - To resuming the playback You've paused."
-            "\n • `/skip` - To skipping the player."
-            "\n • `/end` - For end the playback."
-            "\n • `/musicplayer <on/off>` - Toggle for turn ON or turn OFF the musicplayer."
+            "\n × `/userbotjoin` - For inviting the assistant to your groups."
+            "\n × `/userbotleave` - Use this if you want the assistant leaving your groups."
+            "\n × `/pause` - To pause the playback."
+            "\n × `/resume` - To resuming the playback You've paused."
+            "\n × `/skip` - To skipping the player."
+            "\n × `/end` - For end the playback."
+            "\n × `/musicplayer <on/off>` - Toggle for turn ON or turn OFF the musicplayer."
             "\n\n๏ Command for all members."
-            "\n • `/play` <query> - Playing And Can Play Vid To.",
+            "\n × `/play` <query> - Playing And Can Play Vid To.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(

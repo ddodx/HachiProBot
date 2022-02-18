@@ -102,16 +102,16 @@ def warn(
             chat.unban_member(user.id)
             reply = (
                 f"<code>❕</code><b>kick Event</b>\n"
-                f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<code> </code><b>•  Count:</b> {limit}"
+                f"<code> </code><b>×  User:</b> {mention_html(user.id, user.first_name)}\n"
+                f"<code> </code><b>×  Count:</b> {limit}"
             )
 
         else:  # ban
             chat.ban_member(user.id)
             reply = (
                 f"<code>❕</code><b>Ban Event</b>\n"
-                f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<code> </code><b>•  Count:</b> {limit}"
+                f"<code> </code><b>×  User:</b> {mention_html(user.id, user.first_name)}\n"
+                f"<code> </code><b>×  Count:</b> {limit}"
             )
 
         for warn_reason in reasons:
@@ -141,11 +141,11 @@ def warn(
 
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
-            f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-            f"<code> </code><b>•  Count:</b> {num_warns}/{limit}"
+            f"<code> </code><b>×  User:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<code> </code><b>×  Count:</b> {num_warns}/{limit}"
         )
         if reason:
-            reply += f"\n<code> </code><b>•  Reason:</b> {html.escape(reason)}"
+            reply += f"\n<code> </code><b>×  Reason:</b> {html.escape(reason)}"
 
         log_reason = (
             f"<b>{html.escape(chat.title)}:</b>\n"
@@ -270,7 +270,7 @@ def warns(update: Update, context: CallbackContext):
                 f"This user has {num_warns}/{limit} warns, for the following reasons:"
             )
             for reason in reasons:
-                text += f"\n • {reason}"
+                text += f"\n × {reason}"
 
             msgs = split_message(text)
             for msg in msgs:
@@ -477,8 +477,8 @@ def set_warn_strength(update: Update, context: CallbackContext):
 
 def __stats__():
     return (
-        f"• {sql.num_warns()} overall warns, across {sql.num_warn_chats()} chats.\n"
-        f"• {sql.num_warn_filters()} warn filters, across {sql.num_warn_filter_chats()} chats."
+        f"× {sql.num_warns()} overall warns, across {sql.num_warn_chats()} chats.\n"
+        f"× {sql.num_warn_filters()} warn filters, across {sql.num_warn_filter_chats()} chats."
     )
 
 

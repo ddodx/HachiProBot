@@ -131,7 +131,7 @@ def sfachat(update: Update, context: CallbackContext):
                 )
                 update.message.reply_text(
                     f"""
-• AUTO-BAN CHANNEL EVENT ‼️
+× AUTO-BAN CHANNEL EVENT ‼️
 🚫 Banned This Channel: <a href="{BANNED_CHANNEL_LINK}">here's the link</a>
                 """,
                     parse_mode=ParseMode.HTML,
@@ -140,7 +140,7 @@ def sfachat(update: Update, context: CallbackContext):
                 update.message.reply_text(
                     f"""
 There was an error occured during auto ban and delete message. please report this to @BlackKnightsUnion_DevChat.
-• Error: `{respond}`
+× Error: `{respond}`
                 """
                 )
             msg.delete()

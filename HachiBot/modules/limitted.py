@@ -4,7 +4,7 @@
 """
 ✘ Commands Available -
 
-• `{i}limited`
+× `{i}limited`
    Check you are limited or not !
 """
 

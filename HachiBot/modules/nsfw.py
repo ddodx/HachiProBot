@@ -62,7 +62,7 @@ def list_nsfw_chats(update: Update, context: CallbackContext):
         try:
             x = context.bot.get_chat(int(*chat))
             name = x.title if x.title else x.first_name
-            text += f"• <code>{name}</code>\n"
+            text += f"× <code>{name}</code>\n"
         except BadRequest:
             sql.rem_nsfw(*chat)
         except Unauthorized:
@@ -768,8 +768,8 @@ __handlers__ = [
     DVA_HANDLER,
 ]
 
-"""
-__help__ = 
+
+__help__ = """
 *NSFW:*
 × /addnsfw : Enable NSFW mode
 × /rmnsfw : Disable NSFW mode

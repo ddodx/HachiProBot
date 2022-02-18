@@ -140,7 +140,7 @@ flood_err_no_perm: I can't mute people here, give me permissions first! Until th
 flood_logger_success: |
   <b>{}:</b>
   #MUTED
-  <b>• User:</b> {}
+  <b>× User:</b> {}
   Flooded the group.
 flood_logger_fail: |
   <b>{}:</b>
@@ -149,12 +149,12 @@ flood_logger_fail: |
 flood_logger_set_off: |
   <b>{}:</b>
   #SETFLOOD
-  <b>• Admin:</b> {}
+  <b>× Admin:</b> {}
   Disabled antiflood.
 flood_logger_set_on: |
   <b>{}:</b>
   #SETFLOOD
-  <b>• Admin:</b> {}
+  <b>× Admin:</b> {}
   Set antiflood to <code>{}</code>.'
 flood_set: Antiflood has been updated and set to {}
 flood_set_off: Antiflood has been disabled.
@@ -233,9 +233,9 @@ bans_err_usr_is_admin: Why would I ban an admin? That sounds like a pretty dumb 
 bans_logger: |
   <b>{}:</b>
   #BANNED
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 bans_banned_success: Admin {} has successfully banned {} in <b>{}</b>!
 bans_logger_reason: \n<b>Reason:</b> {}
 bans_err_unknown: "Unknown error: {} failed."
@@ -243,10 +243,10 @@ bans_err_tban_no_arg: You haven't specified a time to ban this user for!
 bans_tban_logger: |
   <b>{}:</b>
   #TEMP_BANNED
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
-  <b>• Time:</b> {}
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
+  <b>× Time:</b> {}
 bans_tbanned_success: Admin {} has successfully banned {} in <b>{}</b> for {}!
 bans_kick_is_bot: I'm not kicking myself!
 bans_kick_is_admin: Why would I kick an admin? That sounds like a pretty dumb idea.
@@ -254,9 +254,9 @@ bans_kick_success: Admin {} has successfully kicked {} in <b>{}</b>!
 bans_kick_logger: |
   <b>{}:</b>
   #KICKED
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 bans_kickme_success: No problem.
 bans_kickme_failed: I cannot kick you! You're lucky today.
 bans_unban_user_in_chat: Why are you trying to unban someone that's already in the chat?
@@ -264,15 +264,15 @@ bans_unban_success: Yep, this user can join!
 bans_unban_logger: |
   <b>{}:</b>
   #UNBANNED
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 bans_sban_logger: |
   <b>{}:</b>
   #UNBANNED
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 bans_help: |
   Some people need to be publicly banned; spammers, annoyances, or just trolls.\n
   This module allows you to do that easily, by exposing some common actions, so everyone will see!\n
@@ -334,15 +334,15 @@ connection_help: |
   Sometimes, you just want to add some notes and filters to a group chat, but you don't want everyone to see; This is where connections come in...
   This allows you to connect to a chat's database, and add things to it without the commands appearing in chat! For obvious reasons, you need to be an admin to add things; but any member in the group can view your data.\n
   Actions are available with connected groups:
-  • View and edit notes
-  • View and edit filters
-  • View and edit blacklists
-  • Promote/demote users
-  • See adminlist, see invitelink
-  • Disable/enable commands in chat
-  • Mute/unmute users in chat
-  • Restrict/unrestrict users in chat
-  • More in the future!\n
+  × View and edit notes
+  × View and edit filters
+  × View and edit blacklists
+  × Promote/demote users
+  × See adminlist, see invitelink
+  × Disable/enable commands in chat
+  × Mute/unmute users in chat
+  × Restrict/unrestrict users in chat
+  × More in the future!\n
   - Type /connect or /connection in the group you want to connect to.
   - /connection or /connect <chatid>: Connect to remote chat
   - /disconnect: Disconnect from chat
@@ -572,12 +572,12 @@ log_channel_help: |
 modname_weather: Weather
 weather_no_info: "No weather information for this location!"
 weather_invalid: "Invalid country."
-weather_temp: "• **Temperature:** "
-weather_cond: "• **Condition:** "
-weather_hum: "• **Humidity:** "
-weather_wind: "• **Wind:** "
-weather_sunrise: "• **Sunrise**: "
-weather_sunset: "• **Sunset**: "
+weather_temp: "× **Temperature:** "
+weather_cond: "× **Condition:** "
+weather_hum: "× **Humidity:** "
+weather_wind: "× **Wind:** "
+weather_sunrise: "× **Sunrise**: "
+weather_sunset: "× **Sunset**: "
 weather_help: |
   *Available commands:*
   - /weather <name>: Returns the weather in a city, country or state.
@@ -589,13 +589,13 @@ antiarabic_setting: "This chat's current setting is: `{}`"
 antiarabic_help: |
   AntiArabicScript module is used to delete messages containing characters from one of the following automatically:
 
-  • Arabic
-  • Arabic Supplement
-  • Arabic Extended-A
-  • Arabic Presentation Forms-A
-  • Arabic Presentation Forms-B
-  • Rumi Numeral Symbols
-  • Arabic Mathematical Alphabetic Symbols
+  × Arabic
+  × Arabic Supplement
+  × Arabic Extended-A
+  × Arabic Presentation Forms-A
+  × Arabic Presentation Forms-B
+  × Rumi Numeral Symbols
+  × Arabic Mathematical Alphabetic Symbols
 
   *NOTE:* AntiArabicScript module doesn't affect messages sent by admins.
 
@@ -1057,43 +1057,43 @@ warns_max_warn_ban: "{} warnings, {} has been banned!"
 warns_warn_ban_log_channel: |
   <b>{}:</b>
   #WARN_BAN
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
-  <b>• Reason:</b> {}
-  <b>• Warn Count:</b> <code>{}/{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
+  <b>× Reason:</b> {}
+  <b>× Warn Count:</b> <code>{}/{}</code>
 warns_warn_log_channel: |
   <b>{}:</b>
   #WARN
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
-  <b>• Reason:</b> {}
-  <b>• Counts:</b> <code>{}/{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
+  <b>× Reason:</b> {}
+  <b>× Counts:</b> <code>{}/{}</code>
 warns_remove_log_channel: |
   <b>{}:</b>
   #UNWARN
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 warns_reset_log_channel: |
   <b>{}:</b>
   #RESETWARNS
-  <b>• Admin:</b> {}
-  <b>• User:</b> {}
-  <b>• ID:</b> <code>{}</code>
+  <b>× Admin:</b> {}
+  <b>× User:</b> {}
+  <b>× ID:</b> <code>{}</code>
 warns_set_warn_limit_log_channel: |
   <b>{}:</b>
   #SET_WARN_LIMIT
-  <b>• Admin:</b> {}
+  <b>× Admin:</b> {}
   Set the warn limit to <code>{}</code>
 warns_strength_on_log_channel: |
   <b>{}:</b>\n
-  <b>• Admin:</b> {}\n
+  <b>× Admin:</b> {}\n
   Has enabled strong warns. Users will be banned.
 warns_strength_off_log_channel: |
   <b>{}:</b>\n
-  <b>• Admin:</b> {}\n
+  <b>× Admin:</b> {}\n
   Has disabled strong warns. Users will only be kicked.
 warns_btn_remove_warn: Remove warn
 warns_btn_rules: Rules

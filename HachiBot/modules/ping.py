@@ -85,17 +85,7 @@ def ping(update: Update, context: CallbackContext):
         "PONG!!\n"
         "<b>Time Taken:</b> <code>{}</code>\n"
         "<b>Service uptime:</b> <code>{}</code>".format(telegram_ping, uptime),
-        parse_mode=ParseMode.HTML,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="Systats", callback_data="stats_callback"
-                        ),
-                ]
-            ]
-        ),
-    )
+        parse_mode=ParseMode.HTML,)
 
 
 @pgram.on_callback_query(filters.regex("stats_callback"))

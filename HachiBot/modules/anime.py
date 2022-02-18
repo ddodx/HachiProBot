@@ -222,11 +222,11 @@ def anime(update, context):
         return
     if json:
         json = json["data"]["Media"]
-        msg = f"*{json['title']['romaji']}* *-* *({json['title']['native']})*\n\n*• Type*: {json['format']}\n*• Status*: {json['status']}\n*• Episodes*: {json.get('episodes', 'N/A')}\n*• Duration*: {json.get('duration', 'N/A')} Per Ep.\n*• Score*: {json['averageScore']}\n*• Genres*: `"
+        msg = f"*{json['title']['romaji']}* *-* *({json['title']['native']})*\n\n*× Type*: {json['format']}\n*× Status*: {json['status']}\n*× Episodes*: {json.get('episodes', 'N/A')}\n*× Duration*: {json.get('duration', 'N/A')} Per Ep.\n*× Score*: {json['averageScore']}\n*× Genres*: `"
         for x in json["genres"]:
             msg += f"{x}, "
         msg = msg[:-2] + "`\n"
-        msg += "*• Studios*: `"
+        msg += "*× Studios*: `"
         for x in json["studios"]["nodes"]:
             msg += f"{x['name']}, "
         msg = msg[:-2] + "`\n"
@@ -531,11 +531,11 @@ def watchlist(update, context):
     message = update.effective_message
     watchlist = list(REDIS.sunion(f"anime_watch_list{user.id}"))
     watchlist.sort()
-    watchlist = "\n• ".join(watchlist)
+    watchlist = "\n× ".join(watchlist)
     if watchlist:
         message.reply_text(
             "{}<b>'s Watchlist:</b>"
-            "\n• {}".format(mention_html(user.id, user.first_name), watchlist),
+            "\n× {}".format(mention_html(user.id, user.first_name), watchlist),
             parse_mode=ParseMode.HTML,
         )
     else:
@@ -573,11 +573,11 @@ def fvrtchar(update, context):
     message = update.effective_message
     fvrt_char = list(REDIS.sunion(f"anime_fvrtchar{user.id}"))
     fvrt_char.sort()
-    fvrt_char = "\n• ".join(fvrt_char)
+    fvrt_char = "\n× ".join(fvrt_char)
     if fvrt_char:
         message.reply_text(
             "{}<b>'s Harem:</b>"
-            "\n• {}".format(mention_html(user.id, user.first_name), fvrt_char),
+            "\n× {}".format(mention_html(user.id, user.first_name), fvrt_char),
             parse_mode=ParseMode.HTML,
         )
     else:
@@ -615,11 +615,11 @@ def readmanga(update, context):
     message = update.effective_message
     manga_list = list(REDIS.sunion(f"anime_mangaread{user.id}"))
     manga_list.sort()
-    manga_list = "\n• ".join(manga_list)
+    manga_list = "\n× ".join(manga_list)
     if manga_list:
         message.reply_text(
             "{}<b>'s Manga Lists:</b>"
-            "\n• {}".format(mention_html(user.id, user.first_name), manga_list),
+            "\n× {}".format(mention_html(user.id, user.first_name), manga_list),
             parse_mode=ParseMode.HTML,
         )
     else:
@@ -763,7 +763,7 @@ def site_search(update: Update, context: CallbackContext, site: str):
             for entry in search_result:
                 post_link = "https://animekaizoku.com/" + entry.a['href']
                 post_name = html.escape(entry.text)
-                result += f"• <a href='{post_link}'>{post_name}</a>\n"
+                result += f"× <a href='{post_link}'>{post_name}</a>\n"
         else:
             more_results = False
             result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
@@ -784,7 +784,7 @@ def site_search(update: Update, context: CallbackContext, site: str):
 
             post_link = entry.a['href']
             post_name = html.escape(entry.text.strip())
-            result += f"• <a href='{post_link}'>{post_name}</a>\n"
+            result += f"× <a href='{post_link}'>{post_name}</a>\n"
 
     buttons = [[InlineKeyboardButton("See all results", url=search_url)]]
 
