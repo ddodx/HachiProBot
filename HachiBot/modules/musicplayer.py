@@ -1,4 +1,4 @@
-__mod_name__ = "Music Player"
+__mod_name__ = "MusicPlayer"
 
 __help__ = """
 Help music can accses with different command and support dashboard help and setting
