@@ -32,7 +32,7 @@ import requests
 from pyrogram import filters
 from json import JSONDecodeError
 
-from HachiBot.utils.pluginhelpers import admins_only, edit_or_reply, fetch_audio
+from HachiBot.utils.pluginhelper import admins_only, edit_or_reply, fetch_audio
 from HachiBot import pgram, BOT_USERNAME, SUPPORT_CHAT, BOT_NAME
 
 
