@@ -25,6 +25,7 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
+from HachiBot.events import register
 from HachiBot.modules.log_channel import loggable
 from HachiBot.modules.helper_funcs.alternate import send_message
 
@@ -169,6 +170,7 @@ def setchat_title(update: Update, context: CallbackContext):
 @can_promote
 @user_admin
 @loggable
+@register(pattern="^/admin ?(.*)")
 def admin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
@@ -260,6 +262,7 @@ def admin(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
+@register(pattern="^/lowpromote ?(.*)")
 def lowpromote(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
@@ -337,6 +340,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
+@register(pattern="^/coadmin ?(.*)")
 def coadmin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
@@ -430,6 +434,7 @@ def coadmin(update: Update, context: CallbackContext) -> str:
 @can_promote
 @user_admin
 @loggable
+@register(pattern="^/unadmin ?(.*)")
 def unadmin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
@@ -500,6 +505,7 @@ def unadmin(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
+@register(pattern="^/reload ?(.*)")
 def reload(update, _):
     try:
         ADMIN_CACHE.pop(update.effective_chat.id)
@@ -513,6 +519,7 @@ def reload(update, _):
 @bot_admin
 @can_promote
 @user_admin
+@register(pattern="^/title ?(.*)")
 def set_title(update: Update, context: CallbackContext):
     bot = context.bot
     args = context.args
@@ -579,6 +586,7 @@ def set_title(update: Update, context: CallbackContext):
 @can_pin
 @user_admin
 @loggable
+@register(pattern="^/pin ?(.*)")
 def pin(update: Update, context: CallbackContext) -> str:
     bot, args = context.bot, context.args
     user = update.effective_user
@@ -640,6 +648,7 @@ def pin(update: Update, context: CallbackContext) -> str:
 @can_pin
 @user_admin
 @loggable
+@register(pattern="^/unpin ?(.*)")
 def unpin(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
@@ -768,6 +777,7 @@ def invite(update: Update, context: CallbackContext):
 
 
 @connection_status
+@register(pattern="^/admins ?(.*)")
 def adminlist(update, context):
     chat = update.effective_chat
     user = update.effective_user
@@ -940,7 +950,7 @@ def button(update: Update, context: CallbackContext) -> str:
 
 __help__ = """
 *User Commands*:
-❂ /admins*:* list of admins in the chat
+❂ /admins, staff*:* list of admins in the chat
 ❂ /pinned*:* to get the current pinned message.
 
 *The Following Commands are Admins only:* 

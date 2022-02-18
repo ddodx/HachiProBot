@@ -11,6 +11,7 @@ from HachiBot.modules.helper_funcs.filters import CustomFilters
 from HachiBot.modules.helper_funcs.misc import send_to_list
 from HachiBot.modules.sql.users_sql import get_all_chats
 import HachiBot.modules.sql.global_kicks_sql as sql
+from HachiBot.events import register
 
 GKICK_ERRORS = {
     "Bots can't add new chat members",
@@ -32,7 +33,7 @@ GKICK_ERRORS = {
     "User not found"
 }
 
-
+@register(pattern="^/gkick ?(.*)")
 def gkick(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
     user_id = extract_user(message, args)

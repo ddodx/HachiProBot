@@ -38,6 +38,7 @@ from HachiBot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
+from HachiBot.events import register
 from HachiBot.modules.helper_funcs.misc import send_to_list
 
 GBAN_ENFORCE_GROUP = 6
@@ -72,6 +73,7 @@ UNGBAN_ERRORS = {
 
 
 @support_plus
+@register(pattern="^/gban ?(.*)")
 def gban(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
@@ -276,6 +278,7 @@ def gban(update: Update, context: CallbackContext):
 
 
 @support_plus
+@register(pattern="^/ungban ?(.*)")
 def ungban(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message

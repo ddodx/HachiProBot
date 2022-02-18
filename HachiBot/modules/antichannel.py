@@ -7,6 +7,7 @@ from telegram.ext.filters import Filters
 
 import HachiBot.modules.sql.antilinkedchannel_sql as sql
 from HachiBot import TOKEN, dispatcher
+from HachiBot.events import register
 from HachiBot.modules.helper_funcs.anonymous import AdminPerms, user_admin
 from HachiBot.modules.helper_funcs.chat_status import bot_admin, bot_can_delete
 from HachiBot.modules.helper_funcs.chat_status import user_admin as u_admin
@@ -66,6 +67,7 @@ def eliminate_linked_channel_msg(update: Update, _: CallbackContext):
 
 @bot_admin
 @u_admin
+@register(pattern="^/antich ?(.*)")
 def antich(update: Update, context: CallbackContext):
     args = context.args
     chat = update.effective_chat

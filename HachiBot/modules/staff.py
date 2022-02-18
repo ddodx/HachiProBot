@@ -4,9 +4,11 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from HachiBot import pbot
+from HachiBot.events import register
 
 
 @pbot.on_message(filters.command("staff"))
+@register(pattern="^/staff ?(.*)")
 def staff(client: Client, message: Message):
     chat_id = message.chat.id
     chat_title = message.chat.title
