@@ -91,6 +91,7 @@ AD_STRINGS = (
 )
 
 
+@register(pattern="^/odo ?(.*)")
 def odo(update: Update, context: CallbackContext):
     message = update.effective_message
     message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
@@ -102,6 +103,7 @@ def odo(update: Update, context: CallbackContext):
     reply_photo(random.choice(hachi_strings.HACHI_IMG))
 
 
+@register(pattern="^/ipe ?(.*)")
 def ipe(update: Update, context: CallbackContext):
     message = update.effective_message
     message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
@@ -172,6 +174,7 @@ JJ_STRING = (
 )
 
 
+@register(pattern="^/lawak ?(.*)")
 def lawak(update, context):
     msg = update.effective_message
     msg.reply_video(
@@ -188,6 +191,7 @@ def lawak(update, context):
     )
 
 
+@register(pattern="^/diarydodo ?(.*)")
 def diaryadodo(update: Update, context: CallbackContext):
     msg = update.effective_message
     reply_text = (
@@ -196,6 +200,7 @@ def diaryadodo(update: Update, context: CallbackContext):
     reply_text(random.choice(AD_STRINGS), parse_mode=ParseMode.MARKDOWN)
 
 
+@register(pattern="^/spill ?(.*)")
 def spill(update: Update, context: CallbackContext):
     msg = update.effective_message
     reply_text = (
