@@ -13,6 +13,7 @@ from HachiBot import (
     WOLVES,
     sw,
     LOGGER,
+    JOIN_LOGGER,
     dispatcher,
 )
 from HachiBot.modules.helper_funcs.chat_status import (
@@ -235,6 +236,59 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             if new_mem.id in WOLVES:
                 update.effective_message.reply_text(
                     "Oof! A Soldier Users just joined!", reply_to_message_id=reply
+                )
+                continue
+
+            # Welcome yourselflog
+            elif new_mem.id == bot.id:
+                creator = None
+                for x in bot.get_chat_administrators(update.effective_chat.id):
+                    if x.status == "creator":
+                        creator = x.user
+                        break
+                if creator:
+                    bot.send_message(
+                        JOIN_LOGGER,
+                        f"""
+                        \\#NEWGROUP \
+                        \nGroup Name:   **\\{chat.title}** \
+                        \nID:   `\\{chat.id}` \
+                        \nCreator ID:   `\\{creator.id}` \
+                        \nCreator Username:   \@{creator.username} \
+                        """,
+                        parse_mode=ParseMode.MARKDOWN_V2,
+                    )
+                else:
+                    bot.send_message(
+                        JOIN_LOGGER,
+                        "#NEW_GROUP\n<b>Group name:</b> {}\n<b>ID:</b> <code>{}</code>".format(
+                            html.escape(chat.title),
+                            chat.id,
+                        ),
+                        parse_mode=ParseMode.HTML,
+                    )
+
+            # Welcome yourself
+            if new_mem.id == bot.id:
+                update.effective_message.reply_text(
+                    "Hey {}, I'm {}! Thank you for adding me to {}\n"
+                    "Join support and channel update with clicking button below!".format(
+                        user.first_name, context.bot.first_name, chat.title
+                    ),
+                    reply_to_message_id=reply,
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="🚑 Support", url=f"https://t.me/{SUPPORT_CHAT}"
+                                ),
+                                InlineKeyboardButton(
+                                    text="📢 Updates",
+                                    url="https://t.me/hachixlog",
+                                ),
+                            ]
+                        ],
+                    ),
                 )
                 continue
 
