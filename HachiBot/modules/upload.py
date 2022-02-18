@@ -37,7 +37,7 @@ from telethon import events
 
 from HachiBot import BOT_USERNAME, telethn, TEMP_DOWNLOAD_DIRECTORY, SUPPORT_CHAT
 from HachiBot.modules.urluploader import download_file
-from HachiBot.utils.pluginhelpers import humanbytes, progress
+from HachiBot.utils.pluginhelper import humanbytes, progress
 
 def get_date_in_two_weeks():
     """
