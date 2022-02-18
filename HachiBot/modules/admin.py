@@ -171,7 +171,7 @@ def setchat_title(update: Update, context: CallbackContext):
 @can_promote
 @user_admin
 @loggable
-def admin(context: CallbackContext, update: Update) -> str:
+def admin(context, update: Update) -> str:
     bot = context.bot
     args = context.args
 
