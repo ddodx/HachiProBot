@@ -1,4 +1,5 @@
 import html
+from typing import Optional
 
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
@@ -768,9 +769,9 @@ def invite(update: Update, context: CallbackContext):
 
 @connection_status
 def adminlist(update, context):
-    chat = update.effective_chat  # type: Optional[Chat] -> unused variable
-    user = update.effective_user  # type: Optional[User]
-    args = context.args  # -> unused variable
+    chat = update.effective_chat
+    user = update.effective_user
+    args = context.args
     bot = context.bot
 
     if update.effective_message.chat.type == "private":
@@ -779,7 +780,7 @@ def adminlist(update, context):
 
     chat = update.effective_chat
     chat_id = update.effective_chat.id
-    chat_name = update.effective_message.chat.title  # -> unused variable
+    chat_name = update.effective_message.chat.title
 
     try:
         msg = update.effective_message.reply_text(
