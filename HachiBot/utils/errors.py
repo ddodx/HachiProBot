@@ -1,14 +1,10 @@
-""" WRITTEN BY @pokurt, https://github.com/pokurt"""
-# credits goes to William, https://github.com/WilliamButcherBot
-
 import sys
 import traceback
 from functools import wraps
 
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
-from HachiBot import ERROR_LOG, pbot as app
-
+from HachiBot import SUPPORT_CHAT, pgram
 
 def split_limits(text):
     if len(text) < 2048:
@@ -35,7 +31,7 @@ def capture_err(func):
         try:
             return await func(client, message, *args, **kwargs)
         except ChatWriteForbidden:
-            await app.leave_chat(message.chat.id)
+            await pgram.leave_chat(message.chat.id)
             return
         except Exception as err:
             exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -53,7 +49,7 @@ def capture_err(func):
                 ),
             )
             for x in error_feedback:
-                await app.send_message(ERROR_LOG, x)
+                await pgram.send_message(SUPPORT_CHAT, x)
             raise err
 
     return capture
