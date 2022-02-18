@@ -270,7 +270,9 @@ else:
     DisableAbleCommandHandler = CommandHandler
     DisableAbleMessageHandler = MessageHandler
 
-    __help__ = """
+__mod_name__ = "Disabling"
+
+__help__ = """
 × /cmds*:* check the current status of disabled commands
 *Admins only:*
 × /enable <cmd name>*:* enable that command
@@ -280,4 +282,3 @@ else:
 × /listcmds*:* list all possible toggleable commands
 """
 
-    __mod_name__ = "Disabling"
