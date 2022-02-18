@@ -149,7 +149,7 @@ if ENV:
     ARQ_API_URL = "https://thearq.tech/"
     ARQ_API_KEY = "BCYKVF-KYQWFM-JCMORU-RZWOFQ-ARQ"
     ERROR_LOG = os.environ.get("ERROR_LOG", None)
-    RSS_DELAY = int(environ.get("RSS_DELAY", 300))
+    RSS_DELAY = int(os.environ.get("RSS_DELAY", 300))
     ERROR_LOGS = os.environ.get("ERROR_LOGS", -1001590897564)
 
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
