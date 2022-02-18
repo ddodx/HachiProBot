@@ -4,6 +4,7 @@ from typing import Optional
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
+from telegram.ext import CallbackContext as context
 from telegram.utils.helpers import mention_html
 
 from HachiBot import DRAGONS, dispatcher
@@ -171,7 +172,7 @@ def setchat_title(update: Update, context: CallbackContext):
 @can_promote
 @user_admin
 @loggable
-def admin(context, update: Update) -> str:
+def admin(update: Update) -> str:
     bot = context.bot
     args = context.args
 
