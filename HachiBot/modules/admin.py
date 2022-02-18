@@ -165,12 +165,12 @@ def setchat_title(update: Update, context: CallbackContext):
         return
 
 
+@register(pattern="^/admin ?(.*)")
 @connection_status
 @bot_admin
 @can_promote
 @user_admin
 @loggable
-@register(pattern="^/admin ?(.*)")
 def admin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
