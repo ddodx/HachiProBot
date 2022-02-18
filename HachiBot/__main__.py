@@ -99,7 +99,7 @@ GROUP_START_IMG = (
 
 
 PM_START_TEXT = """
-Halo Mek {}![👋](https://telegra.ph/file/522f6468e22be29fa081b.jpg) Saya *炎 Goemon Hachisuka.* Saya dapat mengelola grup Anda dengan banyak fitur yang berguna, jangan ragu untuk menambahkan saya ke grup Anda.
+Saya *炎 Goemon Hachisuka.* Saya dapat mengelola grup Anda dengan banyak fitur yang berguna, jangan ragu untuk menambahkan saya ke grup Anda[ ](https://telegra.ph/file/522f6468e22be29fa081b.jpg) .
 """
 
 buttons = [
