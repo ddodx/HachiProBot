@@ -118,8 +118,8 @@ buttons = [
 
 
 HELP_STRINGS = """
-✨ I'm a modular group management bot with a few fun extras! Have a look at the following for an 
-idea I can help you with. Main commands available: 
+✨ I'm a modular group management bot with a few fun extras! Have a look at the following for an idea I can help you with.
+Main commands available: 
 
 × /start: starts me!
 × /help: makes me send or redirect you to THIS message.
