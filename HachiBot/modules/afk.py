@@ -39,7 +39,7 @@ def afk(update, _):
     fname = user.first_name
     try:
         message.reply_text(
-            f"Sampai jumpa banh 👋 <code>{fname}</code>!", parse_mode=ParseMode.HTML
+            f"Sampai jumpa gays 👋 <code>{fname}</code>!", parse_mode=ParseMode.HTML
         )
     except BadRequest:
         pass
