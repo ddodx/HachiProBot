@@ -31,6 +31,7 @@ from HachiBot import (
 from telegram.ext import (
     MessageHandler,
     Filters,
+    CallbackContext,
     CommandHandler,
     run_async,
     CallbackQueryHandler,
