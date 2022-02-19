@@ -1,19 +1,15 @@
 """
 MIT License
 
-Copyright (C) 2017-2019, Paul Larsen
-Copyright (C) 2021 Awesome-RJ
-Copyright (c) 2021, Yūki • Black Knights Union, <https://github.com/Awesome-RJ/CutiepiiRobot>
-
-This file is part of @Cutiepii_Robot (Telegram Bot)
+Copyright (c) 2021 TheHamkerCat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
-
 furnished to do so, subject to the following conditions:
+
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
@@ -26,36 +22,47 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import os
-import requests
-import wget
-
 from pyrogram import filters
 
-from HachiBot import pgram, BOT_USERNAME
-from HachiBot.utils.saavnhelp import get_arg
+from HachiBot import app, arq
+from HachiBot.utils.errors import capture_err
 
 
-@pgram.on_message(filters.command("saavn", f"saavn@{BOT_USERNAME}"))
-async def song(client, message):
-    args = get_arg(message) + " " + "song"
-    if args.startswith(" "):
-        await message.reply("<b> Song name required!! </b>")
-        return ""
-    m = await message.reply_text(
-        "Downloading the song, Please wait..."
-    )
+@app.on_message(filters.command("saavn") & ~filters.edited)
+@capture_err
+async def jssong(_, message):
+    global is_downloading
+    if len(message.command) < 2:
+        return await message.reply_text("/saavn requires an argument.")
+    if is_downloading:
+        return await message.reply_text(
+            "Another download is in progress, try again after sometime."
+        )
+    is_downloading = True
+    text = message.text.split(None, 1)[1]
+    m = await message.reply_text("Searching...")
     try:
-        r = requests.get(f"https://jostapi.herokuapp.com/saavn?query={args}")
+        songs = await arq.saavn(text)
+        if not songs.ok:
+            await m.edit(songs.result)
+            is_downloading = False
+            return
+        sname = songs.result[0].song
+        slink = songs.result[0].media_url
+        ssingers = songs.result[0].singers
+        sduration = songs.result[0].duration
+        await m.edit("Downloading")
+        song = await download_song(slink)
+        await m.edit("Uploading")
+        await message.reply_audio(
+            audio=song,
+            title=sname,
+            performer=ssingers,
+            duration=sduration,
+        )
+        await m.delete()
     except Exception as e:
-        await m.edit(str(e))
-        return
-    sname = r.json()[0]["song"]
-    slink = r.json()[0]["media_url"]
-    ssingers = r.json()[0]["singers"]
-    file = wget.download(slink)
-    ffile = file.replace("mp4", "m4a")
-    os.rename(file, ffile)
-    await message.reply_audio(audio=ffile, title=sname, performer=ssingers)
-    os.remove(ffile)
-    await m.delete()
+        is_downloading = False
+        return await m.edit(str(e))
+    is_downloading = False
+    song.close()

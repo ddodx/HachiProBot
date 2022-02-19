@@ -810,37 +810,37 @@ def kayo(update: Update, context: CallbackContext):
 __help__ = """
 Get information about anime, manga or characters from [AniList](anilist.co)
 *AniList Commands:*
-× `/anime <anime>`*:* returns information about the anime from AniList.
-× `/character <character>`*:* returns information about the character from AniList.
-× `/manga <manga>`*:* returns information about the manga from AniList.
-× `/upcoming`*:* returns a list of new anime in the upcoming seasons from AniList.
-× `/airing <anime>`*:* returns anime airing info from AniList.
+× /anime <anime>*:* returns information about the anime from AniList.
+× /character <character>*:* returns information about the character from AniList.
+× /manga <manga>*:* returns information about the manga from AniList.
+× /upcoming*:* returns a list of new anime in the upcoming seasons from AniList.
+× /airing <anime>*:* returns anime airing info from AniList.
 
 Get information about anime, manga or characters from [MAL](https://myanimelist.net/)
 *My Anime list Commands:*
-× `/manime <anime>`*:* returns information about the anime MAL.
-× `/mcharacter` <character>*:* returns information about the character from MAL.
-× `/mmanga <manga>`*:* returns information about the manga from MAL.
-× `/mupcoming`*:* returns a list of new anime in the upcoming seasons from MAL.
-× `/user <user>`*:* returns information about a MyAnimeList user.
-× `/animequotes`*:* sends random anime quotes.
-× `/quote`*:* send random quotes
+× /manime <anime>*:* returns information about the anime MAL.
+× /mcharacter <character>*:* returns information about the character from MAL.
+× /mmanga <manga>*:* returns information about the manga from MAL.
+× /mupcoming*:* returns a list of new anime in the upcoming seasons from MAL.
+× /user <user>*:* returns information about a MyAnimeList user.
+× /animequotes*:* sends random anime quotes.
+× /quote*:* send random quotes
 
 *Anime Search Commands:*
-× `/kayo`*:* search an Anime on AnimeKayo website.
-× `/kaizoku`*:* search an Anime on AnimeKaizoku website.
-× `/whatanime`*:* Please reply to a Gif or Photo or Video, then bot gives information about the anime.
+× /kayo*:* search an Anime on AnimeKayo website.
+× /kaizoku*:* search an Anime on AnimeKaizoku website.
+× /whatanime*:* Please reply to a Gif or Photo or Video, then bot gives information about the anime.
 
 *Anime Search Commands:*
-× `/meme`*:* sends Anime Memes.
-× `/hmeme`*:* sends Hentai Memes.
-× `/rmeme`*:* sends Reddit Memes.
+× /meme*:* sends Anime Memes.
+× /hmeme*:* sends Hentai Memes.
+× /rmeme*:* sends Reddit Memes.
 
 *Anime Search Commands:*
-× `/watchorder <anime>`*:* send watch Order of anime.
+× /watchorder <anime>*:* send watch Order of anime.
 
 You saw a good anime video, photo, gif but dont know what is that anime's name?
-This is where whatanime comes in, just reply to that media with `/whatanime` and it will search the anime name for you from anilist.
+This is where whatanime comes in, just reply to that media with /whatanime and it will search the anime name for you from anilist.
  """
 
 ANIME_HANDLER = DisableAbleCommandHandler("anime", anime, run_async=True)

@@ -268,29 +268,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         ),
                         parse_mode=ParseMode.HTML,
                     )
-
-            # Welcome yourself
-            if new_mem.id == bot.id:
-                update.effective_message.reply_text(
-                    "Hey {}, I'm {}! Thank you for adding me to {}\n"
-                    "Join support and channel update with clicking button below!".format(
-                        user.first_name, context.bot.first_name, chat.title
-                    ),
-                    reply_to_message_id=reply,
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    text="🚑 Support", url=f"https://t.me/{SUPPORT_CHAT}"
-                                ),
-                                InlineKeyboardButton(
-                                    text="📢 Updates",
-                                    url="https://t.me/hachixlog",
-                                ),
-                            ]
-                        ],
-                    ),
-                )
                 continue
             buttons = sql.get_welc_buttons(chat.id)
             keyb = build_keyboard(buttons)

@@ -19,8 +19,8 @@ edit_time = 5
 file1 = "https://telegra.ph/file/f30a4c84012c2db6ca459.jpg"
 file2 = "https://telegra.ph/file/6ceb68d63031d9b041c99.jpg"
 file3 = "https://telegra.ph/file/763fd44c4ec9c60ce8100.jpg"
-file4 = "https://telegra.ph/file/956b7a50ec1f0a9802b8b.jpg"
-file5 = "https://telegra.ph/file/2fdff4fc6f3e015eb9a51.jpg"
+file4 = "https://telegra.ph/file/5528839041e2451a4c39b.jpg"
+file5 = "https://telegra.ph/file/522f6468e22be29fa081b.jpg"
 """ =======================HachiBot====================== """
 
 BUTTON = [[Button.url("sᴜᴘᴘᴏʀᴛ", "https://t.me/demonszxx"), Button.url("ᴜᴘᴅᴀᴛᴇs", "https://t.me/hachixlog")]]

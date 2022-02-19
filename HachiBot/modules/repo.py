@@ -17,18 +17,18 @@ async def give_repo(c, m):
     g = github.Github()
     list_of_users = ""
     count = 0
-    repo = g.get_repo("ridhoajaaa/HachiProBot")
+    repo = g.get_repo("ridhoajaaa/DemonsRobot")
     for i in repo.get_contributors():
         count += 1
         list_of_users += f"•{count}. [{i.login}](https://github.com/{i.login})\n"
     await m.reply_photo(
         photo=HACHI,
-        caption=f"""**Hey I'm HachiXBot** 
-**Owner repo : [ddodxy](https://t.me/ddodxy)**
-**Python Version :** `{y()}`
-**Library Version :** `{o}`
-**Telethon Version :** `{s}`
-**Pyrogram Version :** `{z}`
+        caption=f"""**Saya HachiXBot**
+
+**✪ Owner repo : [ddodxy](https://t.me/ddodxy)**
+**✪ Python Version :** `{y()}`
+**✪ Library Version :** `{o}`
+**✪ Telethon Version :** `{s}`
 
 ```----------------
 | Collaborators |

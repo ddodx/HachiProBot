@@ -181,11 +181,9 @@ __help__ = """
 *Force Subscribe:*
 × Hachi can mute members who are not subscribed your channel until they subscribe
 × When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
-×*Setup*
 *Only creator*
 × Add me in your group as admin
 × Add me in your channel as admin 
- 
 *Commmands*
 × /fsub {channel username} - To turn on and setup the channel.
   💡Do this first...
@@ -201,8 +199,8 @@ But then you have many groups, and you don't want this spammer to be in one of y
 You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n
 *Commands:*
 Feds are now divided into 3 sections for your ease.
-× `/fedownerhelp`*:* Provides help for fed creation and owner only commands
-× `/fedadminhelp`*:* Provides help for fed administration commands
-× `/feduserhelp`*:* Provides help for commands anyone can use
+× /fedownerhelp*:* Provides help for fed creation and owner only
+× /fedadminhelp*:* Provides help for fed administration commands
+× /feduserhelp*:* Provides help for commands anyone can use
 """
 __mod_name__ = "F-Sub/Feds"

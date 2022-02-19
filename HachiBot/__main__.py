@@ -118,7 +118,13 @@ buttons = [
 
 
 HELP_STRINGS = """
-✪ *Klik tombol di bawah untuk mendapatkan deskripsi tentang perintah spesifik. *✪"""
+✨ I'm a modular group management bot with a few fun extras! Have a look at the following for an 
+idea I can help you with. Main commands available: 
+
+× /start: starts me!
+× /help: makes me send or redirect you to THIS message.
+× /settings (group chat only): makes me show the current chat settings.
+"""
 
 HACHI_IMG = "https://telegra.ph/file/f2a033fd4e10fbee49551.jpg"
 
@@ -327,6 +333,7 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
+            module = module.replace("_", " ")
             text = (
                 "Here is the help for the *{}* module:\n".format(
                     HELPABLE[module].__mod_name__
