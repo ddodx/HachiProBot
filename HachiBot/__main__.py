@@ -99,7 +99,7 @@ GROUP_START_IMG = (
 
 
 PM_START_TEXT = """
-*炎 Goemon Hachisuka* Dapat mengelola grup Anda dengan banyak fitur yang berguna, jangan ragu untuk menambahkan saya ke grup Anda[.](https://telegra.ph/file/68580f9e18f910ab826b8.jpg)
+*炎 Goemon Hachisuka* Can manage your group with many useful features, feel free to add me to your group[.](https://telegra.ph/file/68580f9e18f910ab826b8.jpg)
 """
 
 buttons = [
@@ -343,8 +343,6 @@ def help_button(update, context):
                             InlineKeyboardButton(
                                 text="Kembali", callback_data="help_back"
                             ),
-                        ],
-                        [
                             InlineKeyboardButton(
                                 text="Support", url="https://t.me/demonszxx"
                             ),

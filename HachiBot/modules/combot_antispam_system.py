@@ -150,7 +150,7 @@ def setTimeSetting(bot: Bot, update: Update, args: List[str]):
     return
 
 
-def get_version(bot: Bot, update: Update):
+def get_version(bot: Bot, update: Update, context: CallbackContext):
     msg = update.effective_message
     ver = cas.vercheck()
     msg.reply_text("CAS API version: " + ver)

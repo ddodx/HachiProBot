@@ -256,7 +256,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         \nCreator ID:   `\\{creator.id}` \
                         \nCreator Username:   \@{creator.username} \
                         """,
-                        parse_mode=ParseMode.MARKDOWN_V2,
+                        parse_mode=ParseMode.MARKDOWN,
                     )
                 else:
                     bot.send_message(
@@ -291,7 +291,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                     ),
                 )
                 continue
-
             buttons = sql.get_welc_buttons(chat.id)
             keyb = build_keyboard(buttons)
 
@@ -312,7 +311,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 else:
                     text = cust_welcome
 
-                if cust_welcome == sql.DEFAULT_WELCOME_MESSAGES:
+                if cust_welcome == sql.DEFAULT_WELCOME:
                     cust_welcome = random.choice(sql.DEFAULT_WELCOME_MESSAGES).format(
                         first=escape_markdown(first_name)
                     )
